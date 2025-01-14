@@ -6,13 +6,12 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 23:41:21 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/15 00:27:18 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "jojo.h"
 #include "milan.h"
 #include "alban.h"
 #include "../OctoLIB/include/libft.h"
@@ -122,7 +121,7 @@ typedef struct s_lst_cmd
 */
 typedef struct s_mini
 {
-	t_env		**lst_env;
+	t_env		*lst_env;
 	t_lst_cmd	**lst_cmd;
 	int			nb_cmd;
 }				t_mini;

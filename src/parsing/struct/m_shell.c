@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   m_shell.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 19:53:13 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/14 22:54:34 by jbergos          ###   ########.fr       */
+/*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
+/*   Updated: 2025/01/14 23:41:34 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-
-int main(int argc, char *argv[], char **envp)
+t_mini	*create_m_shell(char **envp, char *ln_cmd)
 {
-	(void)argc;
-	(void)argv;
-	j_loop(envp);
-	return (0);
+	t_mini *m_shell;
+
+	m_shell = malloc(sizeof(t_mini));
+	if (!m_shell)
+		return (NULL);
+	m_shell->lst_env = create_lst_env(envp);
+	show_lst_env(m_shell->lst_env);
+	return (m_shell);
 }

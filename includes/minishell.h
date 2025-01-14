@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 19:10:18 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/14 23:41:21 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "jojo.h"
 #include "milan.h"
 #include "alban.h"
+#include "../OctoLIB/include/libft.h"
 #include <stdbool.h>
 
 typedef enum s_tokens
@@ -26,6 +27,14 @@ typedef enum s_tokens
 	APP_TOK,
 	HDC_TOK,
 }	t_tokens;
+
+typedef enum s_rd_file
+{
+	in,
+	out,
+	hdc,
+	app,
+} t_rd_file;
 
 typedef struct s_index
 {
@@ -68,6 +77,12 @@ typedef struct s_order_in
 	struct s_order_in	*next;
 }						t_order_in;
 
+typedef struct s_order_file
+{
+	char				*file;
+	t_rd_file			type;
+	struct s_order_file	*next;	
+}						t_order_file;
 /*
 * struct s_order_out | give order for outfile/append redirection
 * bool  is_out | true = outfile / false = append
@@ -96,8 +111,7 @@ typedef struct s_lst_cmd
 	bool				is_builtins;
 	struct s_lst_cmd	*next;
 	t_hdc				**hdc;
-	t_order_in			**order_in;
-	t_order_out			**order_out;
+	t_order_file		**order_file;
 }						t_lst_cmd;
 
 /*
@@ -108,7 +122,7 @@ typedef struct s_lst_cmd
 */
 typedef struct s_mini
 {
-	t_env		**env;
-	t_lst_cmd	**cmd;
+	t_env		**lst_env;
+	t_lst_cmd	**lst_cmd;
 	int			nb_cmd;
 }				t_mini;

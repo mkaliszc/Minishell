@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"*.embeddedhtml": "html",
-		"alban.h": "c"
+		"alban.h": "c",
+		"minishell.h": "c"
 	}
 }

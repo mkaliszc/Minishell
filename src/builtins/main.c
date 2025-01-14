@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:04:18 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 10:33:08 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:33:38 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 int main(int ac, char **av, char **envp)
 {
+	t_env *env;
 	(void)ac;
 	(void)av;
 	char *line;
+	env = init_env_struct(envp);
+	print_env_list(env);
 	while (true)
 	{
 		line = readline(GREEN"WildShell $ "END);
+		printf("%s\n", env->env);
 		char **command = ft_split(line, ' ');
 		if (ft_strncmp(command[0], "pwd", 3) == 0)
 		{
@@ -27,7 +31,7 @@ int main(int ac, char **av, char **envp)
 		}
 		else if (ft_strncmp(command[0], "cd", 2) == 0)
 		{
-			handle_cd(command);
+			handle_cd(command, env);
 		}
 		else if (ft_strncmp(command[0], "env", 3) == 0)
 		{
@@ -43,5 +47,65 @@ int main(int ac, char **av, char **envp)
 		}
 		ft_free_char_tab(command);
 		free(line);
+	}
+}
+
+
+// ? Functions for env variables list
+
+t_env	*init_env_struct(char **envp)
+{
+	t_env	*env;
+
+	env = malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->env = envp[0];
+	env->next = NULL;
+	int i = 1;
+	while (envp[i])
+	{
+		env_add_back(&env, env_lst_new(envp[i]));
+		i++;
+	}
+	return (env);
+}
+t_env	*env_lst_new(char *data)
+{
+	t_env	*env;
+
+	env = malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->env = data;
+	env->next = NULL;
+	return (env);
+}
+
+void	env_add_back(t_env **env, t_env *new)
+{
+	t_env	*ptr;
+
+	if (!env)
+		return ;
+	ptr = (*env);
+	if (!ptr)
+		(*env) = new;
+	else
+	{
+		while (ptr->next)
+		{
+			ptr = ptr->next;
+		}
+		ptr->next = new;
+	}
+}
+
+void	print_env_list(t_env *env)
+{
+	while (env)
+	{
+		ft_printf("%s\n", env->env);
+		env = env->next;
 	}
 }

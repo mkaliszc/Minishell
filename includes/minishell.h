@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 10:53:50 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:33:19 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,10 @@ typedef	struct		 s_mini // ? Main Minishell struct
 {
 	struct s_env	**env;
 }					t_mini;
+
+
+t_env	*init_env_struct(char **envp);;
+t_env	*env_lst_new(char *data);
+void	env_add_back(t_env **env, t_env *new);
+void	print_env_list(t_env *env);
+void	handle_cd(char **cmd, t_env *env);;

@@ -2,7 +2,7 @@ NAME	=	minishell
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g $(INCLUDE)
-INCLUDE	=	-I includes -I libft
+INCLUDE	=	-I includes -I OctoLIB
 CLONE	=	git clone
 RM		=	rm -f
 
@@ -10,6 +10,8 @@ LIB		=	OctoLIB
 LIBFT	=	$(LIB)/libft.a
 
 SRC		=	src/builtins/cd.c \
+			src/builtins/pwd.c \
+			src/builtins/main.c \
 
 
 OBJ 		= $(SRC:.c=.o)

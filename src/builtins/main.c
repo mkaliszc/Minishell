@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 08:04:07 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/14 08:04:18 by albillie          #+#    #+#             */
+/*   Updated: 2025/01/14 08:04:28 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_cd(char **cmd)
+int main(int ac, char **av, char **envp)
 {
-	if (!cmd[1])
+	(void)ac;
+	(void)av;
+	(void)envp;
+	char *line;
+	while (true)
 	{
-		if (chdir(getenv("HOME")) == -1)
+		line = readline(GREEN"WildShell $ "END);
+		char **command = ft_split(line, ' ');
+		if (ft_strncmp(command[0], "pwd", 3) == 0)
 		{
-			ft_putstr_fd("cd: HOME not set\n", 2); // Same message as bash when home is unset (unset HOME)
+			handle_pwd();
 		}
-	}
-	else
-	{
-		if (chdir(cmd[1]) == -1)
+		else if (ft_strncmp(command[0], "cd", 2) == 0)
 		{
-			ft_putstr_fd("cd: ", 2);
-			perror(cmd[1]);
+			handle_cd(command);
 		}
+		ft_free_char_tab(command);
+		free(line);
 	}
 }

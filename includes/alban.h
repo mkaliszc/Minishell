@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:23:08 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 07:40:06 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:21:40 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,7 @@
 
 void	handle_pwd();
 void	handle_cd(char **cmd);
+void	handle_env(char **env);
+void	handle_echo(char **cmd);
+void	handle_exit();
+void	print_element(char **cmd);

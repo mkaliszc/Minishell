@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 03:32:10 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/14 10:53:50 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ typedef struct s_index
 	int	here_d;
 }			t_index;
 
-typedef struct s_env
+typedef struct 		s_env // ? Env variables list
 {
 	char			*env;
 	struct s_env	*next;
-}			t_env;
+}					t_env;
 
-typedef	struct s_mini
+typedef	struct		 s_mini // ? Main Minishell struct
 {
 	struct s_env	**env;
-}				t_mini;
+}					t_mini;

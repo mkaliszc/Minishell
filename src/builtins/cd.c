@@ -6,11 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 08:04:07 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/14 09:18:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO Have to edit PWD and OLDPWD when changing directory
 
 void	handle_cd(char **cmd)
 {

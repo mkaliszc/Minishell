@@ -12,6 +12,8 @@ LIBFT	=	$(LIB)/libft.a
 SRC		=	src/builtins/cd.c \
 			src/builtins/pwd.c \
 			src/builtins/main.c \
+			src/builtins/env.c \
+			src/builtins/echo.c \
 
 
 OBJ 		= $(SRC:.c=.o)

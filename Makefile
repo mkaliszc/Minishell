@@ -1,65 +1,37 @@
-NAME = // name of your program
+NAME	=	minishell
 
-LCYAN = \033[1;36m
-GREEN = \033[0;32m
-LGREEN = \033[1;32m
-LRED = \033[1;31m
-RESET = \033[0m
-GRAY = \033[90m
-PURPLE = \033[0;35m
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror -g $(INCLUDE)
+INCLUDE	=	-I includes -I libft
+CLONE	=	git clone
+RM		=	rm -f
 
-INFO = $(LCYAN)/INFO/$(RESET)
-CLEANING = $(LRED)[DELETING]$(RESET)
-SUCCESS = $(LGREEN)[SUCCESS]$(RESET)
+LIB		=	OctoLIB
+LIBFT	=	$(LIB)/libft.a
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+SRC		=	src/builtins/cd.c \
 
-SRC_DIR = src
-OBJ_DIR = obj
-LIB_DIR = OctoLIB/
 
-FT = // Add functions files with their path here (Be sure to put it in a "src" directory)
+OBJ 		= $(SRC:.c=.o)
 
-SOURCES = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FT)))
-OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(FT)))
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lreadline
 
-LIB = $(LIB_DIR)libft.a
+$(LIBFT):
+		$(MAKE) -C $(LIB)
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(LIB):
-	@if [ -d ./$(LIB_DIR) ]; then \
-		echo "$(INFO)$(PURPLE) Updating OctoLIB$(RESET)"; \
-		cd $(LIB_DIR) && git fetch -q origin && git reset -q --hard origin/main; \
-		echo "$(GREEN)SUCCESS"; \
-	else \
-		echo "$(INFO)$(PURPLE) Clonning lib...$(RESET)"; \
-		git clone git@github.com:mkaliszc/OctoLIB.git; \
-	fi
-	@echo "$(INFO)$(PURPLE) Making Lib$(RESET)"
-	@$(MAKE) -sC $(LIB_DIR)
-
-$(NAME): $(LIB) $(OBJS)
-	@echo "$(INFO) $(GREEN)Creating $(NAME)$(RESET)"
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
-	@echo "$(SUCCESS)"
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "$(CLEANING) $(GRAY)$(OBJ_DIR) in $(LIB_DIR) and local dir$(RESET)"
-	@$(MAKE) clean -sC $(LIB_DIR)
-	rm -rf $(OBJ_DIR)
+	$(RM) $(OBJ)
+	$(MAKE) clean -C $(LIB)
 
 fclean: clean
-	@echo "$(CLEANING) $(GRAY)$(NAME) and Lib in $(LIB_DIR)$(RESET)"
-	@$(MAKE) fclean -sC $(LIB_DIR)
-	rm -f $(NAME)
-
+	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY:		all clean fclean re

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jojo.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/14 19:21:36 by jbergos          ###   ########.fr       */
+/*   Created: 2025/01/14 19:53:13 by jbergos           #+#    #+#             */
+/*   Updated: 2025/01/14 20:00:40 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
+#include "../../includes/minishell.h"
 
-/*
-* readshell for read the terminal
-? Param (char **envp) environnement variable
-? return nothing
-*/
-void	readshell(char **envp);
+int main(int argc, char *arhv[], char **envp)
+{
+	readshell(envp);
+	return (0);
+}

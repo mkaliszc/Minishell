@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 19:10:18 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/14 23:48:37 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_lst_cmd
 */
 typedef struct s_mini
 {
-	t_env		**env;
-	t_lst_cmd	**cmd;
+	t_env		**lst_env;
+	t_lst_cmd	**lst_cmd;
 	int			nb_cmd;
 }				t_mini;

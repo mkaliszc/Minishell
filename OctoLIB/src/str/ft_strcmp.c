@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/14 22:57:21 by mkaliszc         ###   ########.fr       */
+/*   Created: 2025/01/14 22:29:50 by mkaliszc          #+#    #+#             */
+/*   Updated: 2025/01/14 22:40:01 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	loop(char **envp)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char	*line;
+	int	i;
 
-	while (true)
-	{
-		line = readline("Wildshell>");
-		if (ft_strncmp("exit", line, 5) == 0)
-		{
-			// free minishell
-			free(line);
-			break;
-		}
-		// parsing jojo
-		
-		free(line);
-	}
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	//init signal
-	loop(envp);
-	(void)argc;
-	(void)argv;
-	return (0);
+	i = 0;
+	while (s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

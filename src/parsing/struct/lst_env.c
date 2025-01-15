@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 00:57:01 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/15 01:42:49 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ void	show_lst_env(t_env *lst_env)
 		printf("%s\n", tmp->env);
 		tmp = tmp->next;
 	}
+}
+
+void	free_lst_env(t_env *lst_env)
+{
+	if (!lst_env)
+		return ;
+	free_lst_env(lst_env->next);
+	// if ((*lst_env)->env)
+	// 	free((*lst_env)->env);
+	free(lst_env);
 }

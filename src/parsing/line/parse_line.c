@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_shell.c                                          :+:      :+:    :+:   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 02:23:31 by jbergos          ###   ########.fr       */
+/*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
+/*   Updated: 2025/01/15 03:39:28 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/jojo.h"
 
-t_mini	*create_m_shell(char **envp, char *ln_cmd)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_mini	*m_shell;
+	int	i;
 
-	(void)ln_cmd;
-	m_shell = malloc(sizeof(t_mini));
-	if (!m_shell)
-		return (NULL);
-	m_shell->lst_env = create_lst_env(envp);
-	if (is_wrong_line(ln_cmd))
-	// m_shell->lst_cmd = create_lst_cmd(ln_cmd);
-	show_lst_env(m_shell->lst_env);
-	return (m_shell);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		++i;
+	}
+	return (s1[i] - s2[i]);
 }
 
-void	free_m_shell(t_mini *m_shell)
+int	is_wrong_line(char *ln_cmd)
 {
-	free_lst_env(m_shell->lst_env);
-	free(m_shell);
+	t_tokens	token;
+	int			i;
+
+/*
+* parcourir la chaine de caractere
+! ne pas la split par les espaces car le "|" passes a la prochaine fonction meme si il est attache	
+*/
 }

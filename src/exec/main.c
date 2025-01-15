@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/14 22:57:21 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/15 22:34:15 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	loop(char **envp)
 {
+	t_mini	*data;
 	char	*line;
 
 	while (true)
@@ -26,7 +27,7 @@ void	loop(char **envp)
 			break;
 		}
 		// parsing jojo
-		
+		executing_minishell(data);
 		free(line);
 	}
 }

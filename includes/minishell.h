@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 00:49:45 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/15 01:40:38 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ typedef enum s_tokens
 
 typedef enum s_rd_file
 {
-	in,
-	out,
-	hdc,
-	app,
-} t_rd_file;
+	IN,
+	OUT,
+	HDC,
+	APP,
+}	t_rd_file;
 
 typedef struct s_index
 {
@@ -84,8 +84,8 @@ typedef struct s_lst_cmd
 	char				**cmd;
 	bool				is_builtins;
 	struct s_lst_cmd	*next;
-	t_hdc				**hdc;
-	t_order_file		**order_file;
+	t_hdc				*hdc;
+	t_order_file		*order_file;
 }						t_lst_cmd;
 
 /*

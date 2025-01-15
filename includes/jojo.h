@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 00:27:41 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/15 00:48:24 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	j_loop(char **envp);
 t_mini	*create_m_shell(char **envp, char *ln_cmd);
 t_env	*create_env(char *one_env);
 t_env	*create_lst_env(char **envp);
-void	lst_env_add_last(t_env *lst_env, t_env *env);
+void	lst_env_add_last(t_env **lst_env, t_env *env);
 void	show_lst_env(t_env *lst_env);

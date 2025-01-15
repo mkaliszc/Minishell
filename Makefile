@@ -1,7 +1,7 @@
 NAME	=	minishell
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g $(INCLUDE)
+CFLAGS	=	-Wall -Wextra -Werror -g $(INCLUDE) #-no-pie // For laptop
 INCLUDE	=	-I includes -I OctoLIB
 CLONE	=	git clone
 RM		=	rm -f

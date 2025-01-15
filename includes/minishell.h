@@ -5,18 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 13:33:19 by albillie         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/01/15 00:10:56 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #pragma once
 
 #include "jojo.h"
 #include "milan.h"
 #include "alban.h"
+#include <stdbool.h>
 
-typedef	enum s_tokens
+typedef enum s_tokens
 {
 	WORD_TOK,
 	CMD_TOK,
@@ -24,7 +27,7 @@ typedef	enum s_tokens
 	OUT_TOK,
 	APP_TOK,
 	HDC_TOK,
-}		t_type;
+}	t_tokens;
 
 typedef struct s_index
 {
@@ -34,20 +37,89 @@ typedef struct s_index
 	int	here_d;
 }			t_index;
 
+/*
+* chain of all env
+*/
 typedef struct 		s_env // ? Env variables list
 {
 	char			*env;
 	struct s_env	*next;
 }					t_env;
 
-typedef	struct		 s_mini // ? Main Minishell struct
+/*
+* struct s_hdc | give the order of here_doc to create
+! in bash here_doc have high priority and are executed at first
+! maybe try more
+*/
+typedef struct s_hdc
 {
-	struct s_env	**env;
-}					t_mini;
+	char			*limiter;
+	struct s_hdc	*next;
+}					t_hdc;
+
+/*
+* struct s_order_in | give order for infile/here_doc redirection
+* bool is_in |  true = infile / false = here_doc
+* char *lmt_or_file | give the limiter of here_doc or file name for infile
+* struct s_order_in *next | give you the next redirection to make
+*/
+typedef struct s_order_in
+{
+	char				*lmt_or_file;
+	bool				is_in;
+	struct s_order_in	*next;
+}						t_order_in;
+
+/*
+* struct s_order_out | give order for outfile/append redirection
+* bool  is_out | true = outfile / false = append
+* char *file | define the name of the file
+* struct s_order_out *next | give you the next redirection to make
+*/
+typedef struct s_order_out
+{
+	char				*file;
+	bool				is_out;
+	struct s_order_out	*next;
+}						t_order_out;
+
+/*
+* struct s_lst_cmd | list all cmd in chain with her argument,
+* all hdc, order of infile/hdc,order of out/appd and if this cmd or builtins
+* char **cmd | table of cmd with her flags
+* bool is_builtins | true = builtins / false = cmd
+* t_hdc | see ref struct s_hdc
+* t_order_in | see ref struct s_order_in
+* t_order_out | see red struct t_order_out
+*/
+typedef struct s_lst_cmd
+{
+	char				**cmd;
+	bool				is_builtins;
+	struct s_lst_cmd	*next;
+	t_hdc				**hdc;
+	t_order_in			**order_in;
+	t_order_out			**order_out;
+}						t_lst_cmd;
+
+/*
+* struct s_mini | give env variable nb of cmd and list of cmd
+* int nb_cmd | give nb of cmd
+* t_env | see ref struct s_env
+* t_lst_cmd | see ref struct s_lst_cmd
+*/
+typedef struct s_mini
+{
+	t_env		**env;
+	t_lst_cmd	**cmd;
+	int			nb_cmd;
+}				t_mini;
 
 
-t_env	*init_env_struct(char **envp);;
+void	update_env_paths(t_env *env);
+t_env	*init_env_struct(char **envp);
 t_env	*env_lst_new(char *data);
 void	env_add_back(t_env **env, t_env *new);
 void	print_env_list(t_env *env);
-void	handle_cd(char **cmd, t_env *env);;
+void	handle_cd(char **cmd, t_env *env);
+void	handle_export(char *cmd, t_env *env);

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 13:37:02 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:26:54 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	update_env_paths(t_env *env)
 		env = env->next;
 	}
 }
-void	handle_cd(char **cmd, t_env **env)
+void	handle_cd(char **cmd, t_env *env)
 {
 	if (!cmd[1])
 	{
@@ -43,6 +43,6 @@ void	handle_cd(char **cmd, t_env **env)
 			ft_putstr_fd("cd: ", 2);
 			perror(cmd[1]);
 		}
-		update_env_paths(&                                                                       env);
+		update_env_paths(env);
 	}
 }

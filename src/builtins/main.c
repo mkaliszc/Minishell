@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:04:18 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 13:33:38 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/15 00:58:13 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	char *line;
 	env = init_env_struct(envp);
-	print_env_list(env);
 	while (true)
 	{
 		line = readline(GREEN"WildShell $ "END);
-		printf("%s\n", env->env);
 		char **command = ft_split(line, ' ');
 		if (ft_strncmp(command[0], "pwd", 3) == 0)
 		{
@@ -35,7 +33,7 @@ int main(int ac, char **av, char **envp)
 		}
 		else if (ft_strncmp(command[0], "env", 3) == 0)
 		{
-			handle_env(envp);
+			print_env_list(env);
 		}
 		else if (ft_strncmp(command[0], "echo", 4) == 0)
 		{
@@ -43,8 +41,13 @@ int main(int ac, char **av, char **envp)
 		}
 		else if (ft_strncmp(command[0], "exit", 4) == 0)
 		{
-			handle_echo(command);
+			break; // ! Have to work on exit command right here.
 		}
+		else if (ft_strncmp(command[0], "export", 6) == 0)
+		{
+			handle_export(command[1], env);
+		}
+		add_history(line);
 		ft_free_char_tab(command);
 		free(line);
 	}
@@ -109,3 +112,4 @@ void	print_env_list(t_env *env)
 		env = env->next;
 	}
 }
+

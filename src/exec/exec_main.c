@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/15 00:36:05 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/15 00:51:38 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	executing_minishell(t_mini *data)
 	int		status;
 	char	*infile;
 
-	cur = data->order;
+	cur = data->cmd;
 	if ((*data->lst_cmd)->is_builtins == true && data->nb_cmd == 1)
 		which_builtins(data);
 	status = 0;

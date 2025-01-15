@@ -6,14 +6,17 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 19:53:13 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/14 20:00:40 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/14 23:59:48 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/jojo.h"
 
-int main(int argc, char *arhv[], char **envp)
+
+int main(int argc, char *argv[], char **envp)
 {
-	readshell(envp);
+	(void)argc;
+	(void)argv;
+	j_loop(envp);
 	return (0);
 }

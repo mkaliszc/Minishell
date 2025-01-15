@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 01:01:02 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/15 03:14:33 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,9 @@ void	handle_export(char *cmd, t_env *env)
 	{
 		if (ft_strncmp(env->env, cmd, i) == 0)
 		{
-			printf("in condition\n");
 			env->env = cmd;
-			printf("%s\n", env->env);
+			return ;
 		}
 		env = env->next;
 	}
-	// printf("%s\n", cmd);
-	// env_add_back(&env, env_lst_new(cmd));
-	// print_env_list(env);
 }

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 01:06:15 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/15 03:11:30 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ void	update_env_paths(t_env *env);
 t_env	*init_env_struct(char **envp);
 t_env	*env_lst_new(char *data);
 void	env_add_back(t_env **env, t_env *new);
-void	print_env_list(t_env *env);
 void	handle_cd(char **cmd, t_env *env);
 void	handle_export(char *cmd, t_env *env);
+void	print_env_list(t_env *env);

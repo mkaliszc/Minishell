@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:04:18 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 00:58:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/15 03:16:28 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ int main(int ac, char **av, char **envp)
 		}
 		else if (ft_strncmp(command[0], "export", 6) == 0)
 		{
+			env_add_back(&env, env_lst_new("tedt"));
 			handle_export(command[1], env);
+			print_env_list(env);
 		}
-		add_history(line);
-		ft_free_char_tab(command);
-		free(line);
 	}
 }
 

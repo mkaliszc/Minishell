@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/01/15 00:10:56 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
+/*   Updated: 2025/01/15 01:06:15 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #pragma once
 
-#include "jojo.h"
 #include "milan.h"
 #include "alban.h"
+#include "../OctoLIB/include/libft.h"
 #include <stdbool.h>
 
 typedef enum s_tokens
@@ -28,6 +28,14 @@ typedef enum s_tokens
 	APP_TOK,
 	HDC_TOK,
 }	t_tokens;
+
+typedef enum s_rd_file
+{
+	IN,
+	OUT,
+	HDC,
+	APP,
+}	t_rd_file;
 
 typedef struct s_index
 {
@@ -76,12 +84,12 @@ typedef struct s_order_in
 * char *file | define the name of the file
 * struct s_order_out *next | give you the next redirection to make
 */
-typedef struct s_order_out
+typedef struct s_order_file
 {
 	char				*file;
-	bool				is_out;
-	struct s_order_out	*next;
-}						t_order_out;
+	t_rd_file			type;
+	struct s_order_file	*next;
+}						t_order_file;
 
 /*
 * struct s_lst_cmd | list all cmd in chain with her argument,
@@ -97,9 +105,8 @@ typedef struct s_lst_cmd
 	char				**cmd;
 	bool				is_builtins;
 	struct s_lst_cmd	*next;
-	t_hdc				**hdc;
-	t_order_in			**order_in;
-	t_order_out			**order_out;
+	t_hdc				*hdc;
+	t_order_file		*order_file;
 }						t_lst_cmd;
 
 /*
@@ -110,8 +117,8 @@ typedef struct s_lst_cmd
 */
 typedef struct s_mini
 {
-	t_env		**env;
-	t_lst_cmd	**cmd;
+	t_env		*lst_env;
+	t_lst_cmd	*lst_cmd;
 	int			nb_cmd;
 }				t_mini;
 

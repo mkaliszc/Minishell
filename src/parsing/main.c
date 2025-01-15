@@ -6,11 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 19:53:13 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/14 20:20:22 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/15 01:11:56 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/jojo.h"
 
 // int main(int argc, char *arhv[], char **envp)
 // {

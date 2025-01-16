@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 00:02:49 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 00:41:07 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 05:02:41 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "../../../../includes/minishell.h"
 
 void	show_all_lst_env(t_env *lst_env)
 {
@@ -21,7 +21,7 @@ void	show_all_lst_env(t_env *lst_env)
 	tmp = lst_env;
 	while (tmp)
 	{
-		printf("%s : ", tmp->key);
+		printf("%s=", tmp->key);
 		printf("%s\n", tmp->value);
 		tmp = tmp->next;
 	}
@@ -36,11 +36,27 @@ void	show_one_lst_env(t_env *lst_env, char *key)
 	tmp = lst_env;
 	while (tmp)
 	{
-		if (ft_strcmp(key, lst_env->key) == 0)
+		if (ft_strcmp(key, tmp->key) == 0)
 		{
-			printf("%s\n", lst_env->value);
+			printf("%s\n", tmp->value);
 			return ;
 		}
 		tmp = tmp->next; 
 	}
+}
+
+t_env	*find_one_lst_env(t_env *lst_env, char *key)
+{
+	t_env	*tmp;
+
+	if (!lst_env)
+		return (NULL);
+	tmp = lst_env;
+	while (tmp)
+	{
+		if (ft_strcmp(key, tmp->key) == 0)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

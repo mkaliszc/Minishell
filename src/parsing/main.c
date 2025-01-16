@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 19:53:13 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 22:08:45 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:59:42 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/jojo.h"
+#include "../../includes/minishell.h"
 
 int	main(int argc, char *argv[], char **envp)
 {

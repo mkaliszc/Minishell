@@ -6,16 +6,16 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 21:16:46 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 04:13:13 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
-#include "milan.h"
-#include "alban.h"
-#include "../OctoLIB/include/libft.h"
-#include <stdbool.h>
+# include "milan.h"
+# include "alban.h"
+# include "jojo.h"
+# include "../OctoLIB/include/libft.h"
+# include <stdbool.h>
 
 typedef enum s_tokens
 {

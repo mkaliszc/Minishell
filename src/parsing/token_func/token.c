@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 03:11:12 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:59:21 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "../../../includes/minishell.h"
 
 t_tokens	wich_token(char *one_arg)
 {

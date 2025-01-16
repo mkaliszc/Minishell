@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 01:55:47 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 04:52:17 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "../../../includes/minishell.h"
 
 int	empty_line(char *ln_cmd)
 {
@@ -51,7 +51,6 @@ void	find_n_replace_var(t_mini *m_shell, char *ln_cmd)
 	find = find_var(ln_cmd);
 	if (find)
 	{
-		printf("%s\n", find);
 		show_one_lst_env(m_shell->lst_env, find);
 		free(find);
 	}

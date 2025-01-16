@@ -6,21 +6,23 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:14:14 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 01:54:58 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 05:33:45 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/jojo.h"
+#include "../../includes/minishell.h"
 
 void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 {
 	(void)m_shell;
-	char **cmd_splited;
+	// char **cmd_splited;
 	if (empty_line(ln_cmd))
 		return ;
-	cmd_splited = split_line(ln_cmd);
+	// cmd_splited = split_line(ln_cmd);
 	// show_all_lst_env(m_shell->lst_env);
+	show_all_lst_env(m_shell->lst_env);
 	// find_n_replace_var(m_shell, ln_cmd);
+	u_r_one_lst_env(m_shell->lst_env, ln_cmd);
 }
 
 void	j_loop(t_mini *m_shell)

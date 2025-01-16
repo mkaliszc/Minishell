@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 00:03:39 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 05:29:25 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "../../../../includes/minishell.h"
 
 t_env	*create_env(char *one_env)
 {
@@ -69,4 +69,13 @@ void	free_lst_env(t_env *lst_env)
 	if (lst_env->value)
 		free(lst_env->value);
 	free(lst_env);
+}
+
+void	create_one_lst_env(t_env *lst_env, char *export)
+{
+	t_env	*add_env;
+
+	add_env = create_env(export);
+	lst_env_add_last(&lst_env, add_env);
+
 }

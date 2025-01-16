@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 01:54:34 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 23:58:42 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:59:03 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "../../../../includes/minishell.h"
 
 t_lst_cmd	*create_lst_cmd(char *ln_cmd)
 {

@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 01:56:37 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 03:20:22 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 04:00:15 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "../../../includes/minishell.h"
 
 int	is_space(char *ln_cmd)
 {

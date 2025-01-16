@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:05:03 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 00:33:50 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:59:31 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "../../../includes/minishell.h"
 
 int	find_occ(char *s, char c)
 {

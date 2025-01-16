@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 20:26:54 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 06:03:27 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,25 @@ void	update_env_paths(t_env *env)
 	buffer = NULL;
 	while (env)
 	{
-		if (ft_strncmp(env->env, "PWD=", 4) == 0)
+		if (ft_strcmp(env->key, "PWD") == 0)
 		{
-			env->env = getcwd(buffer, 0);
+			env->value = getcwd(buffer, 0);
 		}
 		env = env->next;
 	}
 }
-void	handle_cd(char **cmd, t_env *env)
+int	handle_cd(char **cmd)
 {
-	if (!cmd[1])
+	if (cmd_array_size(cmd) > 2)
+	{
+		ft_putstr_fd("cd: too many arguments\n", 2);
+		return (1);
+	}
+	else if (!cmd[1])
 	{
 		if (chdir(getenv("HOME")) == -1)
-		{
-			ft_putstr_fd("cd: HOME not set\n", 2); // Same message as bash when home is unset (unset HOME)
-		}
+			ft_putstr_fd("cd: HOME not set\n", 2);
+		return (1);
 	}
 	else
 	{
@@ -42,7 +46,8 @@ void	handle_cd(char **cmd, t_env *env)
 		{
 			ft_putstr_fd("cd: ", 2);
 			perror(cmd[1]);
+			return (1);
 		}
-		update_env_paths(env);
 	}
+	return (0);
 }

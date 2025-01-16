@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 04:11:55 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/14 22:29:50 by mkaliszc          #+#    #+#             */
+/*   Updated: 2025/01/14 22:40:01 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handle_export(char *cmd, t_env *env)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int i = 0;
-	while (cmd[i] != '=')
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i])
 		i++;
-	while (env)
-	{
-		if (ft_strcmp(env->key, cmd) == 0)
-		{
-			env->value = cmd;
-			return ;
-		}
-		env = env->next;
-	}
+	return (s1[i] - s2[i]);
 }

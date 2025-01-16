@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   r_lst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 00:02:49 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 00:41:07 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 04:23:06 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "minishell.h"
 
 void	show_all_lst_env(t_env *lst_env)
 {
@@ -21,7 +21,7 @@ void	show_all_lst_env(t_env *lst_env)
 	tmp = lst_env;
 	while (tmp)
 	{
-		printf("%s : ", tmp->key);
+		printf("%s=", tmp->key);
 		printf("%s\n", tmp->value);
 		tmp = tmp->next;
 	}
@@ -41,6 +41,6 @@ void	show_one_lst_env(t_env *lst_env, char *key)
 			printf("%s\n", lst_env->value);
 			return ;
 		}
-		tmp = tmp->next; 
+		tmp = tmp->next;
 	}
 }

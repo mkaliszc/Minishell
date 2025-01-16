@@ -6,11 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 03:48:05 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 03:57:16 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "minishell.h"
 
 t_env	*create_env(char *one_env)
 {

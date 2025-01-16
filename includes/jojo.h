@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   jojo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 00:23:54 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 04:06:00 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include "minishell.h"
+#pragma once
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include "minishell.h"
+
+typedef struct s_mini t_mini;
+typedef struct s_env t_env;
 /*
 * j_loop for read the terminal
 ? Param (char **envp) environnement variable

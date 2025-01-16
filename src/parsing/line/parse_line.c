@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 01:55:47 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:57:50 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "minishell.h"
 
 int	empty_line(char *ln_cmd)
 {

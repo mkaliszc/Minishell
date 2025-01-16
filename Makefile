@@ -16,6 +16,10 @@ SRC		=	src/builtins/cd.c \
 			src/builtins/echo.c \
 			src/builtins/exit.c \
 			src/builtins/export.c \
+			src/parsing/struct/lst_env/c_lst_env.c \
+			src/parsing/struct/lst_env/r_lst_env.c \
+			src/parsing/utils/utils1.c \
+
 
 
 OBJ 		= $(SRC:.c=.o)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   c_lst_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 01:54:34 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 23:58:42 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:57:30 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "minishell.h"
 
 t_lst_cmd	*create_lst_cmd(char *ln_cmd)
 {

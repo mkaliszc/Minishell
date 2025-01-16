@@ -6,11 +6,22 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:04:18 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 03:51:44 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 06:06:00 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	cmd_array_size(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}
+
 
 int main(int ac, char **av, char **envp)
 {
@@ -18,40 +29,39 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	char *line;
-	env = init_env_struct(envp);
+	env = create_lst_env(envp);
 	while (true)
 	{
 		line = readline(GREEN"WildShell $ "END);
 		char **command = ft_split(line, ' ');
-		if (ft_strncmp(command[0], "pwd", 3) == 0)
+		if (ft_strcmp(command[0], "pwd") == 0)
 		{
 			handle_pwd();
 		}
-		else if (ft_strncmp(command[0], "cd", 2) == 0)
+		else if (ft_strcmp(command[0], "cd") == 0)
 		{
-			handle_cd(command, env);
+			handle_cd(command);
+			update_env_paths(env);
+			show_one_lst_env(env, "PWD");
 		}
-		else if (ft_strncmp(command[0], "env", 3) == 0)
+		else if (ft_strcmp(command[0], "env") == 0)
 		{
-			print_env_list(env);
+			show_all_lst_env(env);
 		}
-		else if (ft_strncmp(command[0], "echo", 4) == 0)
+		else if (ft_strcmp(command[0], "echo") == 0)
 		{
 			handle_echo(command);
 		}
-		else if (ft_strncmp(command[0], "exit", 4) == 0)
+		else if (ft_strcmp(command[0], "exit") == 0)
 		{
 			break; // ! Have to work on exit command right here.
 		}
-		else if (ft_strncmp(command[0], "export", 6) == 0)
+		else if (ft_strcmp(command[0], "export") == 0)
 		{
-			env_add_back(&env, env_lst_new("tedt"));
 			handle_export(command[1], env);
-			print_env_list(env);
 		}
 	}
 }
-
 
 // // ? Functions for env variables list
 

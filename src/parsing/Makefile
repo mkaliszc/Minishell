@@ -19,6 +19,7 @@ SRC = main.c \
 	$(SRC_UT)/utils1.c \
 	$(SRC_LN)/parse_line.c \
 	$(SRC_ENV)/r_lst_env.c \
+	$(SRC_ENV)/u_lst_env.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

@@ -6,17 +6,24 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 04:06:00 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 06:18:29 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
-# include "minishell.h"
+
+typedef enum s_tokens t_tokens;
+typedef enum s_rd_file t_rd_file;
+typedef struct s_index t_index;
+typedef struct s_env t_env;
+typedef struct s_hdc t_hdc;
+typedef struct s_order_file t_order_file;
+typedef struct s_lst_cmd t_lst_cmd;
+typedef struct s_mini t_mini;
 
 typedef struct s_mini t_mini;
 typedef struct s_env t_env;
@@ -40,3 +47,6 @@ int		empty_line(char *ln_cmd);
 void	find_n_replace_var(t_mini *m_shell, char *ln_cmd);
 int		ft_strcmp(char *s1, char *s2);
 void	show_one_lst_env(t_env *lst_env, char *key);
+t_env	*find_one_lst_env(t_env *lst_env, char *key);
+void	u_r_one_lst_env(t_env *lst_env, char *export);
+void	create_one_lst_env(t_env *lst_env, char *export);

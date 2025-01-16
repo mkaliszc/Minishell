@@ -6,11 +6,11 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 23:59:02 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 03:59:13 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/jojo.h"
+#include "../../../../includes/minishell.h"
 
 t_mini	*create_m_shell(char **envp, char *ln_cmd)
 {

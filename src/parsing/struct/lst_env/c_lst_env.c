@@ -6,11 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 03:57:16 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 06:17:33 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../../includes/minishell.h"
 
 t_env	*create_env(char *one_env)
 {
@@ -69,4 +69,22 @@ void	free_lst_env(t_env *lst_env)
 	if (lst_env->value)
 		free(lst_env->value);
 	free(lst_env);
+}
+
+void	create_one_lst_env(t_env *lst_env, char *export)
+{
+	t_env	*add_env;
+
+	add_env = create_env(export);
+	lst_env_add_last(&lst_env, add_env);
+
+}
+
+void	create_one_lst_env(t_env *lst_env, char *export)
+{
+	t_env	*add_env;
+
+	add_env = create_env(export);
+	lst_env_add_last(&lst_env, add_env);
+
 }

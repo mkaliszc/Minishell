@@ -6,11 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 01:54:34 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 03:57:30 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 06:17:45 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../../includes/minishell.h"
 
 t_lst_cmd	*create_lst_cmd(char *ln_cmd)
 {

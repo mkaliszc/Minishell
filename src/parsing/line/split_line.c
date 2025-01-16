@@ -6,11 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 01:56:37 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 03:57:57 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 06:18:07 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../includes/minishell.h"
 
 int	is_space(char *ln_cmd)
 {

@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:39:43 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 07:37:57 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:50:07 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_pwd()
+int	handle_pwd()
 {
 	char	*cwd;
 
@@ -21,10 +21,12 @@ void	handle_pwd()
 	if (!cwd)
 	{
 		perror("pwd");
+		return (1);
 	}
 	printf("%s\n", cwd);
 	if (cwd)
 	{
 		free(cwd);
 	}
+	return (0);
 }

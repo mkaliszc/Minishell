@@ -6,13 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:27:20 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/14 11:26:52 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:50:46 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO have to work on echo depending of the commands
 
 void	handle_echo(char **cmd)
 {

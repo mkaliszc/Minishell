@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 06:18:16 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:02:49 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,13 @@ typedef struct s_mini
 	int			exit_code;
 }				t_mini;
 
-
-void	update_env_paths(t_env *env);
+// Function used to update PWD & OLDPWD when doing `cd`
+void	update_env_pwds(t_env *env, char *old_pwd);
 t_env	*init_env_struct(char **envp);
 t_env	*env_lst_new(char *data);
 void	env_add_back(t_env **env, t_env *new);
-int		handle_cd(char **cmd);
-void	handle_export(char *cmd, t_env *env);
-void	print_env_list(t_env *env);
+int		handle_cd(char **cmd, t_env **env);
+int		handle_export(char **cmd, t_env **env);
+void	handle_env(t_env *env);
 int		cmd_array_size(char **array);
+void	handle_unset(char **cmd, t_env **env);

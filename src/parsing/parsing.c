@@ -6,39 +6,36 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:14:14 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 01:43:06 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 01:54:58 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/jojo.h"
 
-t_mini	*parsing_shell(char **envp, char *ln_cmd)
+void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 {
-	t_mini	*m_shell;
-
-	m_shell = create_m_shell(envp, ln_cmd);
-	return (m_shell);
+	(void)m_shell;
+	char **cmd_splited;
+	if (empty_line(ln_cmd))
+		return ;
+	cmd_splited = split_line(ln_cmd);
+	// show_all_lst_env(m_shell->lst_env);
+	// find_n_replace_var(m_shell, ln_cmd);
 }
 
-void	j_loop(char **envp)
+void	j_loop(t_mini *m_shell)
 {
 	char	*line;
-	t_mini	*m_shell;
 
-	(void)envp;
-	m_shell = NULL;
 	while (true)
 	{
 		line = readline("Wildshell>");
 		if (ft_strncmp("exit", line, 5) == 0)
 		{
-			//free minishell
 			free(line);
 			break ;
 		}
-		m_shell = parsing_shell(envp, line);
+		parsing_shell(m_shell, line);
 		free(line);
 	}
-	if (m_shell)
-		free_m_shell(m_shell);
 }

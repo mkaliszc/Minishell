@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 01:00:31 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/15 21:16:46 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct s_index
 */
 typedef struct s_env
 {
-	char			*env;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }					t_env;
 
@@ -99,4 +100,5 @@ typedef struct s_mini
 	t_env		*lst_env;
 	t_lst_cmd	*lst_cmd;
 	int			nb_cmd;
+	int			exit_code;
 }				t_mini;

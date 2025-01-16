@@ -6,33 +6,53 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 03:39:28 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 01:55:47 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/jojo.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	empty_line(char *ln_cmd)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i] && s2[i])
+	while (ln_cmd[i])
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		if (ln_cmd[i] != ' ')
+			return (0);
 		++i;
 	}
-	return (s1[i] - s2[i]);
+	return (1);
 }
 
-int	is_wrong_line(char *ln_cmd)
+char	*find_var(char *ln_cmd)
 {
-	t_tokens	token;
-	int			i;
+	char	*find;
+	int		start;
+	int		end;
 
-/*
-* parcourir la chaine de caractere
-! ne pas la split par les espaces car le "|" passes a la prochaine fonction meme si il est attache	
-*/
+	start = 0;
+	while (ln_cmd[start] && ln_cmd[start] != '$')
+		++start;
+	if (!ln_cmd[start])
+		return (NULL);
+	end = start;
+	while (ln_cmd[end] && ln_cmd[end] != ' ')
+		++end;
+	find = ft_substr(ln_cmd, start + 1, end - start);
+	return (find);
+}
+
+void	find_n_replace_var(t_mini *m_shell, char *ln_cmd)
+{
+	char *find;
+
+	find = find_var(ln_cmd);
+	if (find)
+	{
+		printf("%s\n", find);
+		show_one_lst_env(m_shell->lst_env, find);
+		free(find);
+	}
 }

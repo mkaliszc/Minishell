@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_env.c                                          :+:      :+:    :+:   */
+/*   c_lst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 01:42:49 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 00:03:39 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "../../../../includes/jojo.h"
 
 t_env	*create_env(char *one_env)
 {
@@ -19,7 +19,8 @@ t_env	*create_env(char *one_env)
 	env = malloc(sizeof(t_env));
 	if (!env)
 		return (NULL);
-	env->env = one_env;
+	env->key = key_env(one_env);
+	env->value = ft_strdup(ft_strchr(one_env, '=') + 1);
 	env->next = NULL;
 	return (env);
 }
@@ -58,29 +59,14 @@ void	lst_env_add_last(t_env **lst_env, t_env *env)
 	tmp->next = env;
 }
 
-void	show_lst_env(t_env *lst_env)
-{
-	t_env	*tmp;
-
-	if (!(lst_env))
-	{
-		printf("her\n");
-		return ;
-	}
-	tmp = lst_env;
-	while (tmp)
-	{
-		printf("%s\n", tmp->env);
-		tmp = tmp->next;
-	}
-}
-
 void	free_lst_env(t_env *lst_env)
 {
 	if (!lst_env)
 		return ;
 	free_lst_env(lst_env->next);
-	// if ((*lst_env)->env)
-	// 	free((*lst_env)->env);
+	if (lst_env->key)
+ 		free(lst_env->key);
+	if (lst_env->value)
+		free(lst_env->value);
 	free(lst_env);
 }

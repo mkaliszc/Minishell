@@ -5,12 +5,21 @@ CFLAGS = -Wall -Wextra -Werror
 OBJ_DIR = obj
 LIB = libft.a
 SRC_ST = struct
+SRC_CMD = $(SRC_ST)/lst_cmd
+SRC_ENV = $(SRC_ST)/lst_env
+SRC_MS = $(SRC_ST)/m_shell
+SRC_UT = utils
+SRC_LN = line
 
 
 SRC = main.c \
 	parsing.c \
-	$(SRC_ST)/lst_env.c \
-	$(SRC_ST)/m_shell.c \
+	$(SRC_ENV)/c_lst_env.c \
+	$(SRC_MS)/c_m_shell.c \
+	$(SRC_UT)/utils1.c \
+	$(SRC_LN)/parse_line.c \
+	$(SRC_ENV)/r_lst_env.c \
+	$(SRC_ENV)/u_lst_env.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

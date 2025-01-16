@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_env.c                                          :+:      :+:    :+:   */
+/*   c_lst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/15 00:57:01 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 05:29:25 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/jojo.h"
+#include "../../../../includes/minishell.h"
 
 t_env	*create_env(char *one_env)
 {
@@ -19,7 +19,8 @@ t_env	*create_env(char *one_env)
 	env = malloc(sizeof(t_env));
 	if (!env)
 		return (NULL);
-	env->env = one_env;
+	env->key = key_env(one_env);
+	env->value = ft_strdup(ft_strchr(one_env, '=') + 1);
 	env->next = NULL;
 	return (env);
 }
@@ -58,19 +59,23 @@ void	lst_env_add_last(t_env **lst_env, t_env *env)
 	tmp->next = env;
 }
 
-void	show_lst_env(t_env *lst_env)
+void	free_lst_env(t_env *lst_env)
 {
-	t_env	*tmp;
-
-	if (!(lst_env))
-	{
-		printf("her\n");
+	if (!lst_env)
 		return ;
-	}
-	tmp = lst_env;
-	while (tmp)
-	{
-		printf("%s\n", tmp->env);
-		tmp = tmp->next;
-	}
+	free_lst_env(lst_env->next);
+	if (lst_env->key)
+ 		free(lst_env->key);
+	if (lst_env->value)
+		free(lst_env->value);
+	free(lst_env);
+}
+
+void	create_one_lst_env(t_env *lst_env, char *export)
+{
+	t_env	*add_env;
+
+	add_env = create_env(export);
+	lst_env_add_last(&lst_env, add_env);
+
 }

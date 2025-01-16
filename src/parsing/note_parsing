@@ -1,0 +1,70 @@
+tache a effectuer :
+
+-deployer un prompt
+
+-avoir un historiqye des commandes
+
+-chercher et lancer le bon executable baser sur la variable
+PATH ou en utilisant le chemin absolu ou relatif
+
+-eviter d'utiliser plus que d'une variable globale pour indiquer la
+reception du siganle. Considere les implications : cette approche
+assure que le gestionnaire de signal n'a pas access a votre
+structure de donnees principale
+
+-Ne pas interpreter les non fermer quotes(single et double quotes)
+ou les caracteres speciales non reauis par le sujet comme '\' ou ';'
+
+-gerer les single quotes _'_ qui doivent interpreter les caracteres a 
+l'interieur comme du texte et non des variable
+cas particulier (si une commande et a l'interieur d'une single quote)
+la commande est "TOUT" ce qu'il y a a l'interieur
+EX = 'echo ' | la commande qu'on retourne c'est 'echo ' avec l'espace
+ce fonctionnement est identique pour les flags des commandes
+les particularites des | et <  << et > >> sont annuler dans des
+single quotes
+
+-gerer les double quotes _"_ qui doivnet interpreter les caracteres
+a l' interieur comme des variable si elle le sont
+cas particulier (si une commande et a l'interieur d'une double quote)
+la commande est "TOUT" ce qu'il y a a l'interieur
+EX = "echo " | la commande qu'on retourne c'est "echo "" avec l'espace
+ce fonctionnement est identique pour les flags des commandes
+les particularites des | et < << et > >> sont annuler dans des
+double quotes
+
+-implementer les redirection des input : <
+
+-implementer les redirections des output : >
+
+- << doit recevoir un limiteur, puis lire l'entree jusqu'a ce qu'
+une ligne contenant les limiteur est visible cependant il n'est pas
+necessaire de mettre a jour l'historique
+
+- >> doit rediriger le output en append
+
+- implemente pipe ( | ) l'ouput de chaque commande dans un pipe est
+connecte a l'input de la prochaine commande du pipe
+
+- gerer les variable d'environnement
+(chaines de caractere commencant par $)
+
+- gerer $? qui donne l'exit status du dernier pipe de la commande
+precedente
+
+-gerer ctrl-C ctrl-D et ctrl-\ aui doivent avoir le meme
+comportement comme dans bash :
+
+	- ctrl-C : afficher un nouveau sur une nouvelle ligne
+	- ctrl-D : terminer le programme
+	- ctrl-/ : ne fais rien
+
+- votre shell doit implementer les builtins suivant :
+
+	- echo avec l'option -n
+	- cd avec seulement un chemin relatif ou absolu
+	- pwd sans options
+	- export sans options
+	- unset sans options
+	- env sans option ou arguments
+	- exit sans options

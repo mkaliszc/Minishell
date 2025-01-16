@@ -6,16 +6,20 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/01/15 01:40:38 by mkaliszc         ###   ########.fr       */
+=======
+/*   Updated: 2025/01/16 04:13:13 by jbergos          ###   ########.fr       */
+>>>>>>> 2d0358a79628745b916c1ed6ff55b5ff8b15d025
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
-#include "milan.h"
-#include "alban.h"
-#include "../OctoLIB/include/libft.h"
-#include <stdbool.h>
+# include "milan.h"
+# include "alban.h"
+# include "jojo.h"
+# include "../OctoLIB/include/libft.h"
+# include <stdbool.h>
 
 typedef enum s_tokens
 {
@@ -48,7 +52,8 @@ typedef struct s_index
 */
 typedef struct s_env
 {
-	char			*env;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }					t_env;
 
@@ -99,4 +104,5 @@ typedef struct s_mini
 	t_env		*lst_env;
 	t_lst_cmd	*lst_cmd;
 	int			nb_cmd;
+	int			exit_code;
 }				t_mini;

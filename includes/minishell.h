@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/15 03:11:30 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 03:50:09 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_index
 */
 typedef struct 		s_env // ? Env variables list
 {
-	char			*env;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }					t_env;
 
@@ -120,6 +121,7 @@ typedef struct s_mini
 	t_env		*lst_env;
 	t_lst_cmd	*lst_cmd;
 	int			nb_cmd;
+	int			exit_code;
 }				t_mini;
 
 

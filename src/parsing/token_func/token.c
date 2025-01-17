@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/17 06:20:30 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/17 20:02:04 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,39 @@ void	free_split(char **c_split)
 	free(c_split);
 }
 
+void	nb_of_redir(char **split_cmd)
+{
+	int	i;
+	int	j;
+	int count;
+
+	i = 0;
+	while (split_cmd[i])
+	{
+		j = 0;
+		count = 0;
+		while (split_cmd[i][j])
+		{
+			if (split_cmd[i][j] == '"')
+				while_d_quote(split_cmd[i], &j);
+			if (split_cmd[i][j] == '\'')
+				while_s_quote(split_cmd[i], &j);
+			if (split_cmd[i][j] == '<' || split_cmd[i][j] == '>')
+			{
+				++count;
+				while(split_cmd[i][j] == '<' || split_cmd[i][j] == '>')
+					++j;
+				while (split_cmd[i][j] == ' ' && split_cmd[i][j])
+					++j;
+			}
+			else
+				++j;
+		}
+		printf("nb of redir : %d\n", count);
+		++i;
+	}
+}
+
 void	split_cmd(char *ln_cmd)
 {
 	char **split_cmd;
@@ -84,4 +117,6 @@ void	split_cmd(char *ln_cmd)
 		++end;
 	}
 	split_cmd[i] = NULL;
+	show_split(split_cmd);
+	nb_of_redir(split_cmd);
 }

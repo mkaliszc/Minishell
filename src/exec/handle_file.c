@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/15 22:32:57 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/17 05:11:10 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,24 @@ char	*handle_here_doc(char *limiter)
 	}
 }
 
-int	handle_out(t_mini *data) // * need to be close further in  the code 
+int	handle_out(t_mini *data)
 {
 	t_order_file	*cur;
 	int				out_fd;
 
 	cur = data->lst_cmd->order_file;
-	out_fd = 0;
+	out_fd = 1;
 	while (cur)
 	{
 		if (cur->type == APP)
 		{
-			if (out_fd > 0)
+			if (out_fd > 1)
 				close(out_fd);
 			out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		}
 		else if (cur->type == OUT)
 		{
-			if (out_fd > 0)
+			if (out_fd > 1)
 				close(out_fd);
 			out_fd = open(cur->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		}
@@ -64,7 +64,7 @@ int	handle_out(t_mini *data) // * need to be close further in  the code
 	return (out_fd);
 }
 
-int	handle_in(t_mini *data) // * need to be close further in the code
+int	handle_in(t_mini *data)
 {
 	t_order_file	*cur;
 	int				in_fd;
@@ -88,4 +88,29 @@ int	handle_in(t_mini *data) // * need to be close further in the code
 		cur = cur->next;
 	}
 	return (in_fd);
+}
+
+int	handle_redir_no_pipe(t_mini *data)
+{
+	int	in_fd;
+	int	out_fd;
+
+	in_fd = handle_in(data);
+	out_fd = handle_out(data);
+	if (in_fd == -1 || out_fd == -1)
+		return (perror("error while opening a file"), 1);
+	if (in_fd != 0 && dup2(in_fd, STDIN_FILENO) < 0)
+		return (perror("error while redirecting the entry"), 1);
+	if (out_fd != 1 && dup2(out_fd, STDOUT_FILENO) < 0)
+		return (perror("error while redirecting the output"), 1);
+	if (in_fd != 0)
+		close(in_fd);
+	if (out_fd != 1)
+		close(out_fd);
+	return (0);
+}
+
+void	handle_redir()
+{
+	// * redirect to the pipe etc for last and first
 }

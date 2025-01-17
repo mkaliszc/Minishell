@@ -10,6 +10,7 @@ SRC_ENV = $(SRC_ST)/lst_env
 SRC_MS = $(SRC_ST)/m_shell
 SRC_UT = utils
 SRC_LN = line
+SRC_TK = token_func
 
 
 SRC = main.c \
@@ -20,6 +21,10 @@ SRC = main.c \
 	$(SRC_LN)/parse_line.c \
 	$(SRC_ENV)/r_lst_env.c \
 	$(SRC_ENV)/u_lst_env.c \
+	$(SRC_LN)/parse_err.c \
+	$(SRC_LN)/parse_utils.c \
+	$(SRC_LN)/to_modify.c \
+	$(SRC_TK)/token.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

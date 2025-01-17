@@ -1,57 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   to_modify.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 22:05:03 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/17 01:31:37 by jbergos          ###   ########.fr       */
+/*   Created: 2025/01/17 00:20:40 by jbergos           #+#    #+#             */
+/*   Updated: 2025/01/17 01:32:22 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	find_occ(char *s, char c)
+char	*find_var(char *ln_cmd)
 {
-	int	i;
+	char	*find;
+	int		start;
+	int		end;
 
-	i = 0;
-	while (s[i] && s[i] != c)
-		++i;
-	return (i);
-}
-
-char	*key_env(char *s)
-{
-	char	*key;
-	int		len;
-	int		i;
-
-	len = find_occ(s, '=');
-	key = malloc(sizeof(char) * (len + 1));
-	if (!key)
+	start = 0;
+	while (ln_cmd[start] && ln_cmd[start] != '$')
+		++start;
+	if (!ln_cmd[start])
 		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		key[i] = s[i];
-		++i;
-	}
-	key[i] = '\0';
-	return (key);
+	end = start;
+	while (ln_cmd[end] && ln_cmd[end] != ' ')
+		++end;
+	find = ft_substr(ln_cmd, start + 1, end - start);
+	return (find);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+void	find_n_replace_var(t_mini *m_shell, char *ln_cmd)
 {
-	int	i;
+	char	*find;
 
-	i = 0;
-	while (s1[i] && s2[i])
+	find = find_var(ln_cmd);
+	if (find)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		++i;
+		show_one_lst_env(m_shell->lst_env, find);
+		free(find);
 	}
-	return (s1[i] - s2[i]);
 }

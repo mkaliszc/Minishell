@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 05:28:57 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/17 03:41:42 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,13 @@ void	show_one_lst_env(t_env *lst_env, char *key);
 t_env	*find_one_lst_env(t_env *lst_env, char *key);
 void	u_r_one_lst_env(t_env *lst_env, char *export);
 void	create_one_lst_env(t_env *lst_env, char *export);
+int		is_border_pipe(char *ln_cmd);
+int		is_quote_closed(char *ln_cmd);
+void	ft_error(char c);
+int		is_good_angle_bracket(char *ln_cmd);
+void	while_s_quote(char *ln_cmd, int *index);
+void	while_d_quote(char *ln_cmd, int *index);
+int		while_a_brck(char *ln_cmd, int *i, char *a_brck, int *cnt);
+void	init_ft_brckt(int *i, int *cnt, char *a_brck);
+int		is_dbl_pipe(char *ln_cmd);
+void	split_cmd(char *ln_cmd);

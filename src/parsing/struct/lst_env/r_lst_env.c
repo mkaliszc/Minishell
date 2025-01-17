@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 00:02:49 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 05:02:41 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/17 01:34:54 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	show_one_lst_env(t_env *lst_env, char *key)
 			printf("%s\n", tmp->value);
 			return ;
 		}
-		tmp = tmp->next; 
+		tmp = tmp->next;
 	}
 }
 

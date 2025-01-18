@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 07:35:41 by albillie         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/01/18 20:58:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 
@@ -134,3 +135,9 @@ int		handle_export(char **cmd, t_env **env);
 void	handle_env(t_env *env);
 int		cmd_array_size(char **array);
 void	handle_unset(char **cmd, t_env **env);
+int		handle_in(t_mini *data);
+int		handle_out(t_mini *data);
+char	*handle_here_doc(char *limiter);
+int		handle_redir_no_pipe(t_mini *data);
+void	which_builtins(t_mini *data);
+char	*get_path(char **cmd, t_env *envp);

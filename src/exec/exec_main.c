@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/17 23:32:25 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/18 21:12:13 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 	! if we have a builtin like cd it don't work because it change the PWD and OLDPWD of the CHILD not the main
 	? pipex but mine need some modifications (creation of pipes and structs etc)
 	? pipex need to be executed from left to right (changing one while when creating my lst of cmd)
-	
+
 	todo : redirection
 	* redirect the STDIN to the last IN or HDC redirection (before the pipe)
 	* if we don't have the permission on the infile the command isn't exec and the outfile isn't created if it doesn't exist
@@ -45,8 +45,8 @@
 	*		ulimit -n 25 set the limit to 25 so the main can open 25 fd and the child can open 25 fd too
 	*		if the main open a fd (24 left) the child still have 25 left
 	? so to handle it maybe we can create each pipe in the child before the redirection
-	
-	todo 4 : cmd 
+
+	todo 4 : cmd
 	* check path for every command with access and our envp list
 	! if no path execve wil "fail" and so we need to free evrything
 	* execve
@@ -56,17 +56,17 @@ void	which_builtins(t_mini *data) // ! need updates here with what is requires f
 	if (ft_strcmp("env", *data->lst_cmd->cmd[0]) == 0)
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", data->lst_cmd->cmd[0]) == 0)
-		handle_export(data);
+		handle_export(data->lst_cmd->cmd, data->lst_env);
 	else if (ft_strcmp("unset", data->lst_cmd->cmd[0]) == 0)
-		handle_unset(data);
+		handle_unset(data->lst_cmd->cmd, data->lst_env);
 	else if (ft_strcmp("cd", data->lst_cmd->cmd[0]) == 0)
-		handle_cd(data);
+		handle_cd(data->lst_cmd->cmd, data->lst_env);
 	else if (ft_strcmp("pwd", data->lst_cmd->cmd[0]) == 0)
-		handle_pwd(data->lst_env);
+		handle_pwd();
 	else if (ft_strcmp("echo", data->lst_cmd->cmd[0]) == 0)
-		handle_echo(data);
+		handle_echo(data->lst_cmd->cmd);
 	else if (ft_strcmp("exit", data->lst_cmd->cmd[0]) == 0)
-		handle_exit(data);
+		handle_exit();
 }
 
 t_data	*init_struct(t_mini *data)
@@ -85,7 +85,7 @@ t_data	*init_struct(t_mini *data)
 		return(NULL);
 	}
 	return (res);
-	
+
 }
 
 void	executing_minishell(t_mini *data)

@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/01/18 20:58:43 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
+/*   Updated: 2025/01/18 04:21:12 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
 
 #pragma once
 # include "milan.h"
@@ -49,58 +46,28 @@ typedef struct s_index
 /*
 * chain of all env
 */
-typedef struct 		s_env // ? Env variables list
+typedef struct s_env
 {
 	char			*key;
 	char			*value;
 	struct s_env	*next;
 }					t_env;
 
-/*
-* struct s_hdc | give the order of here_doc to create
-! in bash here_doc have high priority and are executed at first
-! maybe try more
-*/
-typedef struct s_hdc
-{
-	char			*limiter;
-	struct s_hdc	*next;
-}					t_hdc;
-
-/*
-* struct s_order_in | give order for infile/here_doc redirection
-* bool is_in |  true = infile / false = here_doc
-* char *lmt_or_file | give the limiter of here_doc or file name for infile
-* struct s_order_in *next | give you the next redirection to make
-*/
-typedef struct s_order_in
-{
-	char				*lmt_or_file;
-	bool				is_in;
-	struct s_order_in	*next;
-}						t_order_in;
-
-/*
-* struct s_order_out | give order for outfile/append redirection
-* bool  is_out | true = outfile / false = append
-* char *file | define the name of the file
-* struct s_order_out *next | give you the next redirection to make
-*/
 typedef struct s_order_file
 {
 	char				*file;
 	t_rd_file			type;
-	struct s_order_file	*next;
+	struct s_order_file	*next;	
 }						t_order_file;
 
 /*
-* struct s_lst_cmd | list all cmd in chain with her argument,
+* struct s_lst_cmd | list all cmd in chain with her argument, 
 * all hdc, order of infile/hdc,order of out/appd and if this cmd or builtins
 * char **cmd | table of cmd with her flags
 * bool is_builtins | true = builtins / false = cmd
 * t_hdc | see ref struct s_hdc
 * t_order_in | see ref struct s_order_in
-* t_order_out | see red struct t_order_out
+* t_order_out | see red struct t_order_out  
 */
 typedef struct s_lst_cmd
 {
@@ -124,20 +91,3 @@ typedef struct s_mini
 	int			nb_cmd;
 	int			exit_code;
 }				t_mini;
-
-// Function used to update PWD & OLDPWD when doing `cd`
-void	update_env_pwds(t_env *env);
-t_env	*init_env_struct(char **envp);
-t_env	*env_lst_new(char *data);
-void	env_add_back(t_env **env, t_env *new);
-void	handle_cd(char **cmd, t_env *env);
-int		handle_export(char **cmd, t_env **env);
-void	handle_env(t_env *env);
-int		cmd_array_size(char **array);
-void	handle_unset(char **cmd, t_env **env);
-int		handle_in(t_mini *data);
-int		handle_out(t_mini *data);
-char	*handle_here_doc(char *limiter);
-int		handle_redir_no_pipe(t_mini *data);
-void	which_builtins(t_mini *data);
-char	*get_path(char **cmd, t_env *envp);

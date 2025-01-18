@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/18 21:12:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 00:59:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_data	*init_struct(t_mini *data)
 void	executing_minishell(t_mini *data)
 {
 	t_data	*info;
-	int	cur_cmd_nbr; // to handle first cmd and last cmd
+	int	cur_cmd_nbr; // ? to handle first cmd and last cmd
 
 	cur_cmd_nbr = 0;
 	info = init_struct(data);
@@ -109,6 +109,6 @@ void	executing_minishell(t_mini *data)
 		else
 			handle_pipes(data, info);
 		cur_cmd_nbr++;
-		data->lst_cmd = data->lst_cmd->next;
+		data->lst_cmd = data->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}
 }

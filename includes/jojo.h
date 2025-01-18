@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   jojo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 06:18:29 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/16 05:28:57 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ typedef struct s_order_file t_order_file;
 typedef struct s_lst_cmd t_lst_cmd;
 typedef struct s_mini t_mini;
 
-typedef struct s_mini t_mini;
-typedef struct s_env t_env;
 /*
 * j_loop for read the terminal
 ? Param (char **envp) environnement variable

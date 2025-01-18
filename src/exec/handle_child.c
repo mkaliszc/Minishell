@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/17 23:29:02 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/18 20:43:48 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@
 
 void	handle_pipe(t_mini *data, t_data *info)
 {
-	// * fork + create pipe etc 
+	// fork + pipe + redir
 }
 
 void	handle_child(t_mini *data, int child_number)
 {
 	char	*path;
+
 	handle_redir(data, child_number);
 	if (data->lst_cmd->is_builtins == true)
-		which_builtins(data); // ? exit 
+		which_builtins(data); // ? free_all + exit 
 	path = validate_cmd(data->lst_cmd, data->lst_env);
-	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) < 0);
+	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) < 0)
+	{
+		// free_all + exit + close
+	}
 }

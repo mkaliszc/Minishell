@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 01:56:37 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 04:00:15 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 06:18:07 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_space(char *ln_cmd)
 	i = 0;
 	while(ln_cmd[i] && ln_cmd[i] == ' ')
 		++i;
-	return (i);		
+	return (i);
 }
 
 int	is_pipe(char *ln_cmd, int *count)
@@ -56,7 +56,7 @@ int is_d_quote(char *ln_cmd, int *count)
 			while(ln_cmd[i] != '\'')
 					++i;
 		}
-		
+
 	}
 }
 

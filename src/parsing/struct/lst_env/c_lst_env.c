@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_lst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 05:29:25 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/16 06:20:05 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	free_lst_env(t_env *lst_env)
 		return ;
 	free_lst_env(lst_env->next);
 	if (lst_env->key)
- 		free(lst_env->key);
+		free(lst_env->key);
 	if (lst_env->value)
 		free(lst_env->value);
 	free(lst_env);
@@ -79,3 +79,4 @@ void	create_one_lst_env(t_env *lst_env, char *export)
 	lst_env_add_last(&lst_env, add_env);
 
 }
+

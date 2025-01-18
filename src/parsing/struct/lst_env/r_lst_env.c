@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 00:02:49 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/18 03:00:23 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/18 21:03:49 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	show_one_lst_env(t_env *lst_env, char *key)
 			printf("%s\n", tmp->value);
 			return ;
 		}
-		tmp = tmp->next; 
+		tmp = tmp->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:16:21 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 05:40:57 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:30:47 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ void	free_test(t_env *env)
 	free(env);
 }
 
-
-void	handle_unset(char **cmd, t_env **env) // ! Do the while loop for each arg
+// ! Do the while loop for each arg
+void	handle_unset(char **cmd, t_env **env)
 {
-	t_env *ptr = (*env);
-	t_env *temp;
+	t_env	*ptr;
+	t_env	*temp;
+
 	if (!env || !*env)
 		return ;
+	ptr = (*env);
 	if (ft_strcmp(ptr->key, cmd[1]) == 0)
 	{
 		(*env) = ptr->next;

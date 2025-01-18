@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 01:56:39 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/18 07:35:41 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	update_env_pwds(t_env *env);
 t_env	*init_env_struct(char **envp);
 t_env	*env_lst_new(char *data);
 void	env_add_back(t_env **env, t_env *new);
-int		handle_cd(char **cmd, t_env **env);
+void	handle_cd(char **cmd, t_env *env);
 int		handle_export(char **cmd, t_env **env);
 void	handle_env(t_env *env);
 int		cmd_array_size(char **array);

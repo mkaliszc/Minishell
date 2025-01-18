@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:23:08 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 14:50:24 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/18 07:35:37 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 // BUILTINS FUNCTIONS
 
-int	handle_pwd();
+void	handle_pwd();
 void	handle_echo(char **cmd);
 void	handle_exit();
 void	print_element(char **cmd);

@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:27:20 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 12:50:46 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/18 05:40:39 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_echo(char **cmd)
+void	handle_echo(char **cmd) // ! Do the while loop for each arguments
 {
 	int	i;
 

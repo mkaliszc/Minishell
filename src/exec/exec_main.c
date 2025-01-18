@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/17 04:10:35 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/17 23:32:25 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 	* if we don't have the permission on the infile the command isn't exec and the outfile isn't created if it doesn't exist
 	! even if we don't have the perms we do every here_doc before exit/quit
 	* finally we redirect the STDOUT to the last OUT or APP and create it if it doesn't exist
-	! don't forget to unlink the tmp file of each heredoc before killing the child
+	! don't forget to unlink the tmp file of heredoc
 	? redirection with pipes ? boolean for handle_out to see if we find a out or not
 
 	todo 3.1 : pipes

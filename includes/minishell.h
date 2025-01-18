@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:49:05 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 19:32:41 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/18 04:21:12 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }					t_env;
-
-/*
-* struct s_hdc | give the order of here_doc to create
-! in bash here_doc have high priority and are executed at first
-! maybe try more 
-*/
-typedef struct s_hdc
-{
-	char			*limiter;
-	struct s_hdc	*next;
-}					t_hdc;
 
 typedef struct s_order_file
 {

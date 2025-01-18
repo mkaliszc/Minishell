@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/17 02:07:41 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/18 02:59:40 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_path(char **cmd, t_env *envp)
 
 	i = 0;
 	cur = envp;
-	while (cur->key != "PATH" && cur != NULL)
+	while (find_one_lst_env(cur, "PATH") && cur != NULL)
 		cur = cur->next;
 	if (cur == NULL)
 		return(ft_putstr_fd("environnement variable PATH not set", 2), NULL);

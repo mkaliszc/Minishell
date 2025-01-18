@@ -6,22 +6,27 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/16 07:33:11 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/18 04:18:26 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	update_env_pwds(t_env *env, char *old_pwd)
+void	update_env_pwds(t_env *env)
 {
+	t_env	*pwd;
+
+	pwd = find_one_lst_env(env, "PWD");
 	while (env)
 	{
 		if (ft_strcmp(env->key, "OLDPWD") == 0)
 		{
-			env->value = old_pwd;
+			free(env->value);
+			env->value = ft_strdup(pwd->value);
 		}
 		if (ft_strcmp(env->key, "PWD") == 0)
 		{
+			free(env->value);
 			env->value = getcwd(NULL, 0);
 		}
 		env = env->next;
@@ -29,8 +34,6 @@ void	update_env_pwds(t_env *env, char *old_pwd)
 }
 int	handle_cd(char **cmd, t_env **env)
 {
-	char *cwd = getcwd(NULL, 0);
-
 	if (cmd_array_size(cmd) > 2)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
@@ -53,6 +56,6 @@ int	handle_cd(char **cmd, t_env **env)
 			return (1);
 		}
 	}
-	update_env_pwds(*env, cwd);
+	update_env_pwds(*env);
 	return (0);
 }

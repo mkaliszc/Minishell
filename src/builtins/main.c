@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:04:18 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/17 10:31:17 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/01/18 04:19:36 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int main(int ac, char **av, char **envp)
 		char **command = ft_split(line, ' ');
 		if (ft_strcmp(command[0], "pwd") == 0)
 		{
-			handle_pwd();
+			if (handle_pwd() == 0)
+				ft_free_char_tab(command);
 		}
 		else if (ft_strcmp(command[0], "cd") == 0)
 		{
@@ -67,7 +68,6 @@ int main(int ac, char **av, char **envp)
 		else if (ft_strcmp(command[0], "unset") == 0)
 		{
 			handle_unset(command, &env);
-			ft_free_char_tab(command);
 		}
 		else
 			ft_free_char_tab(command);

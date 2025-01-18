@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 04:57:02 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 10:52:32 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/18 01:13:31 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,4 @@ void	u_r_one_lst_env(t_env *lst_env, char *export)
 		free(key);
 	}
 }
+

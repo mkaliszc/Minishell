@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/18 18:22:21 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:55:24 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_data	*init_struct(t_mini *data)
 		free(res);
 		return(NULL);
 	}
+	res->pipe_fd = malloc(sizeof(int) * data->nb_cmd * 2);
+	ft_memset(res->pipe_fd, -1, data->nb_cmd * 2);
 	return (res);
 	
 }
@@ -107,7 +109,7 @@ void	executing_minishell(t_mini *data)
 				which_builtins(data);
 		}
 		else
-			handle_pipes(data, info);
+			handle_pipes(data, info, cur_cmd_nbr);
 		cur_cmd_nbr++;
 		data->lst_cmd = data->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}

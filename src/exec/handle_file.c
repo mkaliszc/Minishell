@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/17 05:11:10 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:15:52 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	handle_redir_no_pipe(t_mini *data)
 	return (0);
 }
 
-void	handle_redir()
+void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
 {
 	// * redirect to the pipe etc for last and first
 }

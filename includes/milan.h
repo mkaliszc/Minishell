@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 00:02:42 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:10:55 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_data
 	int		in_fd;
 	int		out_fd;
 	pid_t	*pid;
-	int		*pipe;
+	int		*pipe_fd;
 }				t_data;
 
 

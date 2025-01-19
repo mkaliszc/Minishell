@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/15 22:34:15 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:12:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_data	*init_data_struct()
+{
+	t_data *data;
+
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	return (data);
+}
 
 void	loop(char **envp)
 {
@@ -26,7 +36,8 @@ void	loop(char **envp)
 			free(line);
 			break;
 		}
-		// parsing jojo
+		data = init_data_struct();
+		// ? data = parsing jojo
 		executing_minishell(data);
 		free(line);
 	}

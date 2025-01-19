@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 06:18:00 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:38:49 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,103 @@ int	empty_line(char *ln_cmd)
 	return (1);
 }
 
-char	*find_var(char *ln_cmd)
+int	is_border_pipe(char *ln_cmd)
 {
-	char	*find;
-	int		start;
-	int		end;
+	int		i;
+	char	st;
+	char	end;
 
-	start = 0;
-	while (ln_cmd[start] && ln_cmd[start] != '$')
-		++start;
-	if (!ln_cmd[start])
-		return (NULL);
-	end = start;
-	while (ln_cmd[end] && ln_cmd[end] != ' ')
-		++end;
-	find = ft_substr(ln_cmd, start + 1, end - start);
-	return (find);
+	i = 0;
+	st = '\0';
+	while (ln_cmd[i])
+	{
+		if (ln_cmd[i] != ' ')
+		{
+			end = ln_cmd[i];
+			if (!st)
+				st = ln_cmd[i];
+		}
+		++i;
+	}
+	if (st == '|' || end == '|')
+		return (ft_error('|'), 1);
+	return (0);
 }
 
-void	find_n_replace_var(t_mini *m_shell, char *ln_cmd)
+int	is_quote_closed(char *ln_cmd)
 {
-	char *find;
+	int		i;
+	char	quote;
 
-	find = find_var(ln_cmd);
-	if (find)
+	quote = '\0';
+	i = 0;
+	while (ln_cmd[i])
 	{
-		show_one_lst_env(m_shell->lst_env, find);
-		free(find);
+		if (ln_cmd[i] == quote)
+		{
+			quote = '\0';
+			++i;
+		}
+		if (!ln_cmd[i])
+			break ;
+		if ((ln_cmd[i] == '"' || ln_cmd[i] == '\'') && !quote)
+			quote = ln_cmd[i];
+		++i;
 	}
+	if (quote)
+		return (ft_error(quote), 1);
+	return (0);
+}
+
+int	is_good_angle_bracket(char *ln_cmd)
+{
+	int		i;
+	int		count;
+	char	a_bracket;
+
+	init_ft_brckt(&i, &count, &a_bracket);
+	while (ln_cmd[i])
+	{
+		if (ln_cmd[i] == '"')
+			while_d_quote(ln_cmd, &i);
+		if (ln_cmd[i] == '\'')
+			while_s_quote(ln_cmd, &i);
+		if (!a_bracket && (ln_cmd[i] == '<' || ln_cmd[i] == '>'))
+		{
+			if (while_a_brck(ln_cmd, &i, &a_bracket, &count))
+				break ;
+		}
+		else
+			++i;
+		if (!ln_cmd[i])
+			break ;
+	}
+	if (a_bracket)
+		return (ft_error(a_bracket), 1);
+	return (0);
+}
+
+int	is_dbl_pipe(char *ln_cmd)
+{
+	int	i;
+
+	i = 0;
+	while (ln_cmd[i])
+	{
+		if(ln_cmd[i] == '"')
+			while_d_quote(ln_cmd, &i);
+		if(ln_cmd[i] == '\'')
+			while_s_quote(ln_cmd, &i);
+		if (ln_cmd[i] == '|')
+		{
+			++i;
+			while (ln_cmd[i] == ' ')
+			++i;
+			if (ln_cmd[i] == '|')
+				return (ft_error('|'), 1);
+		}
+		else
+			++i;
+	}
+	return (0);
 }

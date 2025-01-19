@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 06:20:05 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:42:02 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,4 @@ void	create_one_lst_env(t_env *lst_env, char *export)
 
 	add_env = create_env(export);
 	lst_env_add_last(&lst_env, add_env);
-
 }
-

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:27:20 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 11:27:19 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:12:12 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	handle_echo(char **cmd)
 
 	i = 1;
 	if (!cmd[1])
+	{
 		printf("\n");
+		return ;
+	}
 	if (!is_flag_here(cmd))
 	{
 		while (cmd[i])

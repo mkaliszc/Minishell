@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jojo.h                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/16 05:28:57 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/19 01:43:44 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_order_file t_order_file;
 typedef struct s_lst_cmd t_lst_cmd;
 typedef struct s_mini t_mini;
 
+typedef struct s_mini t_mini;
+typedef struct s_env t_env;
 /*
 * j_loop for read the terminal
 ? Param (char **envp) environnement variable
@@ -48,3 +50,13 @@ void	show_one_lst_env(t_env *lst_env, char *key);
 t_env	*find_one_lst_env(t_env *lst_env, char *key);
 void	u_r_one_lst_env(t_env *lst_env, char *export);
 void	create_one_lst_env(t_env *lst_env, char *export);
+int		is_border_pipe(char *ln_cmd);
+int		is_quote_closed(char *ln_cmd);
+void	ft_error(char c);
+int		is_good_angle_bracket(char *ln_cmd);
+void	while_s_quote(char *ln_cmd, int *index);
+void	while_d_quote(char *ln_cmd, int *index);
+int		while_a_brck(char *ln_cmd, int *i, char *a_brck, int *cnt);
+void	init_ft_brckt(int *i, int *cnt, char *a_brck);
+int		is_dbl_pipe(char *ln_cmd);
+void	split_cmd(char *ln_cmd);

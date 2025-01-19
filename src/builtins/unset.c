@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:16:21 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 11:35:32 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:16:10 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handle_unset(char **cmd, t_env **env)
 	t_env	*ptr;
 	t_env	*temp;
 
-	if (!env || !*env)
+	if (!env || !*env || !cmd[1])
 		return ;
 	ptr = (*env);
 	if (ft_strcmp(ptr->key, cmd[1]) == 0)

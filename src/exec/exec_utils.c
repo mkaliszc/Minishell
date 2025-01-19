@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:43:21 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/18 04:14:43 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:03:50 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**lst_to_char(t_env *lst_env)
 	i = 0;
 	env = malloc(sizeof(char *) * get_lst_env_size(lst_env));
 	if (env == NULL)
-		return(perror("malloc error : transforming lst_env"), NULL);	
+		return(perror("malloc error : transforming lst_env"), NULL);
 	while (cur != NULL)
 	{
 		tmp_join = ft_strjoin(cur->key, "=");
@@ -55,3 +55,4 @@ char	**lst_to_char(t_env *lst_env)
 	env[i] = NULL;
 	return (env);
 }
+

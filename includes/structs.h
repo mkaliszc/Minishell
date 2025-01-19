@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 03:58:44 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 05:49:48 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 06:11:05 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_order_file		t_order_file;
 * t_order_in | see ref struct s_order_in
 * t_order_out | see red struct t_order_out
 */
-typedef struct s_lst_cmd		t_list_cmd;
+typedef struct s_lst_cmd		t_lst_cmd;
 /*
 * struct s_mini | give env variable nb of cmd and list of cmd
 * int nb_cmd | give nb of cmd

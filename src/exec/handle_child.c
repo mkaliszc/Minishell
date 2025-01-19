@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 01:04:19 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 03:23:02 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,32 @@
 	? if last child we only need to redirect the input to the pipe
 */
 
-void	handle_pipe(t_mini *data, t_data *info)
+void	close_unused_pipes(int *pipe_fd, int cur_cmd)
 {
-	// fork + pipe + redir
-	// * fork + create pipe etc
+	int	i;
+
+	while(pipe_fd[i] != -1 && i < (cur_cmd - 1) * 2)
+	{
+		close(pipe_fd[i]);
+		i++;
+	}
 }
 
-void	handle_child(t_mini *data, int child_number)
+void	handle_pipe(t_mini *data, t_data *info, int cur_cmd)
+{
+	if (pipe(info->pipe_fd[cur_cmd * 2]))
+		perror("pipe creation failed"); // ? free all + exit ?
+	info->pid[cur_cmd] = fork();
+	if (info->pid[cur_cmd] == 0)
+		handle_child(data, cur_cmd, info);
+	close_unused_pipes(info->pipe_fd, cur_cmd);
+}
+
+void	handle_child(t_mini *data, int child_number, t_data	*info)
 {
 	char	*path;
 
-	handle_redir(data, child_number);
+	handle_redir(data, child_number, info);
 	if (data->lst_cmd->is_builtins == true)
 		which_builtins(data); // ? exit
 		which_builtins(data); // ? free_all + exit

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   parse_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 11:28:25 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/17 00:16:31 by jbergos           #+#    #+#             */
+/*   Updated: 2025/01/17 00:17:32 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../includes/minishell.h"
 
-void	handle_exit(char **cmd)
+void	ft_error(char c)
 {
-	ft_free_char_tab(cmd);
+	ft_putstr_fd("miniwilds: syntax error near unexpected token `", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("\'\n", 2);
 }

@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   milan.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 11:28:25 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
+/*   Updated: 2025/01/18 20:58:40 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# pragma once
 
-void	handle_exit(char **cmd)
+# include "../OctoLIB/include/libft.h"
+# include "minishell.h"
+
+typedef struct s_data
 {
-	ft_free_char_tab(cmd);
-}
+	int		in_fd;
+	int		out_fd;
+	pid_t	*pid;
+}				t_data;

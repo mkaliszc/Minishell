@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 11:28:25 by albillie         ###   ########.fr       */
+/*   Created: 2025/01/14 22:29:50 by mkaliszc          #+#    #+#             */
+/*   Updated: 2025/01/14 22:40:01 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handle_exit(char **cmd)
+int	ft_strcmp(char *s1, char *s2)
 {
-	ft_free_char_tab(cmd);
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

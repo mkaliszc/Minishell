@@ -6,27 +6,15 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/19 01:43:44 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:16:12 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
+#ifndef PARSING_H
+# define PARSING_H
 
-typedef enum s_tokens t_tokens;
-typedef enum s_rd_file t_rd_file;
-typedef struct s_index t_index;
-typedef struct s_env t_env;
-typedef struct s_hdc t_hdc;
-typedef struct s_order_file t_order_file;
-typedef struct s_lst_cmd t_lst_cmd;
-typedef struct s_mini t_mini;
+# include "minishell.h"
 
-typedef struct s_mini t_mini;
-typedef struct s_env t_env;
 /*
 * j_loop for read the terminal
 ? Param (char **envp) environnement variable
@@ -60,3 +48,5 @@ int		while_a_brck(char *ln_cmd, int *i, char *a_brck, int *cnt);
 void	init_ft_brckt(int *i, int *cnt, char *a_brck);
 int		is_dbl_pipe(char *ln_cmd);
 void	split_cmd(char *ln_cmd);
+
+#endif

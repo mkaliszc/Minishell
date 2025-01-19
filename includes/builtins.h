@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alban.h                                            :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:23:08 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 07:35:37 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:07:19 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-// INCLUDES
+// ? Includes
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "../OctoLIB/include/libft.h"
 #include "minishell.h"
+#include "structs.h"
+# include <stdbool.h>
 
-// COLORS
+// ? Colors
 
 #define GREEN	"\e[0;32m"
 #define END 	"\e[0m"
 
-// BUILTINS FUNCTIONS
+// ? Functions
 
-void	handle_pwd();
+void	update_env_pwds(t_env *env);
+void	handle_home_event(t_env *env);
+void	handle_cd(char **cmd, t_env *env);
+bool	is_flag_here(char **cmd);
+void	print_elements(char **cmd, bool flag);
 void	handle_echo(char **cmd);
-void	handle_exit();
-void	print_element(char **cmd);
+void	handle_env(t_env *env);
+void	handle_exit(char **cmd);
+int		handle_export(char **cmd, t_env **env);
+void	handle_pwd(void);
+void	free_test(t_env *env);
+void	handle_unset(char **cmd, t_env **env);
+int		cmd_array_size(char **array);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 06:32:35 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:30:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	free_minishell(t_mini *mini);
 void	free_env_struct(t_env *lst_env);
 void	free_order_file_struct(t_order_file *order_file);
 void	free_cmd_struct(t_lst_cmd *lst_cmd);
+void	free_data_struct(t_data *data);
 
 #endif

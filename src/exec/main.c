@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 05:30:56 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:34:14 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	loop(char **envp)
 		line = readline("Wildshell>");
 		if (ft_strncmp("exit", line, 5) == 0)
 		{
-			// free minishell
+			handle_exit(data);
 			free(line);
 			break;
 		}

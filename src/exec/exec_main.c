@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 03:23:54 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:00:54 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	which_builtins(t_mini *data) // ! need updates here with what is requires f
 	else if (ft_strcmp("echo", data->lst_cmd->cmd[0]) == 0)
 		handle_echo(data->lst_cmd->cmd);
 	else if (ft_strcmp("exit", data->lst_cmd->cmd[0]) == 0)
-		handle_exit();
+		handle_exit(data);
 }
 
 t_data	*init_struct(t_mini *data)

@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/18 11:28:25 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:00:35 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_exit(char **cmd)
+void	handle_exit(t_mini *mini)
 {
-	ft_free_char_tab(cmd);
+	free_minishell(mini);
 }

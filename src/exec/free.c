@@ -6,13 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 06:36:19 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:42:12 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO Add function to free data structure if needed !
 
 void	free_minishell(t_mini *mini)
 {
@@ -58,3 +56,9 @@ void	free_cmd_struct(t_lst_cmd *lst_cmd)
 	free(lst_cmd);
 }
 
+void	free_data_struct(t_data *data)
+{
+	if (!data)
+		return ;
+	// ? Add conditions to free data struct right here
+}

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 03:23:02 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:43:54 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ void	close_unused_pipes(int *pipe_fd, int cur_cmd)
 
 void	handle_pipe(t_mini *data, t_data *info, int cur_cmd)
 {
-	if (pipe(info->pipe_fd[cur_cmd * 2]))
-		perror("pipe creation failed"); // ? free all + exit ?
+	if (pipe(info->pipe_fd[cur_cmd * 2]) == -1)
+	{
+		perror("pipe creation failed");
+		free_minishell(data);
+		exit(1); // ! Exit with valid exit code right here
+	}
 	info->pid[cur_cmd] = fork();
 	if (info->pid[cur_cmd] == 0)
 		handle_child(data, cur_cmd, info);
@@ -49,8 +53,9 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 		which_builtins(data); // ? exit
 		which_builtins(data); // ? free_all + exit
 	path = validate_cmd(data->lst_cmd, data->lst_env);
-	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) < 0)
+	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) == -1)
 	{
-		// free_all + exit + close
+		free_minishell(data);
+		exit(1) // ! Maybe add the valid exit code out here
 	}
 }

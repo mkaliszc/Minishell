@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:23:08 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 05:27:36 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:00:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	is_flag_here(char **cmd);
 void	print_elements(char **cmd, bool flag);
 void	handle_echo(char **cmd);
 void	handle_env(t_env *env);
-void	handle_exit(char **cmd);
+void	handle_exit(t_mini *mini);
 void	handle_export(char **cmd, t_env **env);
 void	handle_pwd(void);
 void	free_env_part(t_env *env);

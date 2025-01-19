@@ -6,13 +6,11 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 19:14:49 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 00:45:45 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// todo open file in the order that they come not in then out
 
 char	*handle_here_doc(char *limiter)
 {
@@ -40,48 +38,53 @@ char	*handle_here_doc(char *limiter)
 	}
 }
 
-void	handle_out(t_mini *data, t_data *info)
+
+void	handle_open(t_data *info, t_order_file *cur)
+{
+	if (cur->type == APP)
+	{
+		if (info->out_fd > 1)
+			close(info->out_fd);
+		info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	}
+	else if (cur->type == OUT)
+	{
+		if (info->out_fd > 1)
+			close(info->out_fd);
+		info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	}
+	else if (cur->type == HDC)
+	{
+		if (info->in_fd > 0)
+			close(info->in_fd);
+		info->in_fd = open(handle_here_doc(cur->file), O_RDONLY);
+	}
+	else if (cur->type == IN)
+	{
+		if (info->in_fd > 0)
+			close(info->in_fd);
+		info->in_fd = open(cur->file, O_RDONLY);
+	}
+}
+
+void	handle_file(t_mini *data, t_data *info)
 {
 	t_order_file	*cur;
 
 	cur = data->lst_cmd->order_file;
 	while (cur)
 	{
-		if (cur->type == APP)
-		{
-			if (info->out_fd > 1)
-				close(info->out_fd);
-			info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		}
-		else if (cur->type == OUT)
-		{
-			if (info->out_fd > 1)
-				close(info->out_fd);
-			info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		}
-		else if (cur->type == HDC)
-		{
-			if (info->in_fd > 0)
-				close(info->in_fd);
-			info->in_fd = open(handle_here_doc(cur->file), O_RDONLY);
-		}
-		else if (cur->type == IN)
-		{
-			if (info->in_fd > 0)
-				close(info->in_fd);
-			info->in_fd = open(cur->file, O_RDONLY);
-		}
+		handle_open(info, cur);
 		cur = cur->next;
 	}
 }
 
-int	handle_redir_no_pipe(t_mini *data)
+int	handle_redir_no_pipe(t_mini *data, t_data *info)
 {
 	int	in_fd;
 	int	out_fd;
 
-	in_fd = handle_in(data);
-	out_fd = handle_out(data);
+	handle_file(data, info);
 	if (in_fd == -1 || out_fd == -1)
 		return (perror("error while opening a file"), 1);
 	if (in_fd != 0 && dup2(in_fd, STDIN_FILENO) < 0)
@@ -97,5 +100,18 @@ int	handle_redir_no_pipe(t_mini *data)
 
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
 {
-	// * redirect to the pipe etc for last and first
+	if(info->in_fd == 0 && cmd_nbr != 0)
+	{
+		if (dup2(info->pipe_fd[cmd_nbr * 2], STDIN_FILENO))
+		{
+			// ! perror etc
+		}
+	}
+	if (info->out_fd == 1 && cmd_nbr < data->nb_cmd)
+	{
+		if (dup2(info->pid[cmd_nbr * 2 + 1], STDOUT_FILENO))
+		{
+			// ! perror etc
+		}
+	}
 }

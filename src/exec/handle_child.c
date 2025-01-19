@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 17:43:54 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:05:25 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) == -1)
 	{
 		free_minishell(data);
-		exit(1) // ! Maybe add the valid exit code out here
+		exit(1); // ! Maybe add the valid exit code out here
 	}
 }

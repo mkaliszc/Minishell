@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 03:07:45 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:14:49 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,56 +40,39 @@ char	*handle_here_doc(char *limiter)
 	}
 }
 
-int	handle_out(t_mini *data)
+void	handle_out(t_mini *data, t_data *info)
 {
 	t_order_file	*cur;
-	int				out_fd;
 
 	cur = data->lst_cmd->order_file;
-	out_fd = 1;
 	while (cur)
 	{
 		if (cur->type == APP)
 		{
-			if (out_fd > 1)
-				close(out_fd);
-			out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			if (info->out_fd > 1)
+				close(info->out_fd);
+			info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		}
 		else if (cur->type == OUT)
 		{
-			if (out_fd > 1)
-				close(out_fd);
-			out_fd = open(cur->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			if (info->out_fd > 1)
+				close(info->out_fd);
+			info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		}
-		cur = cur->next;
-	}
-	return (out_fd);
-}
-
-int	handle_in(t_mini *data)
-{
-	t_order_file	*cur;
-	int				in_fd;
-
-	cur = data->lst_cmd->order_file;
-	in_fd = 0;
-	while (cur)
-	{
-		if (cur->type == HDC)
+		else if (cur->type == HDC)
 		{
-			if (in_fd > 0)
-				close(in_fd);
-			in_fd = open(handle_here_doc(cur->file), O_RDONLY);
+			if (info->in_fd > 0)
+				close(info->in_fd);
+			info->in_fd = open(handle_here_doc(cur->file), O_RDONLY);
 		}
 		else if (cur->type == IN)
 		{
-			if (in_fd > 0)
-				close(in_fd);
-			in_fd = open(cur->file, O_RDONLY);
+			if (info->in_fd > 0)
+				close(info->in_fd);
+			info->in_fd = open(cur->file, O_RDONLY);
 		}
 		cur = cur->next;
 	}
-	return (in_fd);
 }
 
 int	handle_redir_no_pipe(t_mini *data)

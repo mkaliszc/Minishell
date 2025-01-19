@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/19 05:16:12 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:33:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include "minishell.h"
+# include "structs.h"
 
 /*
 * j_loop for read the terminal

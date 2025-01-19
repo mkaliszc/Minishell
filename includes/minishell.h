@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 05:28:10 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:47:06 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,39 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef enum			s_tokens
+typedef enum s_tokens
 {
-						WORD_TOK,
-						CMD_TOK,
-						IN_TOK,
-						OUT_TOK,
-						APP_TOK,
-						HDC_TOK,
-}						t_tokens;
+	WORD_TOK,
+	CMD_TOK,
+	IN_TOK,
+	OUT_TOK,
+	APP_TOK,
+	HDC_TOK,
+}	t_tokens;
 
-typedef enum			s_rd_file
+typedef enum s_rd_file
 {
-						IN,
-						OUT,
-						HDC,
-						APP,
-}						t_rd_file;
+	IN,
+	OUT,
+	HDC,
+	APP,
+}	t_rd_file;
 
-typedef struct 			s_env
+typedef struct s_env
 {
 	char				*key;
 	char				*value;
 	struct s_env		*next;
 }						t_env;
 
-typedef struct			s_order_file
+typedef struct s_order_file
 {
 	char				*file;
 	t_rd_file			type;
 	struct s_order_file	*next;
 }						t_order_file;
 
-typedef struct			s_lst_cmd
+typedef struct s_lst_cmd
 {
 	char				**cmd;
 	bool				is_builtins;
@@ -66,7 +66,7 @@ typedef struct			s_lst_cmd
 	t_order_file		*order_file;
 }						t_lst_cmd;
 
-typedef struct			s_mini
+typedef struct s_mini
 {
 	t_env				*lst_env;
 	t_lst_cmd			*lst_cmd;
@@ -74,7 +74,7 @@ typedef struct			s_mini
 	int					exit_code;
 }						t_mini;
 
-typedef struct			s_data
+typedef struct s_data
 {
 	int					in_fd;
 	int					out_fd;

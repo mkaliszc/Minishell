@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 05:12:08 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:28:10 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef enum 			s_tokens
+typedef enum			s_tokens
 {
 						WORD_TOK,
 						CMD_TOK,
@@ -81,24 +81,5 @@ typedef struct			s_data
 	pid_t				*pid;
 	int					*pipe_fd;
 }						t_data;
-
-// Function used to update PWD & OLDPWD when doing `cd`
-// void	update_env_pwds(t_env *env);
-// t_env	*init_env_struct(char **envp);
-// t_env	*env_lst_new(char *data);
-// void	env_add_back(t_env **env, t_env *new);
-// void	handle_cd(char **cmd, t_env *env);
-// int		handle_export(char **cmd, t_env **env);
-// void	handle_env(t_env *env);
-// int		cmd_array_size(char **array);
-// void	handle_unset(char **cmd, t_env **env);
-// int		handle_in(t_mini *data);
-// int		handle_out(t_mini *data);
-// char	*handle_here_doc(char *limiter);
-// int		handle_redir_no_pipe(t_mini *data);
-// void	which_builtins(t_mini *data);
-// char	*get_path(char **cmd, t_env *envp);
-// void	executing_minishell(t_mini *data);
-
 
 #endif

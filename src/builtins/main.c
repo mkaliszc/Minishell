@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 05:24:59 by albillie          #+#    #+#             */
+/*   Updated: 2025/01/19 05:25:52 by albillie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-
-int	cmd_array_size(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}
-
 
 int main(int ac, char **av, char **envp)
 {
@@ -22,7 +22,7 @@ int main(int ac, char **av, char **envp)
 	env = create_lst_env(envp);
 	while (true)
 	{
-		line = readline(GREEN"WildShell $ "END);
+		line = readline("WildShell $ ");
 		char **command = ft_split(line, ' ');
 		if (ft_strcmp(command[0], "pwd") == 0)
 		{

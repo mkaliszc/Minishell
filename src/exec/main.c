@@ -6,21 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/18 22:12:43 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:30:56 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_data	*init_data_struct()
-{
-	t_data *data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
-	return (data);
-}
 
 void	loop(char **envp)
 {
@@ -36,7 +26,6 @@ void	loop(char **envp)
 			free(line);
 			break;
 		}
-		data = init_data_struct();
 		// ? data = parsing jojo
 		executing_minishell(data);
 		free(line);

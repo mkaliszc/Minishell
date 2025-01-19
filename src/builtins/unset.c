@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:16:21 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 03:58:17 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 05:24:38 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_test(t_env *env)
+void	free_env_part(t_env *env)
 {
 	if (env->key)
 		free(env->key);
@@ -32,7 +32,7 @@ void	handle_unset(char **cmd, t_env **env)
 	if (ft_strcmp(ptr->key, cmd[1]) == 0)
 	{
 		(*env) = ptr->next;
-		free_test(ptr);
+		free_env_part(ptr);
 		return ;
 	}
 	while (ptr)
@@ -41,7 +41,7 @@ void	handle_unset(char **cmd, t_env **env)
 		{
 			temp = ptr->next;
 			ptr->next = ptr->next->next;
-			free_test(temp);
+			free_env_part(temp);
 			return ;
 		}
 		ptr = ptr->next;

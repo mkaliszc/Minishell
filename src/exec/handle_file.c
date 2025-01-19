@@ -6,11 +6,13 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 02:15:52 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/19 03:07:45 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// todo open file in the order that they come not in then out
 
 char	*handle_here_doc(char *limiter)
 {

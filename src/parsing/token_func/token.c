@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/20 02:42:35 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/20 03:16:57 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ char	**split_cmd(char *ln_cmd)
 
 void	while_a_brckt(char *cmd, int *i)
 {
-	while((cmd[*i] == '<' || cmd[*i] == '>') && cmd [*i])
+	while((cmd[*i] == '<' || cmd[*i] == '>') && cmd[*i])
 		++*i;
 	while(cmd[*i] == ' ' && cmd[*i])
 		++*i;
@@ -234,8 +234,7 @@ void	while_a_brckt(char *cmd, int *i)
 			while_d_quote(cmd, i);
 		else if (cmd[*i] == '\'')
 			while_s_quote(cmd, i);
-		else
-			++*i;
+		++*i;
 	}
 }
 

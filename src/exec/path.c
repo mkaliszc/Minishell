@@ -6,29 +6,29 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 09:15:59 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:33:48 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *data)
+char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	char	*path;
 
 	if (!cmd[0])
 		return (NULL);
-	check_absolute_path(cmd, data);
-	path = get_path(cmd, envp, data);
+	check_absolute_path(cmd, mini);
+	path = get_path(cmd, envp, mini);
 	if (!path)
 	{
-		ft_printf_fd(2, "command not found: %s", data->lst_cmd->cmd[0]);
+		ft_printf_fd(2, "command not found: %s", mini->lst_cmd->cmd[0]);
 		exit(127);
 	}
 	return (path);
 }
 
-void	check_absolute_path(char **cmd, t_mini *mini)
+static void	check_absolute_path(char **cmd, t_mini *mini)
 {
 	if (ft_strchr(cmd[0], '/'))
 	{
@@ -47,7 +47,7 @@ void	check_absolute_path(char **cmd, t_mini *mini)
 	}
 }
 
-char	*get_path(char **cmd, t_env *envp, t_mini *mini)
+static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	t_env	*cur;
 	char	**all_paths;
@@ -59,8 +59,8 @@ char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 	cur = find_one_lst_env(envp, "PATH");
 	if (cur == NULL)
 	{
-		mini->exit_code = 127;
-		return(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), NULL);
+		ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]);
+		exit(127);
 	}
 	all_paths = ft_split(cur->value, ':');
 	while (all_paths[i])
@@ -75,3 +75,4 @@ char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 	}
 	return (ft_free_char_tab(all_paths), NULL);
 }
+

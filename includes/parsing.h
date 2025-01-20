@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/19 05:33:55 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 01:29:38 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	while_d_quote(char *ln_cmd, int *index);
 int		while_a_brck(char *ln_cmd, int *i, char *a_brck, int *cnt);
 void	init_ft_brckt(int *i, int *cnt, char *a_brck);
 int		is_dbl_pipe(char *ln_cmd);
-void	split_cmd(char *ln_cmd);
-
+char	**split_cmd(char *ln_cmd);
+void	tp_n_file_redir(char **split_cmd);
+void	add_lst_cmd(t_mini *m_shell, char *ln_cmd);
+void	show_split(char **c_split);
+void	free_split(char **c_split);
+void	list_cmd_n_arg(char **cmd_split);
 #endif

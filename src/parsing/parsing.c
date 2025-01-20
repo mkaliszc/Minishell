@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:14:14 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/17 03:42:09 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/20 00:46:29 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 		return ;
 	if (is_dbl_pipe(ln_cmd))
 		return ;
-	split_cmd(ln_cmd);
+	add_lst_cmd(m_shell, ln_cmd);
 	// cmd_splited = split_line(ln_cmd);
 	// show_all_lst_env(m_shell->lst_env);
 	// show_all_lst_env(m_shell->lst_env);

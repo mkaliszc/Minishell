@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/17 20:02:04 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/20 02:42:35 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,109 @@ void	nb_of_redir(char **split_cmd)
 	}
 }
 
-void	split_cmd(char *ln_cmd)
+void	tp_n_file_redir(char **split_cmd)
+{
+	int	i;
+	int	j;
+	int start;
+	int end;
+
+	i = 0;
+	while (split_cmd[i])
+	{
+		j = 0;
+		while (split_cmd[i][j])
+		{
+			if (split_cmd[i][j] == '"')
+				while_d_quote(split_cmd[i], &j);
+			else if (split_cmd[i][j] == '\'')
+				while_s_quote(split_cmd[i], &j);
+			else if (split_cmd[i][j] == '<')
+			{
+				++j;
+				if (split_cmd[i][j] == '<')
+				{
+					++j;
+					while(split_cmd[i][j] == ' ')
+						++j;
+					start = j;
+					while(split_cmd[i][j] != ' ' && split_cmd[i][j])
+					{
+						if(split_cmd[i][j] == '"')
+							while_d_quote(split_cmd[i], &j);
+						else if (split_cmd[i][j] == '\'')
+							while_s_quote(split_cmd[i], &j);
+						else
+					 		++j;
+					}
+					end = j;
+					printf(" redir << : %s|\n", ft_substr(split_cmd[i], start, end - start));
+				}
+				else
+				{
+					while(split_cmd[i][j] == ' ')
+						++j;
+					start = j;
+					while(split_cmd[i][j] != ' ' && split_cmd[i][j])
+					{
+						if(split_cmd[i][j] == '"')
+							while_d_quote(split_cmd[i], &j);
+						else if (split_cmd[i][j] == '\'')
+							while_s_quote(split_cmd[i], &j);
+						else
+							++j;
+					}
+					end = j;
+					printf(" redir < : %s|\n", ft_substr(split_cmd[i], start, end - start));
+				}
+			}
+			else if (split_cmd[i][j] == '>')
+			{
+				j++;
+				if (split_cmd[i][j] == '>')
+				{
+					++j;
+					while(split_cmd[i][j] == ' ')
+						++j;
+					start = j;
+					while(split_cmd[i][j] != ' ' && split_cmd[i][j])
+					{
+						if(split_cmd[i][j] == '"')
+							while_d_quote(split_cmd[i], &j);
+						else if (split_cmd[i][j] == '\'')
+							while_s_quote(split_cmd[i], &j);
+						else
+					 		++j;
+					}
+					end = j;
+					printf(" redir >> : %s|\n", ft_substr(split_cmd[i], start, end - start));
+				}
+				else
+				{
+					while(split_cmd[i][j] == ' ')
+					++j;
+					start = j;
+					while(split_cmd[i][j] != ' ' && split_cmd[i][j])
+					{
+						if(split_cmd[i][j] == '"')
+							while_d_quote(split_cmd[i], &j);
+						else if (split_cmd[i][j] == '\'')
+							while_s_quote(split_cmd[i], &j);
+						else
+							++j;
+					}
+					end = j;
+					printf(" redir >> : %s|\n", ft_substr(split_cmd[i], start, end - start));
+				}
+			}
+			else
+				++j;
+		}
+	++i;
+	}
+}
+
+char	**split_cmd(char *ln_cmd)
 {
 	char **split_cmd;
 	int		i;
@@ -113,10 +215,62 @@ void	split_cmd(char *ln_cmd)
 			start = end + 1;
 		}
 		if (!ln_cmd[end + 1])
-			split_cmd[i++] = ft_substr(ln_cmd, start, end - start);
+			split_cmd[i++] = ft_substr(ln_cmd, start, end + 1 - start);
 		++end;
 	}
 	split_cmd[i] = NULL;
-	show_split(split_cmd);
-	nb_of_redir(split_cmd);
+	return (split_cmd);
+}
+
+void	while_a_brckt(char *cmd, int *i)
+{
+	while((cmd[*i] == '<' || cmd[*i] == '>') && cmd [*i])
+		++*i;
+	while(cmd[*i] == ' ' && cmd[*i])
+		++*i;
+	while (cmd[*i] && cmd[*i] != ' ')
+	{
+		if (cmd[*i] == '"')
+			while_d_quote(cmd, i);
+		else if (cmd[*i] == '\'')
+			while_s_quote(cmd, i);
+		else
+			++*i;
+	}
+}
+
+void	list_cmd_n_arg(char **cmd_split)
+{
+	int	i;
+	int	j;
+	int	start;
+	int	end;
+
+	i = 0;
+	while (cmd_split[i])
+	{
+		j = 0;
+		while(cmd_split[i][j])
+		{
+			if (cmd_split[i][j] == ' ')
+				++j;
+			else if (cmd_split[i][j] == '<' || cmd_split[i][j] == '>')
+				while_a_brckt(cmd_split[i], &j);
+			else
+			{
+				start = j;
+				while(cmd_split[i][j] && (cmd_split[i][j] != ' ' && cmd_split[i][j] != '<' && cmd_split[i][j] != '>'))
+				{
+					if (cmd_split[i][j] == '"')
+						while_d_quote(cmd_split[i], &j);
+					else if (cmd_split[i][j] == '\'')
+						while_s_quote(cmd_split[i], &j);
+					++j;
+				}
+				end = j;
+				printf("arg : |%s|\n", ft_substr(cmd_split[i], start, end - start));
+			}
+		}
+		++i;
+	}
 }

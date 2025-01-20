@@ -6,27 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 10:33:48 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:49:21 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
-{
-	char	*path;
-
-	if (!cmd[0])
-		return (NULL);
-	check_absolute_path(cmd, mini);
-	path = get_path(cmd, envp, mini);
-	if (!path)
-	{
-		ft_printf_fd(2, "command not found: %s", mini->lst_cmd->cmd[0]);
-		exit(127);
-	}
-	return (path);
-}
 
 static void	check_absolute_path(char **cmd, t_mini *mini)
 {
@@ -47,7 +31,7 @@ static void	check_absolute_path(char **cmd, t_mini *mini)
 	}
 }
 
-static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
+static char	*get_path(char **cmd, t_env *envp)
 {
 	t_env	*cur;
 	char	**all_paths;
@@ -76,3 +60,18 @@ static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 	return (ft_free_char_tab(all_paths), NULL);
 }
 
+char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
+{
+	char	*path;
+
+	if (!cmd[0])
+		return (NULL);
+	check_absolute_path(cmd, mini);
+	path = get_path(cmd, envp);
+	if (!path)
+	{
+		ft_printf_fd(2, "command not found: %s", mini->lst_cmd->cmd[0]);
+		exit(127);
+	}
+	return (path);
+}

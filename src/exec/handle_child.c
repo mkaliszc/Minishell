@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 09:14:56 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:49:49 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 	// handle_redir(data, child_number, info);
 	if (data->lst_cmd->is_builtins == true)
 		which_builtins(data); // ? free_all + exit
-	path = validate_cmd(data->lst_cmd->cmd, data->lst_env, data);
+	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);
 	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) == -1)
 	{
 		free_minishell(data);

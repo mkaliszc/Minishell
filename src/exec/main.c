@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 08:41:34 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:58:57 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,41 @@ t_mini	*create_m_shell_env(char **envp)
 	return (m_shell);
 }
 
+void handle_sigint()  {
+	exit(1);
+}
+
+int main()  {
+    signal(SIGINT, handle_sigint);
+    while (1);
+    return 0;
+}
+
+
 // int	main(int ac, char **av, char **envp)
 // {
+// 	(void) envp;
 // 	(void) ac;
 // 	(void) av;
-// 	loop(envp);
+// 	signal(SIGINT, test);
+// 	// loop(envp);
 // }
 
-int	main(int argc, char **argv, char **envp)
-{
-	//init signal
-	// loop(envp);
-	t_mini *mini;
-	mini = create_m_shell_env(envp);
-	(void)argc;
-	(void)argv;
-	char **test = malloc(1000);
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	//init signal
+// 	// loop(envp);
+// 	t_mini *mini;
+// 	mini = create_m_shell_env(envp);
+// 	(void)argc;
+// 	(void)argv;
+// 	char **test = malloc(1000);
 
-	test[0] = "/usr/bin/ls";
-	test[1] = "test";
-	test[2] = NULL;
-	validate_cmd(test, mini->lst_env, mini);
-	free_minishell(mini);
-	free(test);
-	return (0);
-}
+// 	test[0] = "/usr/bin/ls";
+// 	test[1] = "test";
+// 	test[2] = NULL;
+// 	validate_cmd(test, mini->lst_env, mini);
+// 	free_minishell(mini);
+// 	free(test);
+// 	return (0);
+// }

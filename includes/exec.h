@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/19 17:30:08 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 04:25:14 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		handle_in(t_mini *data);
 int		handle_redir_no_pipe(t_mini *data);
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);
 void	loop(char **envp);
-char	*validate_cmd(char **cmd, t_env *envp);
-char	*get_path(char **cmd, t_env *envp);
+char	*validate_cmd(char **cmd, t_env *envp, t_mini *mini);
+char	*get_path(char **cmd, t_env *envp, t_mini *mini);
 
 // ? Free Functions
 

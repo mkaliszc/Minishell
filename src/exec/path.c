@@ -6,23 +6,23 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 03:52:10 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 05:08:15 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*validate_cmd(char **cmd, t_env *envp)
+char	*validate_cmd(char **cmd, t_env *envp, t_mini *data)
 {
 	if (cmd[0] == NULL)
 		return (NULL);
 	if (access(cmd[0], X_OK) == 0)
 		return (cmd[0]);
 	else
-		return (get_path(cmd, envp));
+		return (get_path(cmd, envp, data));
 }
 
-char	*get_path(char **cmd, t_env *envp)
+char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	t_env	*cur;
 	char	**all_paths;
@@ -34,8 +34,8 @@ char	*get_path(char **cmd, t_env *envp)
 	cur = find_one_lst_env(envp, "PATH");
 	if (cur == NULL)
 	{
-
-		return(ft_putstr_fd("Command not found", 2), NULL);
+		mini->exit_code = 127;
+		return(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), NULL);
 	}
 	all_paths = ft_split(cur->value, ':');
 	while (all_paths[i])

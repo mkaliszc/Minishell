@@ -10,6 +10,8 @@
 		"parsing.h": "c",
 		"stdarg.h": "c",
 		"readline.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"bitset": "c",
+		"atomic": "c"
 	}
 }

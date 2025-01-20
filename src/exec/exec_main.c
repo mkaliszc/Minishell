@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 00:44:37 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 04:30:31 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@
 	! even if we don't have the perms we do every here_doc before exit/quit
 	! don't forget to unlink the tmp file of heredoc
 */
+
 void	which_builtins(t_mini *data)
 {
-	if (ft_strcmp("env", *data->lst_cmd->cmd[0]) == 0)
+	if (ft_strcmp("env", data->lst_cmd->cmd[0]) == 0)
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", data->lst_cmd->cmd[0]) == 0)
-		handle_export(data->lst_cmd->cmd, data->lst_env);
+		handle_export(data->lst_cmd->cmd, &data->lst_env);
 	else if (ft_strcmp("unset", data->lst_cmd->cmd[0]) == 0)
-		handle_unset(data->lst_cmd->cmd, data->lst_env);
+		handle_unset(data->lst_cmd->cmd, &data->lst_env);
 	else if (ft_strcmp("cd", data->lst_cmd->cmd[0]) == 0)
 		handle_cd(data->lst_cmd->cmd, data->lst_env);
 	else if (ft_strcmp("pwd", data->lst_cmd->cmd[0]) == 0)
@@ -89,7 +90,7 @@ void	executing_minishell(t_mini *data)
 				which_builtins(data);
 		}
 		else
-			handle_pipes(data, info, cur_cmd_nbr);
+			handle_pipe(data, info, cur_cmd_nbr);
 		cur_cmd_nbr++;
 		data->lst_cmd = data->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:43:21 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 00:44:50 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 05:54:04 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	get_lst_env_size(t_env *lst_env)
 
 	size = 0;
 	tmp = lst_env;
-
 	while (tmp != NULL)
 	{
 		size++;
@@ -37,7 +36,7 @@ char	**lst_to_char(t_env *lst_env)
 
 	cur = lst_env;
 	i = 0;
-	env = malloc(sizeof(char *) * get_lst_env_size(lst_env));
+	env = malloc(sizeof(char *) * (get_lst_env_size(lst_env) + 1));
 	if (env == NULL)
 		return (perror("malloc error : transforming lst_env"), NULL);
 	while (cur != NULL)

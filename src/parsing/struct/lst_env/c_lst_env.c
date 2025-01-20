@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:24:00 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/19 01:42:02 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 05:44:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_env	*create_lst_env(char **envp)
 	while (envp[i])
 	{
 		lst_env_add_last(&lst_env, create_env(envp[i]));
-		++i;
+		i++;
 	}
 	return (lst_env);
 }

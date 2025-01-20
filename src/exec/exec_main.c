@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 04:30:31 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 06:33:29 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,27 @@ t_data	*init_struct(t_mini *data)
 
 }
 
-void	executing_minishell(t_mini *data)
+void	executing_minishell(t_mini *mini)
 {
-	t_data	*info;
+	t_data	*data;
 	int		cur_cmd_nbr;
 
 	cur_cmd_nbr = 0;
-	info = init_struct(data);
-	while (data->lst_cmd)
+	data = init_struct(mini);
+	while (mini->lst_cmd)
 	{
-		if (data->lst_cmd->is_builtins == true && data->nb_cmd == 1)
+		if (mini->lst_cmd->is_builtins == true && mini->nb_cmd == 1)
 		{
-			if (handle_redir_no_pipe(data) != 0)
+			if (handle_redir_no_pipe(mini, data) != 0)
 			{
 				// ! error code handling without quitting the prog
 			}
 			else
-				which_builtins(data);
+				which_builtins(mini);
 		}
 		else
-			handle_pipe(data, info, cur_cmd_nbr);
+			handle_pipe(mini, data, cur_cmd_nbr);
 		cur_cmd_nbr++;
-		data->lst_cmd = data->lst_cmd->next; // ? free previous node or do a free all at the end ?
+		mini->lst_cmd = mini->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}
 }

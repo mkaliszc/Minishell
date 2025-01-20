@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 04:25:14 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 06:12:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handle_child(t_mini *data, int child_number, t_data	*info);
 char	*handle_here_doc(char *limiter);
 int		handle_out(t_mini *data);
 int		handle_in(t_mini *data);
-int		handle_redir_no_pipe(t_mini *data);
+int		handle_redir_no_pipe(t_mini *data, t_data *info);
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);
 void	loop(char **envp);
 char	*validate_cmd(char **cmd, t_env *envp, t_mini *mini);

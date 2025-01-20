@@ -6,33 +6,33 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 05:57:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 06:54:48 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	loop(char **envp)
-// {
-// 	t_mini	*data;
-// 	char	*line;
+void	loop(char **envp)
+{
+	t_mini	*mini;
+	char	*line;
 
-// 	while (true)
-// 	{
-// 		line = readline("Wildshell>");
-// 		if (ft_strncmp("exit", line, 5) == 0)
-// 		{
-// 			handle_exit(data);
-// 			free(line);
-// 			break;
-// 		}
-// 		// ? data = parsing jojo
-// 		executing_minishell(data);
-// 		free(line);
-// 	}
-// }
+	while (true)
+	{
+		line = readline("Wildshell>");
+		if (ft_strncmp("exit", line, 5) == 0)
+		{
+			handle_exit(mini);
+			free(line);
+			break;
+		}
+		mini = create_m_shell_env(envp);
+		executing_minishell(mini);
+		free(line);
+	}
+}
 
-t_mini	*create_m_shell_env(char**envp)
+t_mini	*create_m_shell_env(char **envp)
 {
 	t_mini	*m_shell;
 	m_shell = malloc(sizeof(t_mini));
@@ -45,6 +45,13 @@ t_mini	*create_m_shell_env(char**envp)
 	return (m_shell);
 }
 
+// int	main(int ac, char **av, char **envp)
+// {
+// 	(void) ac;
+// 	(void) av;
+// 	loop(envp);
+// }
+
 int	main(int argc, char **argv, char **envp)
 {
 	//init signal
@@ -55,12 +62,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char **test = malloc(1000);
 
-	test[0] = "ls";
-	test[1] = "-l";
+	test[0] = "echo";
+	test[1] = "test";
 	test[2] = NULL;
-	get_path(test, mini->lst_env, mini);
+	char *path = get_path(test, mini->lst_env, mini);
 	printf("%d\n", mini->exit_code);
-	execve("/usr/bin/ls", test, lst_to_char(mini->lst_env));
+	execve(path, test, lst_to_char(mini->lst_env));
 	free_minishell(mini);
 	free(test);
 	return (0);

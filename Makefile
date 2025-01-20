@@ -24,8 +24,11 @@ SRC		=	src/builtins/cd.c 						\
 			src/exec/free.c							\
 			src/exec/main.c							\
 			src/exec/path.c							\
-			src/exec/exec_utils.c							\
-			# src/parsing/struct/m_shell/c_m_shell.c	\
+			src/exec/exec_utils.c					\
+			src/exec/exec_main.c					\
+			src/exec/handle_child.c					\
+			src/exec/handle_file.c					\
+
 
 OBJ 		= $(SRC:.c=.o)
 

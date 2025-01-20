@@ -6,11 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:43:21 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 05:54:04 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 06:44:45 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	get_lst_env_size(t_env *lst_env)
 {

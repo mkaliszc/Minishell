@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 06:33:29 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:56:29 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,16 @@ t_data	*init_struct(t_mini *data)
 	res->pipe_fd = malloc(sizeof(int) * data->nb_cmd * 2);
 	ft_memset(res->pipe_fd, -1, data->nb_cmd * 2);
 	return (res);
-
 }
 
 void	executing_minishell(t_mini *mini)
 {
 	t_data	*data;
 	int		cur_cmd_nbr;
+	int		i;
 
 	cur_cmd_nbr = 0;
+	i = -1;
 	data = init_struct(mini);
 	while (mini->lst_cmd)
 	{
@@ -94,4 +95,6 @@ void	executing_minishell(t_mini *mini)
 		cur_cmd_nbr++;
 		mini->lst_cmd = mini->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}
+	while (++i < mini->nb_cmd)
+		waitpid(data->pid[i], EXIT_FAILURE, 0);
 }

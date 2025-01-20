@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 10:49:49 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:10:24 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 {
 	char	*path;
 
-	(void) child_number;
-	(void) info;
-	// handle_redir(data, child_number, info);
+	if (data->nb_cmd == 1)
+		handle_redir_no_pipe(data, info);
+	else
+		handle_redir(data, child_number, info); 
 	if (data->lst_cmd->is_builtins == true)
 		which_builtins(data); // ? free_all + exit
 	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);

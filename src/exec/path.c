@@ -6,20 +6,45 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 05:08:15 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 09:15:59 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*validate_cmd(char **cmd, t_env *envp, t_mini *data)
+char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *data)
 {
-	if (cmd[0] == NULL)
+	char	*path;
+
+	if (!cmd[0])
 		return (NULL);
-	if (access(cmd[0], X_OK) == 0)
-		return (cmd[0]);
-	else
-		return (get_path(cmd, envp, data));
+	check_absolute_path(cmd, data);
+	path = get_path(cmd, envp, data);
+	if (!path)
+	{
+		ft_printf_fd(2, "command not found: %s", data->lst_cmd->cmd[0]);
+		exit(127);
+	}
+	return (path);
+}
+
+void	check_absolute_path(char **cmd, t_mini *mini)
+{
+	if (ft_strchr(cmd[0], '/'))
+	{
+		if (access(cmd[0], F_OK) < 0)
+		{
+			ft_printf_fd(2, "Command not found: %s\n", cmd[0]);
+			free_minishell(mini);
+			exit(127);
+		}
+		else if (access(cmd[0], X_OK) < 0)
+		{
+			ft_printf_fd(2, "Permission denied: %s\n", cmd[0]);
+			free_minishell(mini);
+			exit(126);
+		}
+	}
 }
 
 char	*get_path(char **cmd, t_env *envp, t_mini *mini)

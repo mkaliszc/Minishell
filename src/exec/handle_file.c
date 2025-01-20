@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 06:15:27 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 08:32:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	handle_file(t_mini *data, t_data *info)
 		cur = cur->next;
 	}
 }
-
 int	handle_redir_no_pipe(t_mini *data, t_data *info)
 {
 	handle_file(data, info);

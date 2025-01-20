@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 06:54:48 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 08:41:34 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char **test = malloc(1000);
 
-	test[0] = "echo";
+	test[0] = "/usr/bin/ls";
 	test[1] = "test";
 	test[2] = NULL;
-	char *path = get_path(test, mini->lst_env, mini);
-	printf("%d\n", mini->exit_code);
-	execve(path, test, lst_to_char(mini->lst_env));
+	validate_cmd(test, mini->lst_env, mini);
 	free_minishell(mini);
 	free(test);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 17:42:12 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:49:14 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,11 @@ void	free_data_struct(t_data *data)
 {
 	if (!data)
 		return ;
-	// ? Add conditions to free data struct right here
+	if (data->pid)
+		free(data->pid);
+	if (data->pipe_fd)
+	{
+		close_all(data->pipe_fd);
+		free(data->pipe_fd);
+	}
 }

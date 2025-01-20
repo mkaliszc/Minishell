@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 23:49:14 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 04:05:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ void	free_cmd_struct(t_lst_cmd *lst_cmd)
 	free(lst_cmd);
 }
 
-void	free_data_struct(t_data *data)
-{
-	if (!data)
-		return ;
-	if (data->pid)
-		free(data->pid);
-	if (data->pipe_fd)
-	{
-		close_all(data->pipe_fd);
-		free(data->pipe_fd);
-	}
-}
+// void	free_data_struct(t_data *data)
+// {
+// 	if (!data)
+// 		return ;
+// 	if (data->pid)
+// 		free(data->pid);
+// 	if (data->pipe_fd)
+// 	{
+// 		close_all(data->pipe_fd);
+// 		free(data->pipe_fd);
+// 	}
+// }

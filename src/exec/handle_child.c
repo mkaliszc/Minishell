@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 03:26:39 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:46:35 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	close_unused_pipes(int *pipe_fd, int cur_cmd)
 
 void	handle_pipe(t_mini *data, t_data *info, int cur_cmd)
 {
-	if (pipe(info->pipe_fd + 2 * cur_cmd) == -1) 
+	if (pipe(info->pipe_fd + 2 * cur_cmd) == -1)
 	{
 		perror("pipe creation failed");
 		free_minishell(data);
-		exit(1); // ! Exit with valid exit code right here
+		exit(1);
 	}
 	info->pid[cur_cmd] = fork();
 	if (info->pid[cur_cmd] == 0)
@@ -56,6 +56,6 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) == -1)
 	{
 		free_minishell(data);
-		exit(1); // ! Maybe add the valid exit code out here
+		exit(1);
 	}
 }

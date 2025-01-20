@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/20 03:25:46 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 04:03:30 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "builtins.h"
 # include "exec.h"
 # include "parsing.h"
-# include "../OctoLIB/include/libft.h"
+# include "libft.h"
 
 # include <unistd.h>
 # include <stdlib.h>

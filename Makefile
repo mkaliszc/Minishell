@@ -2,11 +2,11 @@ NAME	=	minishell
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g $(INCLUDE) #-no-pie // For laptop
-INCLUDE	=	-I includes -I OctoLIB/include
+INCLUDE	=	-I includes -I libft
 CLONE	=	git clone
 RM		=	rm -f
 
-LIB		=	OctoLIB
+LIB		=	libft
 LIBFT	=	$(LIB)/libft.a
 
 SRC		=	src/builtins/cd.c \
@@ -21,6 +21,7 @@ SRC		=	src/builtins/cd.c \
 			src/parsing/struct/lst_env/r_lst_env.c \
 			src/parsing/struct/lst_env/u_lst_env.c \
 			src/parsing/utils/utils1.c \
+			src/exec/free.c			\
 
 
 

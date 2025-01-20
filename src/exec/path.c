@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/18 23:50:41 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:52:10 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ char	*get_path(char **cmd, t_env *envp)
 	i = 0;
 	cur = find_one_lst_env(envp, "PATH");
 	if (cur == NULL)
-		return(ft_putstr_fd("environnement variable PATH not set", 2), NULL);
+	{
+
+		return(ft_putstr_fd("Command not found", 2), NULL);
+	}
 	all_paths = ft_split(cur->value, ':');
 	while (all_paths[i])
 	{

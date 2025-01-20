@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 22:47:00 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/21 00:15:21 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// ! Create a function to close everything
+// ! Handle all exit codes
 
 int	handle_redir_no_pipe(t_mini *data, t_data *info)
 {
@@ -33,14 +36,16 @@ void	handle_redir_in(t_mini *data, int cmd_nbr, t_data *info)
 	{
 		if (dup2(info->pipe_fd[2 * cmd_nbr - 1], STDIN_FILENO) < 0)
 		{
-			// ! perror etc
+			perror("redir in with single command");
+			exit(1);
 		}
 	}
 	else if (info->in_fd != 0)
 	{
 		if(dup2(info->in_fd, STDIN_FILENO) < 0)
 		{
-			// ! perror etc
+			perror("redir in");
+			exit(1);
 		}
 	}
 }

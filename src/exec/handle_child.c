@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 19:10:24 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:34:30 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	handle_pipe(t_mini *data, t_data *info, int cur_cmd)
 {
 	if (pipe(info->pipe_fd + 2 * cur_cmd) == -1)
 	{
-		perror("pipe creation failed");
+		perror("pipe");
 		free_minishell(data);
 		exit(1);
 	}
@@ -52,7 +52,7 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 	if (data->nb_cmd == 1)
 		handle_redir_no_pipe(data, info);
 	else
-		handle_redir(data, child_number, info); 
+		handle_redir(data, child_number, info);
 	if (data->lst_cmd->is_builtins == true)
 		which_builtins(data); // ? free_all + exit
 	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);

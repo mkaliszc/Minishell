@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 10:58:57 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:15:10 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ t_mini	*create_m_shell_env(char **envp)
 	return (m_shell);
 }
 
-void handle_sigint()  {
+void handle_sigint()
+{
 	exit(1);
 }
 
-int main()  {
+int main()
+{
     signal(SIGINT, handle_sigint);
     while (1);
     return 0;

@@ -6,13 +6,16 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 03:58:44 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 06:11:05 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 04:03:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+/*
+Enum struct used to identify tokens
+*/
 typedef enum s_tokens			t_tokens;
 typedef enum s_rd_file			t_rd_file;
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 23:15:10 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:37:09 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	loop(char **envp)
 
 	while (true)
 	{
-		line = readline("Wildshell>");
+		line = readline("Wildshell> ");
 		if (ft_strncmp("exit", line, 5) == 0)
 		{
 			handle_exit(mini);
@@ -50,10 +50,12 @@ void handle_sigint()
 	exit(1);
 }
 
-int main()
+int main(int argc, char **argv, char **envp)
 {
     signal(SIGINT, handle_sigint);
-    while (1);
+	loop(envp);
+	(void)argc;
+	(void)argv;
     return 0;
 }
 

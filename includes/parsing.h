@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:57:57 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/21 06:38:37 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,9 @@ t_order_file	*create_lst_order_file(char *one_cmd);
 void			redir_in_hdc(t_order_file **ord_f, char *cmd, int *i);
 void			redir_out_app(t_order_file **ord_f, char *cmd, int *i);
 void			show_order_file(t_order_file *ord_f);
+int				nb_cmd(t_lst_cmd *cmd);
+void			free_order_file(t_order_file *ord_f);
+void			free_lst_cmd(t_lst_cmd	*cmd);
+void			reset_m_shell(t_mini *m_shell);
+int				length_without_quote(char *s);
 #endif

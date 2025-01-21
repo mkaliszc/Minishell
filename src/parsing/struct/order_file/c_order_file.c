@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 01:03:50 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:40:12 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/21 06:04:40 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,14 @@ t_order_file	*create_lst_order_file(char *one_cmd)
 			++i;
 	}
 	return (order_file);
+}
+
+void	free_order_file(t_order_file *ord_f)
+{
+	if (!ord_f)
+		return ;
+	free_order_file(ord_f->next);
+	if (ord_f->file)
+		free(ord_f->file);
+	free(ord_f);
 }

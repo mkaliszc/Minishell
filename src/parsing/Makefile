@@ -13,7 +13,7 @@ SRC_RD = redir
 SRC_UT = utils
 SRC_LN = line
 SRC_TC = table_char
-
+SRC_Q = quote_parse
 
 SRC = main.c \
 	parsing.c \
@@ -32,6 +32,7 @@ SRC = main.c \
 	$(SRC_OF)/c_order_file.c \
 	$(SRC_RD)/in_hdc.c \
 	$(SRC_RD)/out_app.c \
+	$(SRC_Q)/remove_quote.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

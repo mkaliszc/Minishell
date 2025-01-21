@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/20 01:29:38 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/21 04:57:57 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,42 @@
 ? Param (char **envp) environnement variable
 ? return nothing
 */
-void	j_loop(t_mini *m_shell);
-t_mini	*create_m_shell(char **envp, char *ln_cmd);
-t_env	*create_env(char *one_env);
-t_env	*create_lst_env(char **envp);
-void	lst_env_add_last(t_env **lst_env, t_env *env);
-void	show_all_lst_env(t_env *lst_env);
-void	free_lst_env(t_env *lst_env);
-void	free_m_shell(t_mini *m_shell);
-t_mini	*create_m_shell_env(char**envp);
-int		find_occ(char *s, char c);
-char	*key_env(char *s);
-int		empty_line(char *ln_cmd);
-void	find_n_replace_var(t_mini *m_shell, char *ln_cmd);
-int		ft_strcmp(char *s1, char *s2);
-void	show_one_lst_env(t_env *lst_env, char *key);
-t_env	*find_one_lst_env(t_env *lst_env, char *key);
-void	u_r_one_lst_env(t_env *lst_env, char *export);
-void	create_one_lst_env(t_env *lst_env, char *export);
-int		is_border_pipe(char *ln_cmd);
-int		is_quote_closed(char *ln_cmd);
-void	ft_error(char c);
-int		is_good_angle_bracket(char *ln_cmd);
-void	while_s_quote(char *ln_cmd, int *index);
-void	while_d_quote(char *ln_cmd, int *index);
-int		while_a_brck(char *ln_cmd, int *i, char *a_brck, int *cnt);
-void	init_ft_brckt(int *i, int *cnt, char *a_brck);
-int		is_dbl_pipe(char *ln_cmd);
-char	**split_cmd(char *ln_cmd);
-void	tp_n_file_redir(char **split_cmd);
-void	add_lst_cmd(t_mini *m_shell, char *ln_cmd);
-void	show_split(char **c_split);
-void	free_split(char **c_split);
-void	list_cmd_n_arg(char **cmd_split);
+void			j_loop(t_mini *m_shell);
+t_env			*create_env(char *one_env);
+t_env			*create_lst_env(char **envp);
+void			lst_env_add_last(t_env **lst_env, t_env *env);
+void			show_all_lst_env(t_env *lst_env);
+void			free_lst_env(t_env *lst_env);
+void			free_m_shell(t_mini *m_shell);
+t_mini			*create_m_shell_env(char**envp);
+int				find_occ(char *s, char c);
+char			*key_env(char *s);
+int				empty_line(char *ln_cmd);
+void			find_n_replace_var(t_mini *m_shell, char *ln_cmd);
+int				ft_strcmp(char *s1, char *s2);
+void			show_one_lst_env(t_env *lst_env, char *key);
+t_env			*find_one_lst_env(t_env *lst_env, char *key);
+void			u_r_one_lst_env(t_env *lst_env, char *export);
+void			create_one_lst_env(t_env *lst_env, char *export);
+int				is_border_pipe(char *ln_cmd);
+int				is_quote_closed(char *ln_cmd);
+void			ft_error(char c);
+int				is_good_angle_bracket(char *ln_cmd);
+void			while_s_quote(char *ln_cmd, int *index);
+void			while_d_quote(char *ln_cmd, int *index);
+int				while_a_brck(char *ln_cmd, int *i, char *a_brck, int *cnt);
+void			init_ft_brckt(int *i, int *cnt, char *a_brck);
+int				is_dbl_pipe(char *ln_cmd);
+char			**split_cmd(char *ln_cmd);
+void			add_lst_cmd(t_mini *m_shell, char *ln_cmd);
+void			show_split(char **c_split);
+void			free_split(char **c_split);
+t_lst_cmd		*create_lst_cmd(char **cmd_split);
+char			**table_cmd(char *cmd);
+void			order_file_add_lst(t_order_file **order_file, t_order_file *file);
+t_order_file	*create_order_file(char *file, t_rd_file type);
+t_order_file	*create_lst_order_file(char *one_cmd);
+void			redir_in_hdc(t_order_file **ord_f, char *cmd, int *i);
+void			redir_out_app(t_order_file **ord_f, char *cmd, int *i);
+void			show_order_file(t_order_file *ord_f);
 #endif

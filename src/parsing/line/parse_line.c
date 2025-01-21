@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/19 01:38:49 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 04:33:38 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,15 @@ int	is_dbl_pipe(char *ln_cmd)
 	i = 0;
 	while (ln_cmd[i])
 	{
-		if(ln_cmd[i] == '"')
+		if (ln_cmd[i] == '"')
 			while_d_quote(ln_cmd, &i);
-		if(ln_cmd[i] == '\'')
+		if (ln_cmd[i] == '\'')
 			while_s_quote(ln_cmd, &i);
 		if (ln_cmd[i] == '|')
 		{
 			++i;
 			while (ln_cmd[i] == ' ')
-			++i;
+				++i;
 			if (ln_cmd[i] == '|')
 				return (ft_error('|'), 1);
 		}

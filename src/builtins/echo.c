@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:27:20 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/19 01:12:12 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:29:01 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ bool	is_flag_here(char **cmd)
 	if (cmd[1][i] == '-')
 	{
 		i++;
+		if (cmd[1][i] != 'n')
+			return (false);
 	}
 	else
 		return (false);

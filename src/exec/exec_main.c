@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 22:56:29 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/21 03:25:36 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	executing_minishell(t_mini *mini)
 {
 	t_data	*data;
 	int		cur_cmd_nbr;
+	int		exit_status;
 	int		i;
 
 	cur_cmd_nbr = 0;
@@ -96,5 +97,5 @@ void	executing_minishell(t_mini *mini)
 		mini->lst_cmd = mini->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}
 	while (++i < mini->nb_cmd)
-		waitpid(data->pid[i], EXIT_FAILURE, 0);
+		waitpid(data->pid[i], &exit_status, 0);
 }

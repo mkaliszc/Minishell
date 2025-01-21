@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 03:08:33 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 03:20:24 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,16 @@ void	handle_redir_in(t_mini *data, int cmd_nbr, t_data *info)
 {
 	if(info->in_fd == 0 && cmd_nbr != 0)
 	{
-		if (dup2(info->pipe_fd[2 * cmd_nbr - 1], STDIN_FILENO) < 0)
+		if (dup2(info->pipe_fd[2 * cmd_nbr - 1], STDIN_FILENO) == -1)
 		{
-			perror("redir in with single command");
-			free_minishell(data);
-			exit(1);
+			perror_exit(data, "redir in with single command", 1);
 		}
 	}
 	else if (info->in_fd != 0)
 	{
-		if(dup2(info->in_fd, STDIN_FILENO) < 0)
+		if(dup2(info->in_fd, STDIN_FILENO) == -1)
 		{
-			perror("redir in");
-			free_minishell(data);
-			exit(1);
+			perror_exit(data, "redir in", 1);
 		}
 	}
 }
@@ -56,20 +52,16 @@ void	hande_redir_out(t_mini *data, int cmd_nbr, t_data *info)
 {
 	if (info->out_fd == 1 && cmd_nbr < data->nb_cmd)
 	{
-		if (dup2(info->pipe_fd[2 * cmd_nbr + 1], STDOUT_FILENO) < 0)
+		if (dup2(info->pipe_fd[2 * cmd_nbr + 1], STDOUT_FILENO) == -1)
 		{
-			perror("out redir for last command");
-			free_minishell(data);
-			exit(EXIT_FAILURE);
+			perror_exit(data, "out redir for last command", 1);
 		}
 	}
 	else if (info->out_fd != 1)
 	{
 		if (dup2(info->out_fd, STDOUT_FILENO) == -1)
 		{
-			perror("out redir");
-			free_minishell(data);
-			exit(EXIT_FAILURE);
+			perror_exit(data, "out redir", 1);
 		}
 	}
 }

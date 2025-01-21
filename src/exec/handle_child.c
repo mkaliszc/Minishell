@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 00:24:44 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 03:27:39 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,5 @@ void	handle_child(t_mini *data, int child_number, t_data	*info)
 	}
 	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);
 	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) == -1)
-	{
-		free_minishell(data);
-		exit(1);
-	}
+		perror_exit(data, "execve failed", 1);
 }

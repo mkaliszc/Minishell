@@ -1,57 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 22:05:03 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:17:16 by jbergos          ###   ########.fr       */
+/*   Created: 2025/01/21 06:30:33 by jbergos           #+#    #+#             */
+/*   Updated: 2025/01/21 06:41:12 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	find_occ(char *s, char c)
+int	length_without_quote(char *s)
 {
 	int	i;
+	int	len;
 
+	len = ft_strlen(s);
+	printf("len with quote : %d\n", len);
 	i = 0;
-	while (s[i] && s[i] != c)
-		++i;
-	return (i);
-}
-
-char	*key_env(char *s)
-{
-	char	*key;
-	int		len;
-	int		i;
-
-	len = find_occ(s, '=');
-	key = malloc(sizeof(char) * (len + 1));
-	if (!key)
-		return (NULL);
-	i = 0;
-	while (i < len)
+	while (s[i])
 	{
-		key[i] = s[i];
+		if (s[i] == '"')
+		{
+			while_d_quote(s, &i);
+			len -= 2;
+		}
+		else if (s[i] == '\'')
+		{
+			while_s_quote(s, &i);
+			len -= 2;
+		}
 		++i;
 	}
-	key[i] = '\0';
-	return (key);
+	printf("len without quote : %d\n", len);
+	return (len);
 }
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
+// char	*remove_quote(char *s)
+// {
+// 	char	*sq;
+// 	int		len;
 
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		++i;
-	}
-	return (s1[i] - s2[i]);
-}
+// 	len = length_wihtout_quote(s);
+// }

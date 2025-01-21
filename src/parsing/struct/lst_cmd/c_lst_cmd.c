@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 01:54:34 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/20 01:12:12 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/21 06:02:02 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_lst_cmd	*create_cmd(char *one_cmd)
 	cmd = malloc(sizeof(t_lst_cmd));
 	if (!cmd)
 		return (NULL);
-
-	cmd->cmd = NULL;
-	// cmd->order_file = // all in | out | hdc | app | ordered
+	cmd->cmd = table_cmd(one_cmd);
+	cmd->order_file = create_lst_order_file(one_cmd);
 	cmd->is_builtins = false;
 	cmd->next = NULL;
+	return (cmd);
 }
 
 void	lst_cmd_add_last(t_lst_cmd **lst_cmd, t_lst_cmd *cmd)
@@ -55,16 +55,34 @@ t_lst_cmd	*create_lst_cmd(char **cmd_split)
 	while (cmd_split[i])
 	{
 		lst_cmd_add_last(&lst_cmd, create_cmd(cmd_split[i]));
+		++i;
 	}
 	return (lst_cmd);
 }
 
-// t_lst_cmd	*create_cmd(char **split_ln_cmd)
-// {
-// 	t_lst_cmd	*cmd;
+int	nb_cmd(t_lst_cmd *cmd)
+{
+	int			count;
+	t_lst_cmd	*tmp;
 
-// 	cmd = malloc(sizeof(t_lst_cmd));
-// 	if (!cmd)
-// 		return (NULL);
-// 	cmd->
-// }
+	count = 0;
+	tmp = cmd;
+	while (tmp)
+	{
+		++count;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
+void	free_lst_cmd(t_lst_cmd	*cmd)
+{
+	if (!cmd)
+		return ;
+	free_lst_cmd(cmd->next);
+	if (cmd->order_file)
+		free_order_file(cmd->order_file);
+	if (cmd->cmd)
+		free_split(cmd->cmd);
+	free(cmd);
+}

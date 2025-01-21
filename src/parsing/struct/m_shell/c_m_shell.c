@@ -6,26 +6,42 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/20 02:12:10 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/21 06:05:57 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
+void	show_lst_cmd(t_lst_cmd	*lst_cmd)
+{
+	t_lst_cmd	*tmp;
+
+	if (!lst_cmd)
+		return ;
+	tmp = lst_cmd;
+	while (tmp)
+	{
+		show_split(tmp->cmd);
+		show_order_file(tmp->order_file);
+		tmp = tmp->next;
+	}
+}
+
 void	add_lst_cmd(t_mini *m_shell, char *ln_cmd)
 {
-	char **cmd_split;
-	(void)m_shell;
+	char	**cmd_split;
+
 	cmd_split = split_cmd(ln_cmd);
-	show_split(cmd_split);
-	list_cmd_n_arg(cmd_split);
-	// m_shell->lst_cmd
+	m_shell->lst_cmd = create_lst_cmd(cmd_split);
+	m_shell->nb_cmd = nb_cmd(m_shell->lst_cmd);
+	show_lst_cmd(m_shell->lst_cmd);
 	free_split(cmd_split);
 }
 
 t_mini	*create_m_shell_env(char**envp)
 {
 	t_mini	*m_shell;
+
 	m_shell = malloc(sizeof(t_mini));
 	if (!m_shell)
 		return (NULL);
@@ -40,4 +56,11 @@ void	free_m_shell(t_mini *m_shell)
 {
 	free_lst_env(m_shell->lst_env);
 	free(m_shell);
+}
+
+void	reset_m_shell(t_mini *m_shell)
+{
+	m_shell->nb_cmd = 0;
+	m_shell->exit_code = 0;
+	free_lst_cmd(m_shell->lst_cmd);
 }

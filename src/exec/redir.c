@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 02:29:05 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 03:08:33 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,7 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
 		if (info->in_fd != 0)
 		{
 			if (dup2(info->in_fd, STDIN_FILENO) == -1)
-			{
-				perror("redir in for the first command");
-				free_mnishell(data);
-				exit(EXIT_FAILURE);
-			}
+				perror_exit(data, "redir in for the first command", 1);
 		}
 		handle_redir_out(data, cmd_nbr, info);
 	}
@@ -94,12 +90,8 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
 		handle_redir_in(data, cmd_nbr, info);
 		if (info->out_fd != 0)
 		{
-			if (dup2(info->out_fd, STDOUT_FILENO))
-			{
-				perror("redir out for the last command");
-				free_minishell(data);
-				exit(EXIT_FAILURE);
-			}
+			if (dup2(info->out_fd, STDOUT_FILENO) == -1)
+				perror_exit(data, "redir out for the last command", 1);
 		}
 	}
 	else

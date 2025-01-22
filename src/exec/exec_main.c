@@ -6,31 +6,11 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 19:52:22 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:30:21 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-	TODO : executing checklist (in child)
-	* check where to redirect the entry and if we need, redirect the output
-	! ulimit -n (if we open to much fd)
-	? open file/pipe in the child dynamicly
-	!! handle exit code !
-
-	todo 2 : if we have only one cmd (no pipe)
-	* redirecting then check if we have a builtins (for the parent)
-	? if not a builtins then fork, redirect the child output/entry and execve
-
-	todo 3 : multiple cmd (1 or + pipes)
-	? pipex need to be executed from left to right (changing one while when creating my lst of cmd)
-
-	todo : redirection
-	* if we don't have the permission on the infile the command isn't exec and the outfile isn't created if it doesn't exist
-	! even if we don't have the perms we do every here_doc before exit/quit
-	! don't forget to unlink the tmp file of heredoc
-*/
 
 void	which_builtins(t_mini *data)
 {
@@ -74,26 +54,27 @@ void	executing_minishell(t_mini *mini)
 {
 	t_data	*data;
 	int		cur_cmd_nbr;
-	int		i;
+	t_mini	*tmp;
 
 	cur_cmd_nbr = 0;
-	i = -1;
 	data = init_struct(mini);
-	while (mini->lst_cmd)
+	tmp = mini;
+	while (tmp->lst_cmd)
 	{
-		if (mini->lst_cmd->is_builtins == true && mini->nb_cmd == 1)
+		if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
 		{
-			mini->exit_code = handle_redir_no_pipe(mini, data);
-			if (mini->exit_code != 0)
+			tmp->exit_code = handle_redir_no_pipe(mini, data);
+			if (tmp->exit_code != 0)
 				break ;
 			else
-				which_builtins(mini);
+				which_builtins(tmp);
 		}
 		else
-			handle_pipe(mini, data, cur_cmd_nbr);
+			handle_pipe(tmp, data, cur_cmd_nbr);
 		cur_cmd_nbr++;
-		mini->lst_cmd = mini->lst_cmd->next; // ? free previous node or do a free all at the end ?
-	} // * need to create a tmp that points on mini but norm friendly or free each node each time
-	while (++i < mini->nb_cmd)
-		waitpid(data->pid[i], &mini->exit_code, 0);
+		tmp->lst_cmd = tmp->lst_cmd->next;
+	}
+	cur_cmd_nbr = -1;
+	while (++cur_cmd_nbr < tmp->nb_cmd)
+		waitpid(data->pid[cur_cmd_nbr], &mini->exit_code, 0);
 }

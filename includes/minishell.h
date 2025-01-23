@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/20 18:53:48 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 03:55:15 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,9 @@ typedef struct s_data
 	int					*pipe_fd;
 }						t_data;
 
+typedef	struct s_pain
+{
+	int	i;
+	int	j;
+} t_pain;
 #endif

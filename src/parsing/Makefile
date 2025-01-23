@@ -14,6 +14,7 @@ SRC_UT = utils
 SRC_LN = line
 SRC_TC = table_char
 SRC_Q = quote_parse
+SRC_V = var_env
 
 SRC = main.c \
 	parsing.c \
@@ -33,6 +34,8 @@ SRC = main.c \
 	$(SRC_RD)/in_hdc.c \
 	$(SRC_RD)/out_app.c \
 	$(SRC_Q)/remove_quote.c \
+	$(SRC_V)/get_env.c \
+	$(SRC_V)/rep_q_n_v.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

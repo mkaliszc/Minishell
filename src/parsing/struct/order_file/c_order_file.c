@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 01:03:50 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 06:04:40 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 04:23:49 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	order_file_add_lst(t_order_file **order_file, t_order_file *file)
 	tmp->next = file;
 }
 
-t_order_file	*create_lst_order_file(char *one_cmd)
+t_order_file	*create_lst_order_file(char *one_cmd, t_env *env)
 {
 	t_order_file	*order_file;
 	int				i;
@@ -82,9 +82,9 @@ t_order_file	*create_lst_order_file(char *one_cmd)
 		else if (one_cmd[i] == '\'')
 			while_s_quote(one_cmd, &i);
 		else if (one_cmd[i] == '<')
-			redir_in_hdc(&order_file, one_cmd, &i);
+			redir_in_hdc(&order_file, one_cmd, &i, env);
 		else if (one_cmd[i] == '>')
-			redir_out_app(&order_file, one_cmd, &i);
+			redir_out_app(&order_file, one_cmd, &i, env);
 		else
 			++i;
 	}

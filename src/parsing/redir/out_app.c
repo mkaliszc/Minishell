@@ -6,13 +6,13 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 04:23:17 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 05:02:03 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 04:41:08 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	redir_app(t_order_file **ord_f, char *cmd, int *i)
+void	redir_app(t_order_file **ord_f, char *cmd, int *i, t_env *env)
 {
 	int	start;
 	int	end;
@@ -31,10 +31,11 @@ void	redir_app(t_order_file **ord_f, char *cmd, int *i)
 	}
 	end = *i;
 	order_file_add_lst(ord_f, \
-	create_order_file(ft_substr(cmd, start, end - start), APP));
+	create_order_file(replace_o_var(ft_substr(cmd, start, end - start), \
+	env), APP));
 }
 
-void	redir_out(t_order_file **ord_f, char *cmd, int *i)
+void	redir_out(t_order_file **ord_f, char *cmd, int *i, t_env *env)
 {
 	int	start;
 	int	end;
@@ -52,14 +53,15 @@ void	redir_out(t_order_file **ord_f, char *cmd, int *i)
 	}
 	end = *i;
 	order_file_add_lst(ord_f, \
-	create_order_file(ft_substr(cmd, start, end - start), OUT));
+	create_order_file(replace_o_var(ft_substr(cmd, start, end - start), \
+	env), OUT));
 }
 
-void	redir_out_app(t_order_file **ord_f, char *cmd, int *i)
+void	redir_out_app(t_order_file **ord_f, char *cmd, int *i, t_env *env)
 {
 	++*i;
 	if (cmd[*i] == '>')
-		redir_app(ord_f, cmd, i);
+		redir_app(ord_f, cmd, i, env);
 	else
-		redir_out(ord_f, cmd, i);
+		redir_out(ord_f, cmd, i, env);
 }

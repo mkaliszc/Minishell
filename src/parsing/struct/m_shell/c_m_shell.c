@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 06:05:57 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 04:33:13 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	add_lst_cmd(t_mini *m_shell, char *ln_cmd)
 	char	**cmd_split;
 
 	cmd_split = split_cmd(ln_cmd);
-	m_shell->lst_cmd = create_lst_cmd(cmd_split);
+	m_shell->lst_cmd = create_lst_cmd(cmd_split, m_shell->lst_env);
 	m_shell->nb_cmd = nb_cmd(m_shell->lst_cmd);
-	show_lst_cmd(m_shell->lst_cmd);
 	free_split(cmd_split);
 }
 

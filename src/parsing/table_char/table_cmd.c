@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:43:04 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 04:23:18 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_args(char *cmd, int *i)
 	return (ft_substr(cmd, start, end - start));
 }
 
-char	**table_cmd(char *cmd)
+char	**table_cmd(char *cmd, t_env *env)
 {
 	char	**pptr;
 	int		len;
@@ -93,7 +93,7 @@ char	**table_cmd(char *cmd)
 		else if (cmd[i] == '<' || cmd[i] == '>')
 			while_a_brckt(cmd, &i);
 		else
-			pptr[j++] = get_args(cmd, &i);
+			pptr[j++] = replace_o_var(get_args(cmd, &i), env);
 		if (!cmd[i])
 			break ;
 		++i;

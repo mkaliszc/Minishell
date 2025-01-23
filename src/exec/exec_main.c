@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 03:25:36 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:14:44 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	executing_minishell(t_mini *mini)
 {
 	t_data	*data;
 	int		cur_cmd_nbr;
-	int		exit_status;
+	// int		exit_status;
 	int		i;
 
 	cur_cmd_nbr = 0;
@@ -96,6 +96,6 @@ void	executing_minishell(t_mini *mini)
 		cur_cmd_nbr++;
 		mini->lst_cmd = mini->lst_cmd->next; // ? free previous node or do a free all at the end ?
 	}
-	while (++i < mini->nb_cmd)
-		waitpid(data->pid[i], &exit_status, 0);
+	// while (++i < mini->nb_cmd)
+	// 	waitpid(data->pid[i], &exit_status, 0);
 }

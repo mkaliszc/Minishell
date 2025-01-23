@@ -22,12 +22,12 @@ SRC		=	src/builtins/cd.c 						\
 			src/parsing/struct/lst_env/u_lst_env.c	\
 			src/parsing/utils/utils1.c				\
 			src/exec/free.c							\
-			src/exec/main.c							\
-			src/exec/path.c							\
-			src/exec/exec_utils.c					\
-			src/exec/exec_main.c					\
-			src/exec/handle_child.c					\
-			src/exec/handle_file.c					\
+			# src/exec/main.c							\
+			# src/exec/path.c							\
+			# src/exec/exec_utils.c					\
+			# src/exec/exec_main.c					\
+			# src/exec/handle_child.c					\
+			# src/exec/handle_file.c					\
 
 
 OBJ 		= $(SRC:.c=.o)

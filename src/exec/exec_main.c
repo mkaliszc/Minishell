@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 22:38:51 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 23:35:30 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	executing_minishell(t_mini *mini)
 	tmp = mini;
 	while (tmp->lst_cmd)
 	{
+		// ! Is builtin is not working right now
 		if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
 		{
 			handle_redir_no_pipe(tmp, data);

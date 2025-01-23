@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 20:04:48 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:59:57 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	handle_redir_in(t_mini *data, int cmd_nbr, t_data *info)
 	}
 }
 
-void	hande_redir_out(t_mini *data, int cmd_nbr, t_data *info)
+void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info)
 {
 	if (info->out_fd == 1 && cmd_nbr < data->nb_cmd )
 	{

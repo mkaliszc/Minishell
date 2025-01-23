@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/23 04:34:43 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 21:51:22 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minishell.h"
+// # include "minishell.h"
 # include "structs.h"
 
 /*
@@ -68,4 +68,6 @@ char			*get_env(t_env *lst_env, char *s);
 int				length_o_var(char *s, t_env *env);
 char			*replace_o_var(char *s, t_env *env);
 void			show_lst_cmd(t_lst_cmd	*lst_cmd);
+void			parsing_shell(t_mini *m_shell, char *ln_cmd);
+
 #endif

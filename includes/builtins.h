@@ -6,14 +6,14 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:23:08 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/20 10:43:39 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:51:12 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "minishell.h"
+// # include "minishell.h"
 # include "structs.h"
 # include <stdbool.h>
 

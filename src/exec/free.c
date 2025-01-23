@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/22 22:04:28 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:49:26 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	free_data_struct(t_data *data)
 		free(data->pid);
 	if (data->pipe_fd)
 	{
-		close_all(data->pipe_fd);
+		// close_all(data->pipe_fd);
 		free(data->pipe_fd);
 	}
 }

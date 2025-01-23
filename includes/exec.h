@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/22 21:42:20 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:59:49 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "minishell.h"
+// # include "minishell.h"
 # include "structs.h"
 
 void	executing_minishell(t_mini *data);
@@ -25,13 +25,14 @@ void	close_unused_pipes(int *pipe_fd, int cur_cmd);
 void	handle_pipe(t_mini *data, t_data *info, int cur_cmd);
 void	handle_child(t_mini *data, int child_number, t_data	*info);
 char	*handle_here_doc(char *limiter);
-int		handle_redir_no_pipe(t_mini *data, t_data *info);
+void	handle_redir_no_pipe(t_mini *data, t_data *info);
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);
 void	loop(char **envp);
 char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *data);
 void	perror_exit(t_mini *mini, char *error, int status);
 void	handle_open(t_data *info, t_order_file *cur, int exit_code);
 void	handle_file(t_mini *data, t_data *info);
+void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info);
 
 // ? Free Functions
 

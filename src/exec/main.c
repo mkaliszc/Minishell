@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 00:50:49 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:00:49 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	loop(char **envp)
 	t_mini	*mini;
 	char	*line;
 
+	mini = create_m_shell_env(envp);
 	while (true)
 	{
 		line = readline("Wildshell> ");
@@ -26,37 +27,38 @@ void	loop(char **envp)
 			free(line);
 			break ;
 		}
-		mini = create_m_shell_env(envp);
+		parsing_shell(mini, line);
 		executing_minishell(mini);
 		if (!line)
 			add_history(line);
 		free(line);
+		reset_m_shell(mini);
 	}
 	rl_clear_history();
 }
 
-t_mini	*create_m_shell_env(char **envp)
-{
-	t_mini	*m_shell;
+// t_mini	*create_m_shell_env(char **envp)
+// {
+// 	t_mini	*m_shell;
 
-	m_shell = malloc(sizeof(t_mini));
-	if (!m_shell)
-		return (NULL);
-	m_shell->lst_env = create_lst_env(envp);
-	m_shell->exit_code = 0;
-	m_shell->nb_cmd = 0;
-	m_shell->lst_cmd = NULL;
-	return (m_shell);
-}
+// 	m_shell = malloc(sizeof(t_mini));
+// 	if (!m_shell)
+// 		return (NULL);
+// 	m_shell->lst_env = create_lst_env(envp);
+// 	m_shell->exit_code = 0;
+// 	m_shell->nb_cmd = 0;
+// 	m_shell->lst_cmd = NULL;
+// 	return (m_shell);
+// }
 
-void	handle_sigint(void)
-{
-	exit(1);
-}
+// void	handle_sigint(void)
+// {
+// 	exit(1);
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
-	signal(SIGINT, handle_sigint);
+	// signal(SIGINT, handle_sigint);
 	loop(envp);
 	(void)argc;
 	(void)argv;

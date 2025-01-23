@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/22 21:41:04 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 23:08:50 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ char	*handle_here_doc(char *limiter)
 	while (true)
 	{
 		line = readline("> ");
+		printf("line : %s\n", line);
 		if (line == NULL)
 			break ;
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-			&& line[ft_strlen(limiter)] == '\n')
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
 			close(tmp_fd);
 			free(line);

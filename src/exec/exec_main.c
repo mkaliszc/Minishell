@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 21:34:45 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:38:51 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	executing_minishell(t_mini *mini)
 	{
 		if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
 		{
-			tmp->exit_code = handle_redir_no_pipe(mini, data);
+			handle_redir_no_pipe(tmp, data);
 			if (tmp->exit_code != 0)
 				break ;
 			else
@@ -75,6 +75,6 @@ void	executing_minishell(t_mini *mini)
 		tmp->lst_cmd = tmp->lst_cmd->next;
 	}
 	cur_cmd_nbr = -1;
-	while (++cur_cmd_nbr < tmp->nb_cmd)
+	while (++cur_cmd_nbr < mini->nb_cmd)
 		waitpid(data->pid[cur_cmd_nbr], &mini->exit_code, 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 21:59:57 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/23 23:17:06 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_redir_in(t_mini *data, int cmd_nbr, t_data *info)
 {
 	if (info->in_fd == 0 && cmd_nbr != 0)
 	{
-		if (dup2(info->pipe_fd[2 * cmd_nbr - 1], STDIN_FILENO) == -1)
+		if (dup2(info->pipe_fd[2 * cmd_nbr - 2], STDIN_FILENO) == -1)
 		{
 			perror_exit(data, "redir in with single command", 1);
 		}

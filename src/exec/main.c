@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 22:00:49 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/23 23:25:03 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	TODO : executing_minishell
+	* condition when we only have redirection and no cmd
+	
+	TODO : loop
+	* handle parse error with exit code
+	* signal and check for history because it doesn't work
+
+	TODO : overall
+	* check leaks and fds open
+
+	? msg discord si doute
+
+*/
 void	loop(char **envp)
 {
 	t_mini	*mini;
@@ -34,7 +48,7 @@ void	loop(char **envp)
 		free(line);
 		reset_m_shell(mini);
 	}
-	rl_clear_history();
+	// rl_clear_history();
 }
 
 // t_mini	*create_m_shell_env(char **envp)

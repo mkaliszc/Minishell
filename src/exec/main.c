@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 18:37:09 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 00:50:49 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,25 @@ void	loop(char **envp)
 	while (true)
 	{
 		line = readline("Wildshell> ");
-		if (ft_strncmp("exit", line, 5) == 0)
+		if (ft_strncmp("exit", line, 4) == 0)
 		{
 			handle_exit(mini);
 			free(line);
-			break;
+			break ;
 		}
 		mini = create_m_shell_env(envp);
 		executing_minishell(mini);
+		if (!line)
+			add_history(line);
 		free(line);
 	}
+	rl_clear_history();
 }
 
 t_mini	*create_m_shell_env(char **envp)
 {
 	t_mini	*m_shell;
+
 	m_shell = malloc(sizeof(t_mini));
 	if (!m_shell)
 		return (NULL);
@@ -45,20 +49,19 @@ t_mini	*create_m_shell_env(char **envp)
 	return (m_shell);
 }
 
-void handle_sigint()
+void	handle_sigint(void)
 {
 	exit(1);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-    signal(SIGINT, handle_sigint);
+	signal(SIGINT, handle_sigint);
 	loop(envp);
 	(void)argc;
 	(void)argv;
-    return 0;
+	return (0);
 }
-
 
 // int	main(int ac, char **av, char **envp)
 // {

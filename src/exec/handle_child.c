@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 20:34:51 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/23 20:40:53 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	handle_pipe(t_mini *data, t_data *pipex, int cur_cmd)
 	if (pipex->pid[cur_cmd] == 0)
 		handle_child(data, cur_cmd, pipex);
 	close(pipex->pipe_fd[2 * cur_cmd + 1]);
+	pipex->pipe_fd[2 * cur_cmd + 1] = -1;
 	if (cur_cmd > 0)
+	{
 		close(pipex->pipe_fd[2 * (cur_cmd - 1)]);
+		pipex->pipe_fd[2 * (cur_cmd - 1)] = -1;
+	}
 }
 
 void	handle_child(t_mini *data, int child_number, t_data	*pipex)
@@ -42,6 +46,8 @@ void	handle_child(t_mini *data, int child_number, t_data	*pipex)
 		free_minishell(data);
 		exit(EXIT_SUCCESS);
 	}
+	if (child_number > 0)
+		close(pipex->pipe_fd[2 * (child_number - 1)]);
 	close(pipex->pipe_fd[child_number * 2]);
 	close(pipex->pipe_fd[child_number * 2 + 1]);
 	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);

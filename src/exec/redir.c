@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 03:20:24 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:22:02 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // ! Create a function to close everything
-// ! Handle all exit codes
 
-int	handle_redir_no_pipe(t_mini *data, t_data *info)
+void	handle_redir_no_pipe(t_mini *data, t_data *info)
 {
 	handle_file(data, info);
 	if (info->in_fd == -1 || info->out_fd == -1 || data->exit_code == 126)
-		return (perror("error while opening a file"), 1);
+		return (perror("error while opening a file"));
 	if (info->in_fd != 0 && dup2(info->in_fd, STDIN_FILENO) < 0)
-		return (perror("error while redirecting the entry"), 1);
+		return (perror("error while redirecting the entry"));
 	if (info->out_fd != 1 && dup2(info->out_fd, STDOUT_FILENO) < 0)
-		return (perror("error while redirecting the output"), 1);
+		return (perror("error while redirecting the output"));
 	if (info->in_fd != 0)
 		close(info->in_fd);
 	if (info->out_fd != 1)
 		close(info->out_fd);
-	return (0);
+	return ;
 }
 void	handle_redir_in(t_mini *data, int cmd_nbr, t_data *info)
 {

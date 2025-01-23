@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 17:54:43 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:21:49 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*handle_here_doc(char *limiter)
 	}
 	return (NULL);
 }
-
 
 void	handle_open(t_data *info, t_order_file *cur)
 {

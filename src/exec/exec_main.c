@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 21:25:48 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:32:54 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	executing_minishell(t_mini *mini)
 {
 	t_data	*data;
 	int		cur_cmd_nbr;
-	// int		exit_status;
 	int		i;
 
 	cur_cmd_nbr = 0;
@@ -84,10 +83,9 @@ void	executing_minishell(t_mini *mini)
 	{
 		if (mini->lst_cmd->is_builtins == true && mini->nb_cmd == 1)
 		{
-			if (handle_redir_no_pipe(mini, data) != 0)
-			{
-				// ! error code handling without quitting the prog
-			}
+			mini->exit_code = handle_redir_no_pipe(mini, data);
+			if (mini->exit_code != 0)
+				break ;
 			else
 				which_builtins(mini);
 		}
@@ -95,7 +93,7 @@ void	executing_minishell(t_mini *mini)
 			handle_pipe(mini, data, cur_cmd_nbr);
 		cur_cmd_nbr++;
 		mini->lst_cmd = mini->lst_cmd->next; // ? free previous node or do a free all at the end ?
-	}
-	// while (++i < mini->nb_cmd)
-	// 	waitpid(data->pid[i], &exit_status, 0);
+	} // * need to create a tmp that points on mini but norm friendly or free each node each time
+	while (++i < mini->nb_cmd)
+		waitpid(data->pid[i], &mini->exit_code, 0);
 }

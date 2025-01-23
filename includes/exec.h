@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 03:05:34 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:31:30 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);
 void	loop(char **envp);
 char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *data);
 void	perror_exit(t_mini *mini, char *error, int status);
+void	handle_file(t_mini *data, t_data *info);
 
 // ? Free Functions
 

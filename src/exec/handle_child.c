@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 03:27:39 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:21:44 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-	todo : handle pipe
-	* we need conditions to redirect to the pipes for the first, last and for every child
-	? if first child we only need to redirect the output in normal time (pipe and no redir out)
-	? if last child we only need to redirect the input to the pipe
-*/
 
 void	close_unused_pipes(int *pipe_fd, int cur_cmd)
 {

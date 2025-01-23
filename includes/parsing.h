@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 06:38:37 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/23 04:34:43 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,21 @@ char			**split_cmd(char *ln_cmd);
 void			add_lst_cmd(t_mini *m_shell, char *ln_cmd);
 void			show_split(char **c_split);
 void			free_split(char **c_split);
-t_lst_cmd		*create_lst_cmd(char **cmd_split);
-char			**table_cmd(char *cmd);
+t_lst_cmd		*create_lst_cmd(char **cmd_split, t_env *env);
+char			**table_cmd(char *cmd, t_env *env);
 void			order_file_add_lst(t_order_file **order_file, t_order_file *file);
 t_order_file	*create_order_file(char *file, t_rd_file type);
-t_order_file	*create_lst_order_file(char *one_cmd);
-void			redir_in_hdc(t_order_file **ord_f, char *cmd, int *i);
-void			redir_out_app(t_order_file **ord_f, char *cmd, int *i);
+t_order_file	*create_lst_order_file(char *one_cmd, t_env *env);
+void			redir_in_hdc(t_order_file **ord_f, char *cmd, int *i, t_env *env);
+void			redir_out_app(t_order_file **ord_f, char *cmd, int *i, t_env *env);
 void			show_order_file(t_order_file *ord_f);
 int				nb_cmd(t_lst_cmd *cmd);
 void			free_order_file(t_order_file *ord_f);
 void			free_lst_cmd(t_lst_cmd	*cmd);
 void			reset_m_shell(t_mini *m_shell);
 int				length_without_quote(char *s);
+char			*get_env(t_env *lst_env, char *s);
+int				length_o_var(char *s, t_env *env);
+char			*replace_o_var(char *s, t_env *env);
+void			show_lst_cmd(t_lst_cmd	*lst_cmd);
 #endif

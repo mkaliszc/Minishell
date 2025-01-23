@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 19:21:49 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:41:04 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ char	*handle_here_doc(char *limiter)
 	return (NULL);
 }
 
-void	handle_open(t_data *info, t_order_file *cur)
+void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 {
-	if (cur->type == APP)
+	if (cur->type == APP && exit_code == 0)
 	{
 		if (info->out_fd > 1)
 			close(info->out_fd);
 		info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	}
-	else if (cur->type == OUT)
+	else if (cur->type == OUT && exit_code == 0)
 	{
 		if (info->out_fd > 1)
 			close(info->out_fd);
@@ -73,7 +73,7 @@ void	handle_file(t_mini *data, t_data *info)
 	cur = data->lst_cmd->order_file;
 	while (cur)
 	{
-		handle_open(info, cur);
+		handle_open(info, cur, data->exit_code);
 		if (info->in_fd == -1 || info->out_fd == -1)
 			data->exit_code = 126;
 		cur = cur->next;

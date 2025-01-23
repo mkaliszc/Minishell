@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/22 19:30:21 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:10:37 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_data	*init_struct(t_mini *data)
 	if (res->pid == NULL)
 	{
 		free(res);
-		return(NULL);
+		return (NULL);
 	}
 	res->pipe_fd = malloc(sizeof(int) * data->nb_cmd * 2);
 	ft_memset(res->pipe_fd, -1, data->nb_cmd * 2);

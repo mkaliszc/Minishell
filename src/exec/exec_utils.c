@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:43:21 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/20 06:44:45 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:09:45 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ char	**lst_to_char(t_env *lst_env)
 	env[i] = NULL;
 	return (env);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 03:58:44 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/21 04:03:55 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 04:15:35 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ typedef struct s_lst_cmd		t_lst_cmd;
 */
 typedef struct s_mini			t_mini;
 typedef struct s_data			t_data;
+typedef struct s_pain			t_pain;
 
 #endif

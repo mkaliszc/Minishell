@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 02:30:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/23 04:38:33 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 05:12:14 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,17 @@ int	if_for_var(char *s, int i)
 	return (0);
 }
 
-void	wololo(t_pain *pain, t_env *env, char *s, char *new)
+void	wololo(t_pain *pain, t_mini *m_shell, char *s, char *new)
 {
 	++pain->i;
 	if (s[pain->i - 1] == '"')
 	{
 		while (s[pain->i] && s[pain->i] != '"')
 		{
-			if (if_for_var(s, pain->i))
-				rv(get_key(s, &pain->i), env, &pain->j, new);
+			if (s[pain->i] == '$' && s[pain->i + 1] == '?')
+				rep_exit_code(m_shell->exit_code, new, pain);
+			else if (if_for_var(s, pain->i))
+				rv(get_key(s, &pain->i), m_shell->lst_env, &pain->j, new);
 			else
 				new[pain->j++] = s[pain->i++];
 		}
@@ -75,12 +77,12 @@ void	wololo(t_pain *pain, t_env *env, char *s, char *new)
 	++pain->i;
 }
 
-char	*replace_o_var(char *s, t_env *env)
+char	*replace_o_var(char *s, t_mini *m_shell)
 {
 	char	*new;
 	t_pain	pain;
 
-	new = malloc(sizeof(char) * (length_o_var(s, env) + 1));
+	new = malloc(sizeof(char) * (length_o_var(s, m_shell) + 1));
 	if (!new)
 		return (NULL);
 	pain.i = 0;
@@ -88,9 +90,11 @@ char	*replace_o_var(char *s, t_env *env)
 	while (s[pain.i])
 	{
 		if (s[pain.i] == '"' || s[pain.i] == '\'')
-			wololo(&pain, env, s, new);
+			wololo(&pain, m_shell, s, new);
+		else if (s[pain.i] == '$' && s[pain.i + 1] == '?')
+			rep_exit_code(m_shell->exit_code, new, &pain);
 		else if (if_for_var(s, pain.i))
-			rv(get_key(s, &pain.i), env, &pain.j, new);
+			rv(get_key(s, &pain.i), m_shell->lst_env, &pain.j, new);
 		else
 			new[pain.j++] = s[pain.i++];
 	}

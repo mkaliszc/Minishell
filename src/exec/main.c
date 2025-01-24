@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 23:25:03 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 07:10:00 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	TODO : executing_minishell
 	* condition when we only have redirection and no cmd
-	
+
 	TODO : loop
 	* handle parse error with exit code
 	* signal and check for history because it doesn't work
@@ -42,9 +42,9 @@ void	loop(char **envp)
 			break ;
 		}
 		parsing_shell(mini, line);
+		show_m_shell(mini);
 		executing_minishell(mini);
-		if (!line)
-			add_history(line);
+		add_history(line);
 		free(line);
 		reset_m_shell(mini);
 	}

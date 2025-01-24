@@ -37,12 +37,14 @@ SRC		=	src/builtins/cd.c 						\
 			src/parsing/struct/lst_env/r_lst_env.c				\
 			src/parsing/struct/lst_env/u_lst_env.c				\
 			src/parsing/struct/m_shell/c_m_shell.c				\
+			src/parsing/struct/m_shell/r_m_shell.c				\
 			src/parsing/struct/order_file/c_order_file.c				\
 			src/parsing/table_char/split_cmd.c				\
 			src/parsing/table_char/table_cmd.c				\
 			src/parsing/utils/utils1.c				\
 			src/parsing/var_env/get_env.c				\
 			src/parsing/var_env/rep_q_n_v.c				\
+			src/parsing/var_env/exit_code.c				\
 			src/parsing/parsing.c				\
 
 

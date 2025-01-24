@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/21 00:47:42 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 07:01:05 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 	path = get_path(cmd, envp);
 	if (!path)
 	{
-		ft_printf_fd(2, "Command not found: %s", mini->lst_cmd->cmd[0]);
-		exit(127);
+		ft_printf_fd(2, "Command not found: %s\n", mini->lst_cmd->cmd[0]);
+		exit(1);
 	}
 	return (path);
 }

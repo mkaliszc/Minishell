@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 23:13:16 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:08:32 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	handle_pipe(t_mini *data, t_data *pipex, int cur_cmd)
 		close(pipex->pipe_fd[2 * (cur_cmd - 1)]);
 		pipex->pipe_fd[2 * (cur_cmd - 1)] = -1;
 	}
+	else if (cur_cmd == 0 && data->nb_cmd == 1)
+		close(pipex->pipe_fd[2 * cur_cmd]);
 }
 
 void	handle_child(t_mini *data, int child_number, t_data	*pipex)

@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 17:54:25 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:23:23 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,16 @@ void	executing_minishell(t_mini *mini)
 	cur_cmd_nbr = 0;
 	data = init_struct(mini);
 	tmp = mini;
+	if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
+	{
+		handle_only_builtins(tmp, data);
+		return ;
+	}
+	else if (mini->nb_cmd == 1 && mini->lst_cmd->cmd[0] == NULL) // * fix temporaire (waiting for jbergos fix) replace 1 with 0
+		return (handle_file(mini, data));
 	while (tmp->lst_cmd)
 	{
-		if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
-			handle_only_builtins(tmp, data);
-		else if (mini->nb_cmd == 1 && mini->lst_cmd->cmd[0] == NULL) // * fix temporaire			
-			handle_file(mini, data);
-		else
-			handle_pipe(tmp, data, cur_cmd_nbr);
+		handle_pipe(tmp, data, cur_cmd_nbr);
 		cur_cmd_nbr++;
 		tmp->lst_cmd = tmp->lst_cmd->next;
 	}

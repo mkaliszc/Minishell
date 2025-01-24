@@ -6,13 +6,13 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 23:08:50 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 20:59:57 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*handle_here_doc(char *limiter)
+char	*handle_here_doc(char *limiter) // ! wrong does not put 
 {
 	int		tmp_fd;
 	char	*line;
@@ -23,7 +23,6 @@ char	*handle_here_doc(char *limiter)
 	while (true)
 	{
 		line = readline("> ");
-		printf("line : %s\n", line);
 		if (line == NULL)
 			break ;
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
@@ -32,7 +31,7 @@ char	*handle_here_doc(char *limiter)
 			free(line);
 			return (".tmp");
 		}
-		ft_putstr_fd(line, tmp_fd);
+		ft_putendl_fd(line, tmp_fd);
 		free(line);
 	}
 	return (NULL);

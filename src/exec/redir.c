@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 17:43:07 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:24:59 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,23 @@ void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info)
 	}
 }
 
+void	handle_first_child(t_mini *data, int cmd_nbr, t_data *info)
+{
+	if (info->in_fd != 0)
+	{
+		if (dup2(info->in_fd, STDIN_FILENO) == -1)
+			perror_exit(data, "redir in for the first command", 1);
+	}
+	handle_redir_out(data, cmd_nbr, info);
+}
+
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
 {
 	handle_file(data, info);
+	if (data->exit_code == 126)
+		return ;
 	if (cmd_nbr == 0)
-	{
-		if (info->in_fd != 0)
-		{
-			if (dup2(info->in_fd, STDIN_FILENO) == -1)
-				perror_exit(data, "redir in for the first command", 1);
-		}
-		handle_redir_out(data, cmd_nbr, info);
-	}
+		handle_first_child(data, cmd_nbr, info);
 	else if (cmd_nbr == data->nb_cmd - 1)
 	{
 		handle_redir_in(data, cmd_nbr, info);
@@ -84,4 +89,8 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
 		handle_redir_in(data, cmd_nbr, info);
 		handle_redir_out(data, cmd_nbr, info);
 	}
+	if (info->in_fd != 0)
+		close(info->in_fd);
+	if (info->out_fd != 1)
+		close(info->out_fd);
 }

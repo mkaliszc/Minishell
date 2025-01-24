@@ -6,22 +6,16 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 17:23:51 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:01:53 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-	TODO : executing_minishell
-	* condition when we only have redirection and no cmd
-
-	TODO : loop
-	* handle parse error with exit code
-	* signal
-
 	TODO : overall
 	* check leaks and fds open
+	* signal
 
 	? msg discord si doute
 

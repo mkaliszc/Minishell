@@ -42,11 +42,10 @@ SRC		=	src/builtins/cd.c 						\
 			src/parsing/table_char/split_cmd.c				\
 			src/parsing/table_char/table_cmd.c				\
 			src/parsing/utils/utils1.c				\
-			src/parsing/var_env/get_env.c				\
-			src/parsing/var_env/rep_q_n_v.c				\
-			src/parsing/var_env/exit_code.c				\
-			src/parsing/parsing.c				\
-
+			src/parsing/var_env/get_env.c			\
+			src/parsing/var_env/exit_code.c			\
+			src/parsing/var_env/rep_q_n_v.c			\
+			src/parsing/parsing.c			\
 
 
 OBJ 		= $(SRC:.c=.o)

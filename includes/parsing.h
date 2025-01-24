@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 06:52:42 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 07:27:53 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void			show_m_shell(t_mini	*m_shell);
 bool			is_builtins(char *cmd);
 void			length_exit_code(int code, int *i, int *len);
 void			rep_exit_code(int code, char *new, t_pain *pain);
+void			parsing_shell(t_mini *m_shell, char *ln_cmd);
 
 #endif

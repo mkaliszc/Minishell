@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/23 21:57:23 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:54:16 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ typedef struct s_data
 	int					*pipe_fd;
 }						t_data;
 
-typedef	struct s_pain
+typedef struct s_pain
 {
 	int	i;
 	int	j;
-} t_pain;
+}						t_pain;
+
 #endif

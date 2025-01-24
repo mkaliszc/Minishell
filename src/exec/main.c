@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 21:01:53 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:05:41 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	loop(char **envp)
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
-		line = readline("Wildshell> ");
+		line = readline("\e[0;32mWildshell> \e[0m");
 		if (ft_strncmp("exit", line, 4) == 0)
 		{
 			handle_exit(mini);
@@ -36,7 +36,7 @@ void	loop(char **envp)
 			break ;
 		}
 		parsing_shell(mini, line);
-		show_m_shell(mini);
+		// show_m_shell(mini);
 		if (mini->exit_code == 0)
 			executing_minishell(mini);
 		add_history(line);

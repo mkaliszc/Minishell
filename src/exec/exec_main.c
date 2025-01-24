@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 21:23:23 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:25:19 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	executing_minishell(t_mini *mini)
 
 	cur_cmd_nbr = 0;
 	data = init_struct(mini);
+	mini->data = data;
 	tmp = mini;
 	if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
 	{

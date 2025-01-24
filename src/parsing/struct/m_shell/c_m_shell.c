@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_m_shell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 05:30:33 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 23:16:11 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_mini	*create_m_shell_env(char**envp)
 	m_shell->exit_code = 0;
 	m_shell->nb_cmd = 0;
 	m_shell->lst_cmd = NULL;
+	m_shell->data = NULL;
 	return (m_shell);
 }
 

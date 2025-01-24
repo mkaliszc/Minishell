@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/23 21:49:26 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:26:20 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	free_minishell(t_mini *mini)
 		free_env_struct(mini->lst_env);
 	if (mini->lst_cmd)
 		free_cmd_struct(mini->lst_cmd);
+	if (mini->data)
+		free_data_struct(mini->data);
 	free(mini);
 }
 

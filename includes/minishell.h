@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/24 21:54:16 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:15:20 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_mini
 {
 	t_env				*lst_env;
 	t_lst_cmd			*lst_cmd;
+	t_data				*data;
 	int					nb_cmd;
 	int					exit_code;
 }						t_mini;

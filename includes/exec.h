@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 21:59:49 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:15:45 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*handle_here_doc(char *limiter);
 void	handle_redir_no_pipe(t_mini *data, t_data *info);
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);
 void	loop(char **envp);
-char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *data);
+char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini);
 void	perror_exit(t_mini *mini, char *error, int status);
 void	handle_open(t_data *info, t_order_file *cur, int exit_code);
 void	handle_file(t_mini *data, t_data *info);

@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 01:03:50 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/23 04:23:49 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 02:49:30 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,27 @@
 void	show_order_file(t_order_file *ord_f)
 {
 	t_order_file	*tmp;
+	int				i;
 
 	if (!ord_f)
 	{
-		printf("yolo\n");
+		printf("no redirextion for this cmd \n");
 		return ;
 	}
 	tmp = ord_f;
+	i = 0;
 	while (tmp)
 	{
 		if (tmp->type == IN)
-			printf("infile : |%s|\n", tmp->file);
+			printf("infile number |%d| : |%s|\n", i + 1, tmp->file);
 		if (tmp->type == OUT)
-			printf("outfile : |%s|\n", tmp->file);
+			printf("outfile number |%d| : |%s|\n", i + 1, tmp->file);
 		if (tmp->type == HDC)
-			printf("outfile : |%s|\n", tmp->file);
+			printf("outfile number |%d| : |%s|\n", i + 1, tmp->file);
 		if (tmp->type == APP)
-			printf("append : |%s|\n", tmp->file);
+			printf("append number |%d| : |%s|\n", i + 1, tmp->file);
 		tmp = tmp->next;
+		++i;
 	}
 }
 
@@ -68,7 +71,7 @@ void	order_file_add_lst(t_order_file **order_file, t_order_file *file)
 	tmp->next = file;
 }
 
-t_order_file	*create_lst_order_file(char *one_cmd, t_env *env)
+t_order_file	*create_lst_order_file(char *one_cmd, t_mini *m_shell)
 {
 	t_order_file	*order_file;
 	int				i;
@@ -77,14 +80,18 @@ t_order_file	*create_lst_order_file(char *one_cmd, t_env *env)
 	order_file = NULL;
 	while (one_cmd[i])
 	{
-		if (one_cmd[i] == '"')
-			while_d_quote(one_cmd, &i);
-		else if (one_cmd[i] == '\'')
-			while_s_quote(one_cmd, &i);
+		if (one_cmd[i] == '"' || one_cmd[i] == '\'')
+		{
+			if (one_cmd[i] == '\'')
+				while_s_quote(one_cmd, &i);
+			else
+				while_d_quote(one_cmd, &i);
+			++i;
+		}
 		else if (one_cmd[i] == '<')
-			redir_in_hdc(&order_file, one_cmd, &i, env);
+			redir_in_hdc(&order_file, one_cmd, &i, m_shell);
 		else if (one_cmd[i] == '>')
-			redir_out_app(&order_file, one_cmd, &i, env);
+			redir_out_app(&order_file, one_cmd, &i, m_shell);
 		else
 			++i;
 	}

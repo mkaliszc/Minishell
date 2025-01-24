@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:05:03 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:17:16 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 05:25:07 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,26 @@ int	ft_strcmp(char *s1, char *s2)
 		++i;
 	}
 	return (s1[i] - s2[i]);
+}
+
+bool	is_builtins(char *cmd)
+{
+	if (!cmd)
+		return (false);
+	else if (!ft_strcmp(cmd, "echo"))
+		return (true);
+	else if (!ft_strcmp(cmd, "export"))
+		return (true);
+	else if (!ft_strcmp(cmd, "cd"))
+		return (true);
+	else if (!ft_strcmp(cmd, "exit"))
+		return (true);
+	else if (!ft_strcmp(cmd, "env"))
+		return (true);
+	else if (!ft_strcmp(cmd, "unset"))
+		return (true);
+	else if (!ft_strcmp(cmd, "pwd"))
+		return (true);
+	else
+		return (false);
 }

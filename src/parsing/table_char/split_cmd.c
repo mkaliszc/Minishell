@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 04:29:57 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:46:40 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 00:33:28 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,14 @@ void	show_split(char **c_split)
 	int	i;
 
 	i = 0;
+	if (!c_split[0])
+		printf("no cmd \n");
 	while (c_split[i])
 	{
-		printf("cmd and args : /%s/\n", c_split[i]);
+		if (i == 0)
+			printf("cmd : |%s|\n", c_split[i]);
+		else
+			printf("args number |%d| : |%s|\n", i, c_split[i]);
 		++i;
 	}
 }

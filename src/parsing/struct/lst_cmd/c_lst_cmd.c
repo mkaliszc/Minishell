@@ -6,22 +6,25 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 01:54:34 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/23 04:20:57 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 02:46:01 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
-t_lst_cmd	*create_cmd(char *one_cmd, t_env *env)
+t_lst_cmd	*create_cmd(char *one_cmd, t_mini *m_shell)
 {
 	t_lst_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_lst_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->cmd = table_cmd(one_cmd, env);
-	cmd->order_file = create_lst_order_file(one_cmd, env);
-	cmd->is_builtins = false;
+	cmd->cmd = table_cmd(one_cmd, m_shell);
+	cmd->order_file = create_lst_order_file(one_cmd, m_shell);
+	if (!cmd->cmd)
+		cmd->is_builtins = false;
+	else
+		cmd->is_builtins = is_builtins(cmd->cmd[0]);
 	cmd->next = NULL;
 	return (cmd);
 }
@@ -45,7 +48,7 @@ void	lst_cmd_add_last(t_lst_cmd **lst_cmd, t_lst_cmd *cmd)
 	tmp->next = cmd;
 }
 
-t_lst_cmd	*create_lst_cmd(char **cmd_split, t_env *env)
+t_lst_cmd	*create_lst_cmd(char **cmd_split, t_mini *m_shell)
 {
 	t_lst_cmd	*lst_cmd;
 	int			i;
@@ -54,7 +57,7 @@ t_lst_cmd	*create_lst_cmd(char **cmd_split, t_env *env)
 	lst_cmd = NULL;
 	while (cmd_split[i])
 	{
-		lst_cmd_add_last(&lst_cmd, create_cmd(cmd_split[i], env));
+		lst_cmd_add_last(&lst_cmd, create_cmd(cmd_split[i], m_shell));
 		++i;
 	}
 	return (lst_cmd);

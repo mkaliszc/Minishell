@@ -36,6 +36,8 @@ SRC = main.c \
 	$(SRC_Q)/remove_quote.c \
 	$(SRC_V)/get_env.c \
 	$(SRC_V)/rep_q_n_v.c \
+	$(SRC_MS)/r_m_shell.c \
+	$(SRC_V)/exit_code.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

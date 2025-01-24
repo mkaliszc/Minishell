@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/23 04:33:13 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/24 05:30:33 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,24 @@
 void	show_lst_cmd(t_lst_cmd	*lst_cmd)
 {
 	t_lst_cmd	*tmp;
+	int			i;
 
 	if (!lst_cmd)
 		return ;
 	tmp = lst_cmd;
+	i = 0;
 	while (tmp)
 	{
+		printf("lst cmd and redir for pipe number |%d|\n", i + 1);
+		printf("\n-----------------------------------------------\n");
+		printf("------------list of cmd and args-----------\n");
+		tmp->is_builtins ? printf("Is a builtins\n") : printf("Not a builtins\n");
 		show_split(tmp->cmd);
+		printf("-------------list of order file ------------------\n");
 		show_order_file(tmp->order_file);
+		printf("\n---------------------------------------\n");
 		tmp = tmp->next;
+		++i;
 	}
 }
 
@@ -32,8 +41,9 @@ void	add_lst_cmd(t_mini *m_shell, char *ln_cmd)
 	char	**cmd_split;
 
 	cmd_split = split_cmd(ln_cmd);
-	m_shell->lst_cmd = create_lst_cmd(cmd_split, m_shell->lst_env);
+	m_shell->lst_cmd = create_lst_cmd(cmd_split, m_shell);
 	m_shell->nb_cmd = nb_cmd(m_shell->lst_cmd);
+	m_shell->exit_code = 0;
 	free_split(cmd_split);
 }
 
@@ -60,6 +70,6 @@ void	free_m_shell(t_mini *m_shell)
 void	reset_m_shell(t_mini *m_shell)
 {
 	m_shell->nb_cmd = 0;
-	m_shell->exit_code = 0;
 	free_lst_cmd(m_shell->lst_cmd);
+	m_shell->lst_cmd = NULL;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 07:10:00 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:23:51 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 	TODO : loop
 	* handle parse error with exit code
-	* signal and check for history because it doesn't work
+	* signal
 
 	TODO : overall
 	* check leaks and fds open
@@ -43,27 +43,14 @@ void	loop(char **envp)
 		}
 		parsing_shell(mini, line);
 		show_m_shell(mini);
-		executing_minishell(mini);
+		if (mini->exit_code == 0)
+			executing_minishell(mini);
 		add_history(line);
 		free(line);
 		reset_m_shell(mini);
 	}
-	// rl_clear_history();
+	rl_clear_history();
 }
-
-// t_mini	*create_m_shell_env(char **envp)
-// {
-// 	t_mini	*m_shell;
-
-// 	m_shell = malloc(sizeof(t_mini));
-// 	if (!m_shell)
-// 		return (NULL);
-// 	m_shell->lst_env = create_lst_env(envp);
-// 	m_shell->exit_code = 0;
-// 	m_shell->nb_cmd = 0;
-// 	m_shell->lst_cmd = NULL;
-// 	return (m_shell);
-// }
 
 // void	handle_sigint(void)
 // {
@@ -78,31 +65,3 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	return (0);
 }
-
-// int	main(int ac, char **av, char **envp)
-// {
-// 	(void) envp;
-// 	(void) ac;
-// 	(void) av;
-// 	signal(SIGINT, test);
-// 	// loop(envp);
-// }
-
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	//init signal
-// 	// loop(envp);
-// 	t_mini *mini;
-// 	mini = create_m_shell_env(envp);
-// 	(void)argc;
-// 	(void)argv;
-// 	char **test = malloc(1000);
-
-// 	test[0] = "/usr/bin/ls";
-// 	test[1] = "test";
-// 	test[2] = NULL;
-// 	validate_cmd(test, mini->lst_env, mini);
-// 	free_minishell(mini);
-// 	free(test);
-// 	return (0);
-// }

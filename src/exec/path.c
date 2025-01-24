@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 07:01:05 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:10:50 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 		return (NULL);
 	check_absolute_path(cmd, mini);
 	path = get_path(cmd, envp);
+	printf("\npath : %s\n", path);
 	if (!path)
 	{
 		ft_printf_fd(2, "Command not found: %s\n", mini->lst_cmd->cmd[0]);

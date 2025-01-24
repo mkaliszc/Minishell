@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 23:17:06 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:43:07 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,18 @@ void	handle_redir_in(t_mini *data, int cmd_nbr, t_data *info)
 	if (info->in_fd == 0 && cmd_nbr != 0)
 	{
 		if (dup2(info->pipe_fd[2 * cmd_nbr - 2], STDIN_FILENO) == -1)
-		{
 			perror_exit(data, "redir in with single command", 1);
-		}
 	}
 	else if (info->in_fd != 0)
 	{
 		if (dup2(info->in_fd, STDIN_FILENO) == -1)
-		{
 			perror_exit(data, "redir in", 1);
-		}
 	}
 }
 
 void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info)
 {
-	if (info->out_fd == 1 && cmd_nbr < data->nb_cmd )
+	if (info->out_fd == 1 && cmd_nbr < data->nb_cmd)
 	{
 		if (dup2(info->pipe_fd[2 * cmd_nbr + 1], STDOUT_FILENO) == -1)
 			perror_exit(data, "out redir for last command", 1);

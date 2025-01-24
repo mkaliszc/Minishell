@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 07:22:46 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:54:25 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void	which_builtins(t_mini *data)
 		handle_echo(data->lst_cmd->cmd);
 	else if (ft_strcmp("exit", data->lst_cmd->cmd[0]) == 0)
 		handle_exit(data);
+}
+
+void	handle_only_builtins(t_mini *tmp, t_data *data)
+{
+	handle_redir_no_pipe(tmp, data);
+	if (tmp->exit_code == 0)
+		which_builtins(tmp);
 }
 
 t_data	*init_struct(t_mini *data)
@@ -61,15 +68,10 @@ void	executing_minishell(t_mini *mini)
 	tmp = mini;
 	while (tmp->lst_cmd)
 	{
-		// ! Is builtin is not working right now
 		if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
-		{
-			handle_redir_no_pipe(tmp, data);
-			if (tmp->exit_code != 0)
-				break ;
-			else
-				which_builtins(tmp);
-		}
+			handle_only_builtins(tmp, data);
+		else if (mini->nb_cmd == 1 && mini->lst_cmd->cmd[0] == NULL) // * fix temporaire			
+			handle_file(mini, data);
 		else
 			handle_pipe(tmp, data, cur_cmd_nbr);
 		cur_cmd_nbr++;

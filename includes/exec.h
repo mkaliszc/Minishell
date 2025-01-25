@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 23:15:45 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 23:34:05 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ t_data	*init_struct(t_mini *data);
 void	which_builtins(t_mini *data);
 char	**lst_to_char(t_env *lst_env);
 int		get_lst_env_size(t_env *lst_env);
-void	close_unused_pipes(int *pipe_fd, int cur_cmd);
-void	handle_pipe(t_mini *data, t_data *info, int cur_cmd);
-void	handle_child(t_mini *data, int child_number, t_data	*info);
+void	handle_pipe(t_mini *data, t_data *info, int cur_cmd, t_lst_cmd *tmp);
+void	handle_child(t_mini *data, int child_number, t_data	*info, t_lst_cmd *tmp);
 char	*handle_here_doc(char *limiter);
 void	handle_redir_no_pipe(t_mini *data, t_data *info);
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);

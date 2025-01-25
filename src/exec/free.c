@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/24 23:26:20 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 04:06:59 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	free_data_struct(t_data *data)
 		// close_all(data->pipe_fd);
 		free(data->pipe_fd);
 	}
+	free(data);
 }

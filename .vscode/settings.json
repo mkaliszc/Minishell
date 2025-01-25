@@ -15,6 +15,7 @@
 		"atomic": "c",
 		"stdbool.h": "c",
 		"signal.h": "c",
-		"sig_atomic_t.h": "c"
+		"sig_atomic_t.h": "c",
+		"random": "c"
 	}
 }

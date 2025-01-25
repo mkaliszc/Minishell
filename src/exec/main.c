@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 04:58:58 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:52:26 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	loop(char **envp)
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
-		line = readline("\e[0;32mWildshell> \e[0m");
+		line = readline("\e[1;32mWildshell> \e[0m");
 		if (ft_strcmp("exit", line) == 0)
 		{
 			handle_exit(mini);

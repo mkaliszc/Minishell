@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 23:16:29 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:40:31 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handle_pipe(t_mini *data, t_data *pipex, int cur_cmd)
 		close(pipex->pipe_fd[2 * (cur_cmd - 1)]);
 		pipex->pipe_fd[2 * (cur_cmd - 1)] = -1;
 	}
-	else if (cur_cmd == 0 && data->nb_cmd == 1)
+	if (cur_cmd == data->nb_cmd - 1)
 		close(pipex->pipe_fd[2 * cur_cmd]);
 }
 
@@ -42,16 +42,16 @@ void	handle_child(t_mini *data, int child_number, t_data	*pipex)
 		handle_redir_no_pipe(data, pipex);
 	else
 		handle_redir(data, child_number, pipex);
+	if (child_number > 0)
+		close(pipex->pipe_fd[2 * (child_number - 1)]);
+	close(pipex->pipe_fd[child_number * 2]);
+	close(pipex->pipe_fd[child_number * 2 + 1]);
 	if (data->lst_cmd->is_builtins == true)
 	{
 		which_builtins(data);
 		free_minishell(data);
 		exit(EXIT_SUCCESS);
 	}
-	if (child_number > 0)
-		close(pipex->pipe_fd[2 * (child_number - 1)]);
-	close(pipex->pipe_fd[child_number * 2]);
-	close(pipex->pipe_fd[child_number * 2 + 1]);
 	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);
 	if (execve(path, data->lst_cmd->cmd, lst_to_char(data->lst_env)) == -1)
 		perror_exit(data, "execve failed", 1);

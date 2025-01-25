@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 20:59:57 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/25 07:16:37 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*handle_here_doc(char *limiter) // ! wrong does not put 
+char	*handle_here_doc(char *limiter) // ! wrong does not put
 {
 	int		tmp_fd;
 	char	*line;

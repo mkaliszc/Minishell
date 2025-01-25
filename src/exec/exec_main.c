@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 21:41:21 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/25 22:44:44 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	executing_minishell(t_mini *mini)
 	if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
 	{
 		handle_only_builtins(tmp, mini->data);
-		free_data_struct(mini->data);
-		mini->data = NULL;
 		return ;
 	}
 	else if (mini->nb_cmd == 1 && mini->lst_cmd->cmd[0] == NULL) // * fix temporaire (waiting for jbergos fix) replace 1 with 0

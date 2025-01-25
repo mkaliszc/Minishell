@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 07:01:10 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:41:21 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,28 @@ t_data	*init_struct(t_mini *data)
 
 void	executing_minishell(t_mini *mini)
 {
-	t_data	*data;
 	int		cur_cmd_nbr;
 	t_mini	*tmp;
 
 	cur_cmd_nbr = 0;
-	data = init_struct(mini);
-	mini->data = data;
+	mini->data = init_struct(mini);
 	tmp = mini;
 	if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
 	{
-		handle_only_builtins(tmp, data);
+		handle_only_builtins(tmp, mini->data);
+		free_data_struct(mini->data);
+		mini->data = NULL;
 		return ;
 	}
 	else if (mini->nb_cmd == 1 && mini->lst_cmd->cmd[0] == NULL) // * fix temporaire (waiting for jbergos fix) replace 1 with 0
-		return (handle_file(mini, data));
+		return (handle_file(mini, mini->data));
 	while (tmp->lst_cmd)
 	{
-		handle_pipe(tmp, data, cur_cmd_nbr);
+		handle_pipe(tmp, mini->data, cur_cmd_nbr);
 		cur_cmd_nbr++;
 		tmp->lst_cmd = tmp->lst_cmd->next;
 	}
 	cur_cmd_nbr = -1;
 	while (++cur_cmd_nbr < mini->nb_cmd)
-		waitpid(data->pid[cur_cmd_nbr], &mini->exit_code, 0);
+		waitpid(mini->data->pid[cur_cmd_nbr], &mini->exit_code, 0);
 }

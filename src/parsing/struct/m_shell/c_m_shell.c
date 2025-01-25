@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_m_shell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/25 07:26:14 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:31:57 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	free_m_shell(t_mini *m_shell)
 
 void	reset_m_shell(t_mini *m_shell)
 {
-	printf("test\n");
 	m_shell->nb_cmd = 0;
 	free_cmd_struct(m_shell->lst_cmd);
 	m_shell->lst_cmd = NULL;

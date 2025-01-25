@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/23 20:50:54 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:33:26 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,4 @@ void	handle_export(char **cmd, t_env **env)
 		u_r_one_lst_env(*env, cmd[i]);
 		i++;
 	}
-
-	// u_r_one_lst_env(*env, cmd[1]);
-	// return ;
 }

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/25 04:06:59 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 04:47:21 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,19 @@ void	free_order_file_struct(t_order_file *order_file)
 
 void	free_cmd_struct(t_lst_cmd *lst_cmd)
 {
+	t_lst_cmd	*temp;
+
 	if (!lst_cmd)
 		return ;
 	while (lst_cmd)
 	{
+		temp = lst_cmd->next;
 		if (lst_cmd->cmd)
 			ft_free_char_tab(lst_cmd->cmd);
 		if (lst_cmd->order_file)
 			free_order_file_struct(lst_cmd->order_file);
-		lst_cmd = lst_cmd->next;
+		free(lst_cmd);
+		lst_cmd = temp;
 	}
 	free(lst_cmd);
 }

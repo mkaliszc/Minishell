@@ -6,27 +6,27 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 23:34:27 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 00:02:58 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	which_builtins(t_mini *data)
+void	which_builtins(t_mini *data, t_lst_cmd *tmp)
 {
-	if (ft_strcmp("env", data->lst_cmd->cmd[0]) == 0)
+	if (ft_strcmp("env", tmp->cmd[0]) == 0)
 		handle_env(data->lst_env);
-	else if (ft_strcmp("export", data->lst_cmd->cmd[0]) == 0)
+	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
 		handle_export(data->lst_cmd->cmd, &data->lst_env);
-	else if (ft_strcmp("unset", data->lst_cmd->cmd[0]) == 0)
-		handle_unset(data->lst_cmd->cmd, &data->lst_env);
-	else if (ft_strcmp("cd", data->lst_cmd->cmd[0]) == 0)
-		handle_cd(data->lst_cmd->cmd, data->lst_env);
-	else if (ft_strcmp("pwd", data->lst_cmd->cmd[0]) == 0)
+	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
+		handle_unset(tmp->cmd, &data->lst_env);
+	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
+		handle_cd(tmp->cmd, data->lst_env);
+	else if (ft_strcmp("pwd", tmp->cmd[0]) == 0)
 		handle_pwd();
-	else if (ft_strcmp("echo", data->lst_cmd->cmd[0]) == 0)
+	else if (ft_strcmp("echo", tmp->cmd[0]) == 0)
 		handle_echo(data->lst_cmd->cmd);
-	else if (ft_strcmp("exit", data->lst_cmd->cmd[0]) == 0)
+	else if (ft_strcmp("exit", tmp->cmd[0]) == 0)
 		handle_exit(data);
 }
 
@@ -34,7 +34,7 @@ void	handle_only_builtins(t_mini *tmp, t_data *data)
 {
 	handle_redir_no_pipe(tmp, data);
 	if (tmp->exit_code == 0)
-		which_builtins(tmp);
+		which_builtins(tmp, tmp->lst_cmd);
 }
 
 t_data	*init_struct(t_mini *data)

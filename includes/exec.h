@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 23:34:05 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 00:00:40 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	executing_minishell(t_mini *data);
 t_data	*init_struct(t_mini *data);
-void	which_builtins(t_mini *data);
+void	which_builtins(t_mini *data, t_lst_cmd *tmp);
 char	**lst_to_char(t_env *lst_env);
 int		get_lst_env_size(t_env *lst_env);
 void	handle_pipe(t_mini *data, t_data *info, int cur_cmd, t_lst_cmd *tmp);

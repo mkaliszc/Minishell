@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 23:33:02 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 00:01:50 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	handle_child(t_mini *data, int child_number, t_data	*pipex, t_lst_cmd *tmp)
 	close(pipex->pipe_fd[child_number * 2 + 1]);
 	if (tmp->is_builtins == true)
 	{
-		which_builtins(data);
+		which_builtins(data, tmp);
 		free_minishell(data);
 		exit(EXIT_SUCCESS);
 	}
-	path = validate_cmd_path(data->lst_cmd->cmd, data->lst_env, data);
+	path = validate_cmd_path(tmp->cmd, data->lst_env, data);
 	if (execve(path, tmp->cmd, lst_to_char(data->lst_env)) == -1)
 		perror_exit(data, "execve failed", 1);
 }

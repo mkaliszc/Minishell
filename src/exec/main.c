@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 00:30:50 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 00:36:17 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	loop(char **envp)
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
-		g_signal_received = 0;
-		line = readline("\e[1;32mWildshell> \e[0m");
-		g_signal_received = 1;
+		// g_signal_received = 0;
+		line = readline("Wildshell> ");
+		// g_signal_received = 1;
 		parsing_shell(mini, line);
 		// show_m_shell(mini);
 		executing_minishell(mini);
@@ -64,13 +64,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	struct sigaction sa;
-	rl_outstream = stderr;
-	sa.sa_handler = handle_sigint;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	sigaction(SIGINT, &sa, NULL);
-	signal(SIGQUIT, SIG_IGN);
+	// struct sigaction sa;
+	// rl_outstream = stderr;
+	// sa.sa_handler = handle_sigint;
+	// sa.sa_flags = 0;
+	// sigemptyset(&sa.sa_mask);
+	// sigaction(SIGINT, &sa, NULL);
+	// signal(SIGQUIT, SIG_IGN);
 	loop(envp);
 	return (0);
 }

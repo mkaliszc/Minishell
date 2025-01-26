@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 22:58:07 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 02:12:32 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	loop(char **envp)
 			break ;
 		}
 		parsing_shell(mini, line);
-		if (mini->exit_code == 0)
-			executing_minishell(mini);
+		executing_minishell(mini);
 		add_history(line);
 		free(line);
 		reset_m_shell(mini);

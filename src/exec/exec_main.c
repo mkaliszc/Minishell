@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 00:02:58 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 02:12:43 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,26 @@ t_data	*init_struct(t_mini *data)
 	return (res);
 }
 
+void	wait_for_child(t_mini *mini)
+{
+	int i;
+
+	i = -1;
+	while (++i < mini->nb_cmd)
+	{
+		waitpid(mini->data->pid[i], &mini->exit_code, 0);
+		if (WIFEXITED(mini->exit_code))
+			mini->exit_code = WEXITSTATUS(mini->exit_code);
+	}
+}
+
 void	executing_minishell(t_mini *mini)
 {
 	int		cur_cmd_nbr;
 	t_lst_cmd	*tmp;
 
+	if (mini->exit_code == 2)
+		return ;
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);
 	tmp = mini->lst_cmd;
@@ -78,7 +93,5 @@ void	executing_minishell(t_mini *mini)
 		cur_cmd_nbr++;
 		tmp = tmp->next;
 	}
-	cur_cmd_nbr = -1;
-	while (++cur_cmd_nbr < mini->nb_cmd)
-		waitpid(mini->data->pid[cur_cmd_nbr], &mini->exit_code, 0);
+	wait_for_child(mini);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_m_shell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 05:30:33 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/25 23:24:15 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_mini	*create_m_shell_env(char**envp)
 	m_shell->exit_code = 0;
 	m_shell->nb_cmd = 0;
 	m_shell->lst_cmd = NULL;
+	m_shell->data = NULL;
 	return (m_shell);
 }
 
@@ -70,6 +71,8 @@ void	free_m_shell(t_mini *m_shell)
 void	reset_m_shell(t_mini *m_shell)
 {
 	m_shell->nb_cmd = 0;
-	free_lst_cmd(m_shell->lst_cmd);
+	free_cmd_struct(m_shell->lst_cmd);
+	free_data_struct(m_shell->data);
+	m_shell->data = NULL;
 	m_shell->lst_cmd = NULL;
 }

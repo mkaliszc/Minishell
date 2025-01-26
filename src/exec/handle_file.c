@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 23:08:50 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 23:21:57 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@ char	*handle_here_doc(char *limiter)
 {
 	int		tmp_fd;
 	char	*line;
+	g_signal_received = 2;
 
 	tmp_fd = open(".tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (tmp_fd < 0)
 		return (NULL);
 	while (true)
 	{
-		line = readline("> ");
-		printf("line : %s\n", line);
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
+		if (!line)
+		{
+			close(tmp_fd);
+			break;
+		}
 		if (line == NULL)
 			break ;
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+			&& line[ft_strlen(limiter)] == '\n')
 		{
 			close(tmp_fd);
 			free(line);
@@ -66,11 +73,11 @@ void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 	}
 }
 
-void	handle_file(t_mini *data, t_data *info)
+void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp)
 {
 	t_order_file	*cur;
 
-	cur = data->lst_cmd->order_file;
+	cur = tmp->order_file;
 	while (cur)
 	{
 		handle_open(info, cur, data->exit_code);

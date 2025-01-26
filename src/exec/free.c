@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/23 21:49:26 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/25 22:37:54 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	free_minishell(t_mini *mini)
 		free_env_struct(mini->lst_env);
 	if (mini->lst_cmd)
 		free_cmd_struct(mini->lst_cmd);
+	if (mini->data)
+		free_data_struct(mini->data);
 	free(mini);
 }
 
@@ -43,15 +45,19 @@ void	free_order_file_struct(t_order_file *order_file)
 
 void	free_cmd_struct(t_lst_cmd *lst_cmd)
 {
+	t_lst_cmd	*temp;
+
 	if (!lst_cmd)
 		return ;
 	while (lst_cmd)
 	{
+		temp = lst_cmd->next;
 		if (lst_cmd->cmd)
 			ft_free_char_tab(lst_cmd->cmd);
 		if (lst_cmd->order_file)
 			free_order_file_struct(lst_cmd->order_file);
-		lst_cmd = lst_cmd->next;
+		free(lst_cmd);
+		lst_cmd = temp;
 	}
 	free(lst_cmd);
 }
@@ -64,7 +70,7 @@ void	free_data_struct(t_data *data)
 		free(data->pid);
 	if (data->pipe_fd)
 	{
-		// close_all(data->pipe_fd);
 		free(data->pipe_fd);
 	}
+	free(data);
 }

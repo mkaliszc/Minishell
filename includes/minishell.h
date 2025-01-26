@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/23 21:57:23 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 07:15:11 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+extern volatile sig_atomic_t	g_signal_received;
 
 typedef enum s_tokens
 {
@@ -72,6 +74,7 @@ typedef struct s_mini
 {
 	t_env				*lst_env;
 	t_lst_cmd			*lst_cmd;
+	t_data				*data;
 	int					nb_cmd;
 	int					exit_code;
 }						t_mini;
@@ -84,9 +87,10 @@ typedef struct s_data
 	int					*pipe_fd;
 }						t_data;
 
-typedef	struct s_pain
+typedef struct s_pain
 {
 	int	i;
 	int	j;
-} t_pain;
+}						t_pain;
+
 #endif

@@ -6,28 +6,49 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 07:22:46 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 19:52:04 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	which_builtins(t_mini *data)
+void	which_builtins(t_mini *data, t_lst_cmd *tmp)
 {
-	if (ft_strcmp("env", data->lst_cmd->cmd[0]) == 0)
+	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
 		handle_env(data->lst_env);
-	else if (ft_strcmp("export", data->lst_cmd->cmd[0]) == 0)
-		handle_export(data->lst_cmd->cmd, &data->lst_env);
-	else if (ft_strcmp("unset", data->lst_cmd->cmd[0]) == 0)
-		handle_unset(data->lst_cmd->cmd, &data->lst_env);
-	else if (ft_strcmp("cd", data->lst_cmd->cmd[0]) == 0)
-		handle_cd(data->lst_cmd->cmd, data->lst_env);
-	else if (ft_strcmp("pwd", data->lst_cmd->cmd[0]) == 0)
+	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
+		handle_export(data->lst_cmd->cmd, &data);
+	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
+		handle_unset(tmp->cmd, &data->lst_env);
+	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
+		handle_cd(tmp->cmd, data);
+	else if (ft_strcmp("pwd", tmp->cmd[0]) == 0)
 		handle_pwd();
-	else if (ft_strcmp("echo", data->lst_cmd->cmd[0]) == 0)
-		handle_echo(data->lst_cmd->cmd);
-	else if (ft_strcmp("exit", data->lst_cmd->cmd[0]) == 0)
-		handle_exit(data);
+	else if (ft_strcmp("echo", tmp->cmd[0]) == 0 )
+		handle_echo(tmp->cmd);
+	else if (ft_strcmp("exit", tmp->cmd[0]) == 0)
+		handle_exit(tmp->cmd, data);
+}
+
+void	handle_only_builtins(t_mini *data, t_lst_cmd *tmp, t_data *pipex)
+{
+	handle_file(data, pipex, tmp);
+	if (data->exit_code != 0)
+		return ;
+	if (data->data->out_fd != 1)
+		dup2(data->data->out_fd, STDOUT_FILENO);
+	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
+		handle_env(data->lst_env);
+	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
+		handle_export(data->lst_cmd->cmd, &data);
+	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
+		handle_unset(tmp->cmd, &data->lst_env);
+	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
+		handle_cd(tmp->cmd, data);
+	else if (ft_strcmp("pwd", tmp->cmd[0]) == 0)
+		handle_pwd();
+	else if (ft_strcmp("exit", tmp->cmd[0]) == 0)
+		handle_exit(data->lst_cmd->cmd, data);
 }
 
 t_data	*init_struct(t_mini *data)
@@ -50,32 +71,41 @@ t_data	*init_struct(t_mini *data)
 	return (res);
 }
 
+void	wait_for_child(t_mini *mini)
+{
+	int i;
+
+	i = -1;
+	while (++i < mini->nb_cmd)
+	{
+		waitpid(mini->data->pid[i], &mini->exit_code, 0);
+		if (WIFEXITED(mini->exit_code))
+			mini->exit_code = WEXITSTATUS(mini->exit_code);
+	}
+}
+
 void	executing_minishell(t_mini *mini)
 {
-	t_data	*data;
 	int		cur_cmd_nbr;
-	t_mini	*tmp;
+	t_lst_cmd	*tmp;
 
+	if (mini->exit_code == 2 || mini->lst_cmd == NULL)
+		return ;
 	cur_cmd_nbr = 0;
-	data = init_struct(mini);
-	tmp = mini;
-	while (tmp->lst_cmd)
+	mini->data = init_struct(mini);
+	tmp = mini->lst_cmd;
+	if (tmp->is_builtins == true && mini->nb_cmd == 1 && ft_strcmp("echo", tmp->cmd[0]) != 0)
 	{
-		// ! Is builtin is not working right now
-		if (tmp->lst_cmd->is_builtins == true && tmp->nb_cmd == 1)
-		{
-			handle_redir_no_pipe(tmp, data);
-			if (tmp->exit_code != 0)
-				break ;
-			else
-				which_builtins(tmp);
-		}
-		else
-			handle_pipe(tmp, data, cur_cmd_nbr);
-		cur_cmd_nbr++;
-		tmp->lst_cmd = tmp->lst_cmd->next;
+		handle_only_builtins(mini, mini->lst_cmd, mini->data);
+		return ;
 	}
-	cur_cmd_nbr = -1;
-	while (++cur_cmd_nbr < mini->nb_cmd)
-		waitpid(data->pid[cur_cmd_nbr], &mini->exit_code, 0);
+	else if (mini->nb_cmd == 1 && tmp->cmd[0] == NULL) // * fix temporaire (waiting for jbergos fix) replace 1 with 0
+		return (handle_file(mini, mini->data, tmp));
+	while (tmp)
+	{
+		handle_pipe(mini, mini->data, cur_cmd_nbr, tmp);
+		cur_cmd_nbr++;
+		tmp = tmp->next;
+	}
+	wait_for_child(mini);
 }

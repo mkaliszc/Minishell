@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/21 03:45:58 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 02:44:42 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,40 @@ void	update_env_pwds(t_env *env)
 	}
 }
 
-void	handle_home_event(t_env *env)
+void	handle_home_event(t_mini *mini)
 {
 	t_env	*home;
 
-	if (!find_one_lst_env(env, "HOME"))
+	if (!find_one_lst_env(mini->lst_env, "HOME"))
 	{
 		ft_putstr_fd("cd: HOME not set\n", 2);
-		return ;
+		mini->exit_code = 1;
 	}
-	home = find_one_lst_env(env, "HOME");
+	home = find_one_lst_env(mini->lst_env, "HOME");
 	if (chdir(home->value) == -1)
 	{
 		ft_putstr_fd("cd: ", 2);
 		perror(home->value);
-		return ;
+		mini->exit_code = 1;
 	}
 }
 
-void	handle_cd(char **cmd, t_env *env)
+void	handle_cd(char **cmd, t_mini *mini)
 {
 	if (cmd_array_size(cmd) > 2)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
-		return ;
+		mini->exit_code = 1;
 	}
 	else if (!cmd[1])
 	{
-		handle_home_event(env);
+		handle_home_event(mini);
 	}
 	else if (chdir(cmd[1]) == -1)
 	{
 		ft_putstr_fd("cd: ", 2);
 		perror(cmd[1]);
-		return ;
+		mini->exit_code = 1;
 	}
-	update_env_pwds(env);
+	update_env_pwds(mini->lst_env);
 }

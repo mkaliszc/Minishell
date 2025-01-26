@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 21:59:49 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:26:54 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,19 @@
 
 void	executing_minishell(t_mini *data);
 t_data	*init_struct(t_mini *data);
-void	which_builtins(t_mini *data);
+void	which_builtins(t_mini *data, t_lst_cmd *tmp);
 char	**lst_to_char(t_env *lst_env);
 int		get_lst_env_size(t_env *lst_env);
-void	close_unused_pipes(int *pipe_fd, int cur_cmd);
-void	handle_pipe(t_mini *data, t_data *info, int cur_cmd);
-void	handle_child(t_mini *data, int child_number, t_data	*info);
+void	handle_pipe(t_mini *data, t_data *info, int cur_cmd, t_lst_cmd *tmp);
+void	handle_child(t_mini *data, int cmd_nbr, t_data	*info, t_lst_cmd *tmp);
 char	*handle_here_doc(char *limiter);
-void	handle_redir_no_pipe(t_mini *data, t_data *info);
-void	handle_redir(t_mini *data, int cmd_nbr, t_data *info);
+void	handle_redir_no_pipe(t_mini *data, t_data *info, t_lst_cmd *tmp);
+void	handle_redir(t_mini *data, int cmd_nbr, t_data *info, t_lst_cmd *tmp);
 void	loop(char **envp);
-char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *data);
+char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini);
 void	perror_exit(t_mini *mini, char *error, int status);
 void	handle_open(t_data *info, t_order_file *cur, int exit_code);
-void	handle_file(t_mini *data, t_data *info);
+void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp);
 void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info);
 
 // ? Free Functions

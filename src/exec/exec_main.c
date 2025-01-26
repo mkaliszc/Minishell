@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 02:12:43 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 03:13:13 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	which_builtins(t_mini *data, t_lst_cmd *tmp)
 	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
 		handle_unset(tmp->cmd, &data->lst_env);
 	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
-		handle_cd(tmp->cmd, data->lst_env);
+		handle_cd(tmp->cmd, data);
 	else if (ft_strcmp("pwd", tmp->cmd[0]) == 0)
 		handle_pwd();
 	else if (ft_strcmp("echo", tmp->cmd[0]) == 0)
 		handle_echo(data->lst_cmd->cmd);
 	else if (ft_strcmp("exit", tmp->cmd[0]) == 0)
-		handle_exit(data);
+		handle_exit(data->lst_cmd->cmd, data);
 }
 
 void	handle_only_builtins(t_mini *tmp, t_data *data)
@@ -75,7 +75,7 @@ void	executing_minishell(t_mini *mini)
 	int		cur_cmd_nbr;
 	t_lst_cmd	*tmp;
 
-	if (mini->exit_code == 2)
+	if (mini->exit_code == 2 || mini->lst_cmd == NULL)
 		return ;
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/25 07:16:37 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 04:25:22 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*handle_here_doc(char *limiter) // ! wrong does not put
+char	*handle_here_doc(char *limiter)
 {
 	int		tmp_fd;
 	char	*line;
@@ -39,6 +39,8 @@ char	*handle_here_doc(char *limiter) // ! wrong does not put
 
 void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 {
+	char *tmp;
+	
 	if (cur->type == APP && exit_code == 0)
 	{
 		if (info->out_fd > 1)
@@ -53,9 +55,10 @@ void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 	}
 	else if (cur->type == HDC)
 	{
+		tmp = handle_here_doc(cur->file);
 		if (info->in_fd > 0)
 			close(info->in_fd);
-		info->in_fd = open(handle_here_doc(cur->file), O_RDONLY);
+		info->in_fd = open(tmp, O_RDONLY);
 	}
 	else if (cur->type == IN)
 	{

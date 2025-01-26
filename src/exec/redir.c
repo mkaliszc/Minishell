@@ -6,13 +6,11 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/24 21:24:59 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 04:19:07 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// ! Create a function to close everything
 
 void	handle_redir_no_pipe(t_mini *data, t_data *info)
 {
@@ -21,10 +19,10 @@ void	handle_redir_no_pipe(t_mini *data, t_data *info)
 		return (perror("error while opening a file"));
 	if (info->in_fd != 0 && dup2(info->in_fd, STDIN_FILENO) < 0)
 		return (perror("error while redirecting the entry"));
-	if (info->out_fd != 1 && dup2(info->out_fd, STDOUT_FILENO) < 0)
-		return (perror("error while redirecting the output"));
 	if (info->in_fd != 0)
 		close(info->in_fd);
+	if (info->out_fd != 1 && dup2(info->out_fd, STDOUT_FILENO) < 0)
+		return (perror("error while redirecting the output"));
 	if (info->out_fd != 1)
 		close(info->out_fd);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 17:26:21 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:44:14 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info, t_lst_cmd *tmp)
 	else if (cmd_nbr == data->nb_cmd - 1)
 	{
 		handle_redir_in(data, cmd_nbr, info);
-		if (info->out_fd != 0)
+		if (info->out_fd != 1)
 		{
 			if (dup2(info->out_fd, STDOUT_FILENO) == -1)
 				perror_exit(data, "redir out for the last command", 1);

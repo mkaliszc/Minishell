@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 17:25:06 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:36:43 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	*handle_here_doc(char *limiter)
 
 void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 {
-
-	
 	if (cur->type == APP && exit_code == 0)
 	{
 		if (info->out_fd > 1)

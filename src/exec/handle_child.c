@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 17:59:37 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 21:27:53 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,28 @@ void	handle_pipe(t_mini *data, t_data *pipex, int cur_cmd, t_lst_cmd *tmp)
 		close(pipex->pipe_fd[2 * cur_cmd]);
 }
 
+void	sig_child(int sig)
+{
+	(void)sig;
+	printf("icic enculer\n");
+	kill(0, SIGTERM);
+}
+
+void	sig_child(int sig)
+{
+	(void)sig;
+	printf("icic enculer\n");
+	kill(0, SIGTERM);
+}
+
 void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 {
 	char	*path;
+	struct sigaction sa;
+	sa.sa_handler = sig_child;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
 
 	if (data->nb_cmd == 1)
 		handle_redir_no_pipe(data, pipex, tmp);

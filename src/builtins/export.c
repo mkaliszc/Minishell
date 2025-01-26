@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 22:08:24 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:15:26 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,40 @@ int	cmd_array_size(char **array)
 	return (i);
 }
 
-static void	exporting(t_mini *mini, char *export)
+static void	export_env_var(t_mini *mini, char *export)
 {
 	t_env	*find;
 	char	*key;
+	int i = 0;
+
+	while (export[i] != '=')
+	{
+		if (!ft_isalnum(export[i]))
+		{
+			ft_printf_fd(2, " not a valid identifier\n");
+			mini->exit_code = 1;
+			break;
+		}
+		i++;
+	}
+	key = key_env(export);
+	find = find_one_lst_env(mini->lst_env, key);
+	if (!find)
+	{
+		free(key);
+		create_one_lst_env(mini->lst_env, export);
+	}
+	else
+	{
+		free(find->value);
+		find->value = ft_strdup(ft_strchr(export, '=') + 1);
+		free(key);
+	}
+}
+
+
+static void	exporting(t_mini *mini, char *export)
+{
 	int		i;
 
 	i = 0;
@@ -49,30 +79,7 @@ static void	exporting(t_mini *mini, char *export)
 		mini->exit_code = 1;
 		return ;
 	}
-	while (export[i] != '=')
-	{
-		if (!ft_isalnum(export[i]))
-		{
-			ft_printf_fd(2, " not a valid identifier\n");
-			mini->exit_code = 1;
-			break;
-		}
-		i++;
-	}
-	key = key_env(export);
-	find = find_one_lst_env(mini->lst_env, key);
-	i = 0;
-	if (!find)
-	{
-		free(key);
-		create_one_lst_env(mini->lst_env, export);
-	}
-	else
-	{
-		free(find->value);
-		find->value = ft_strdup(ft_strchr(export, '=') + 1);
-		free(key);
-	}
+	export_env_var(mini, export);
 }
 
 

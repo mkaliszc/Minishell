@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 04:45:04 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 05:47:16 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	which_builtins(t_mini *data, t_lst_cmd *tmp)
 	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
-		handle_export(data->lst_cmd->cmd, &data->lst_env);
+		handle_export(data->lst_cmd->cmd, &data);
 	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
 		handle_unset(tmp->cmd, &data->lst_env);
 	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
@@ -40,7 +40,7 @@ void	handle_only_builtins(t_mini *data, t_lst_cmd *tmp, t_data *pipex)
 	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
-		handle_export(data->lst_cmd->cmd, &data->lst_env);
+		handle_export(data->lst_cmd->cmd, &data);
 	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
 		handle_unset(tmp->cmd, &data->lst_env);
 	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)

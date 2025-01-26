@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 07:27:53 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 05:44:35 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			find_n_replace_var(t_mini *m_shell, char *ln_cmd);
 int				ft_strcmp(char *s1, char *s2);
 void			show_one_lst_env(t_env *lst_env, char *key);
 t_env			*find_one_lst_env(t_env *lst_env, char *key);
-void			u_r_one_lst_env(t_env *lst_env, char *export);
+void			u_r_one_lst_env(t_mini *mini, char *export);
 void			create_one_lst_env(t_env *lst_env, char *export);
 int				is_border_pipe(char *ln_cmd);
 int				is_quote_closed(char *ln_cmd);

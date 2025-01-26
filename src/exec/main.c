@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 21:05:02 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/01/27 00:30:50 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
 
 /*
 	TODO : overall
@@ -20,6 +21,9 @@
 	? msg discord si doute
 
 */
+
+volatile sig_atomic_t	g_signal_received = 0;
+
 void	loop(char **envp)
 {
 	t_mini	*mini;
@@ -28,7 +32,9 @@ void	loop(char **envp)
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
-		line = readline("Wildshell> ");
+		g_signal_received = 0;
+		line = readline("\e[1;32mWildshell> \e[0m");
+		g_signal_received = 1;
 		parsing_shell(mini, line);
 		// show_m_shell(mini);
 		executing_minishell(mini);
@@ -38,16 +44,33 @@ void	loop(char **envp)
 	}
 }
 
-// void	handle_sigint(void)
-// {
-// 	exit(1);
-// }
+void	handle_sigint(int num)
+{
+	(void)num;
+	if (g_signal_received == 2)
+	{
+		write(1, "\n", 1);
+	}
+	else
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	// signal(SIGINT, handle_sigint);
+	struct sigaction sa;
+	rl_outstream = stderr;
+	sa.sa_handler = handle_sigint;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 	loop(envp);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 06:09:34 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/26 06:21:27 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,17 @@ static void	exporting(t_mini *mini, char *export)
 			if (!ft_isalpha(export[i]))
 			{
 				ft_printf_fd(2, " not a valid identifier\n");
+				mini->exit_code = 1;
 				return ;
 			}
 			i++;
 		}
+		return ;
+	}
+	if (!isalpha(export[0]))
+	{
+		ft_printf_fd(2, " not a valid identifier\n");
+		mini->exit_code = 1;
 		return ;
 	}
 	while (export[i] != '=')
@@ -55,21 +62,6 @@ static void	exporting(t_mini *mini, char *export)
 	key = key_env(export);
 	find = find_one_lst_env(mini->lst_env, key);
 	i = 0;
-	if (!ft_isalpha(export[0]))
-	{
-		ft_printf_fd(2, " not a valid identifier\n");
-		return ;
-	}
-	while (export[i] != '=')
-	{
-		if (!ft_isalnum(export[i]))
-		{
-			ft_printf_fd(2, " not a valid identifier\n");
-			mini->exit_code = 1;
-			return;
-		}
-		i++;
-	}
 	if (!find)
 	{
 		free(key);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 18:00:03 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 19:52:04 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	which_builtins(t_mini *data, t_lst_cmd *tmp)
 	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
-		handle_export(tmp->cmd, &data->lst_env);
+		handle_export(data->lst_cmd->cmd, &data);
 	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
 		handle_unset(tmp->cmd, &data->lst_env);
 	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
@@ -40,7 +40,7 @@ void	handle_only_builtins(t_mini *data, t_lst_cmd *tmp, t_data *pipex)
 	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
-		handle_export(data->lst_cmd->cmd, &data->lst_env);
+		handle_export(data->lst_cmd->cmd, &data);
 	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
 		handle_unset(tmp->cmd, &data->lst_env);
 	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
@@ -94,8 +94,7 @@ void	executing_minishell(t_mini *mini)
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);
 	tmp = mini->lst_cmd;
-	if (tmp->is_builtins == true && mini->nb_cmd == 1 
-			&& ft_strcmp("echo", tmp->cmd[0]) != 0)
+	if (tmp->is_builtins == true && mini->nb_cmd == 1 && ft_strcmp("echo", tmp->cmd[0]) != 0)
 	{
 		handle_only_builtins(mini, mini->lst_cmd, mini->data);
 		return ;

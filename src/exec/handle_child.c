@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 21:27:53 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/26 21:33:44 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ void	handle_pipe(t_mini *data, t_data *pipex, int cur_cmd, t_lst_cmd *tmp)
 void	sig_child(int sig)
 {
 	(void)sig;
-	printf("icic enculer\n");
-	kill(0, SIGTERM);
-}
-
-void	sig_child(int sig)
-{
-	(void)sig;
-	printf("icic enculer\n");
 	kill(0, SIGTERM);
 }
 

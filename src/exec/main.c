@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 08:17:32 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/26 23:10:44 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	loop(char **envp)
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
+		g_signal_received = 0;
 		line = readline("\e[1;32mWildshell> \e[0m");
+		g_signal_received = 1;
 		parsing_shell(mini, line);
 		// show_m_shell(mini);
 		executing_minishell(mini);
@@ -45,11 +47,17 @@ void	loop(char **envp)
 void	handle_sigint(int num)
 {
 	(void)num;
-	g_signal_received = 2;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (g_signal_received == 2)
+	{
+		write(1, "\n", 1);
+	}
+	else
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -57,12 +65,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	struct sigaction sa;
+	rl_outstream = stderr;
 	sa.sa_handler = handle_sigint;
-	sa.sa_flags = SA_RESTART;
+	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
-	// signal(SIGINT, handle_sigint);
 	loop(envp);
 	return (0);
 }

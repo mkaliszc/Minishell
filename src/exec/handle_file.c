@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 04:25:22 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:25:06 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*handle_here_doc(char *limiter)
 
 void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 {
-	char *tmp;
+
 	
 	if (cur->type == APP && exit_code == 0)
 	{
@@ -55,10 +55,9 @@ void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 	}
 	else if (cur->type == HDC)
 	{
-		tmp = handle_here_doc(cur->file);
 		if (info->in_fd > 0)
 			close(info->in_fd);
-		info->in_fd = open(tmp, O_RDONLY);
+		info->in_fd = open(handle_here_doc(cur->file), O_RDONLY);
 	}
 	else if (cur->type == IN)
 	{
@@ -68,11 +67,11 @@ void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 	}
 }
 
-void	handle_file(t_mini *data, t_data *info)
+void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp)
 {
 	t_order_file	*cur;
 
-	cur = data->lst_cmd->order_file;
+	cur = tmp->order_file;
 	while (cur)
 	{
 		handle_open(info, cur, data->exit_code);

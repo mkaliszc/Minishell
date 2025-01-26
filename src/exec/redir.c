@@ -6,15 +6,15 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 04:19:07 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:26:21 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_redir_no_pipe(t_mini *data, t_data *info)
+void	handle_redir_no_pipe(t_mini *data, t_data *info, t_lst_cmd *tmp)
 {
-	handle_file(data, info);
+	handle_file(data, info, tmp);
 	if (info->in_fd == -1 || info->out_fd == -1 || data->exit_code == 126)
 		return (perror("error while opening a file"));
 	if (info->in_fd != 0 && dup2(info->in_fd, STDIN_FILENO) < 0)
@@ -66,9 +66,9 @@ void	handle_first_child(t_mini *data, int cmd_nbr, t_data *info)
 	handle_redir_out(data, cmd_nbr, info);
 }
 
-void	handle_redir(t_mini *data, int cmd_nbr, t_data *info)
+void	handle_redir(t_mini *data, int cmd_nbr, t_data *info, t_lst_cmd *tmp)
 {
-	handle_file(data, info);
+	handle_file(data, info, tmp);
 	if (data->exit_code == 126)
 		return ;
 	if (cmd_nbr == 0)

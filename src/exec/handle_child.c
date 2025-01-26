@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 04:41:51 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:26:33 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ void	handle_pipe(t_mini *data, t_data *pipex, int cur_cmd, t_lst_cmd *tmp)
 		close(pipex->pipe_fd[2 * cur_cmd]);
 }
 
-void	handle_child(t_mini *data, int child_number, t_data	*pipex, t_lst_cmd *tmp)
+void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 {
 	char	*path;
 
 	if (data->nb_cmd == 1)
-		handle_redir_no_pipe(data, pipex);
+		handle_redir_no_pipe(data, pipex, tmp);
 	else
-		handle_redir(data, child_number, pipex);
-	if (child_number > 0)
-		close(pipex->pipe_fd[2 * (child_number - 1)]);
-	close(pipex->pipe_fd[child_number * 2]);
-	close(pipex->pipe_fd[child_number * 2 + 1]);
+		handle_redir(data, cmd_nbr, pipex, tmp);
+	if (cmd_nbr > 0)
+		close(pipex->pipe_fd[2 * (cmd_nbr - 1)]);
+	close(pipex->pipe_fd[cmd_nbr * 2]);
+	close(pipex->pipe_fd[cmd_nbr * 2 + 1]);
 	if (tmp->is_builtins == true)
 	{
 		which_builtins(data, tmp);

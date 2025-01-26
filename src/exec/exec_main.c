@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 04:45:04 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:27:25 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	which_builtins(t_mini *data, t_lst_cmd *tmp)
 
 void	handle_only_builtins(t_mini *data, t_lst_cmd *tmp, t_data *pipex)
 {
-	handle_file(data, pipex);
+	handle_file(data, pipex, tmp);
 	if (data->exit_code != 0)
 		return ;
 	if (data->data->out_fd != 1)
@@ -100,7 +100,7 @@ void	executing_minishell(t_mini *mini)
 		return ;
 	}
 	else if (mini->nb_cmd == 1 && tmp->cmd[0] == NULL) // * fix temporaire (waiting for jbergos fix) replace 1 with 0
-		return (handle_file(mini, mini->data));
+		return (handle_file(mini, mini->data, tmp));
 	while (tmp)
 	{
 		handle_pipe(mini, mini->data, cur_cmd_nbr, tmp);

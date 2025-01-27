@@ -6,11 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 04:59:04 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 21:39:25 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO fix le exit de 0 car le atol rend 0
 
 // bool	is_numeric(char *str)
 // {
@@ -37,20 +39,18 @@ void	handle_exit(char **cmd, t_mini *mini)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
 		exit_code = 1;
+		return ;
 	}
 	else if (cmd[1])
 	{
-		if (ft_atol(cmd[1]) == 0)
+		if (!ft_atol(cmd[1]))
 		{
 			ft_printf_fd(2, "exit: %s: numeric argument required\n", cmd[1]);
 			exit_code = 2;
+			return ;
 		}
-		else
-		{
-			exit_code = ft_atol(cmd[1]);
-		}
+		exit_code = ft_atol(cmd[1]);
 	}
-	// exit_code = mini->exit_code;
 	if (exit_code < 0)
 		exit_code += 256;
 	exit_code %= 256;

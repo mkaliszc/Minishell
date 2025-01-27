@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/27 20:07:34 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 21:35:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	handle_home_event(t_mini *mini)
 	{
 		ft_putstr_fd("cd: HOME not set\n", 2);
 		mini->exit_code = 1;
+		return ;
 	}
 	home = find_one_lst_env(mini->lst_env, "HOME");
 	if (chdir(home->value) == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   table_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/26 23:01:43 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:02:45 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ char	**is_first_arg_empty(char **pptr)
 {
 	int i;
 	char **rdm;
-
+	
+	if (!pptr[0])
+		return (pptr);
 	if (pptr[0][0] != '\0')
 		return (pptr);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 04:37:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 07:33:37 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 */
 
-volatile sig_atomic_t	g_signal_received = 0;
+// volatile sig_atomic_t	g_signal_received = 0;
 
 void	loop(char **envp)
 {
@@ -33,10 +33,12 @@ void	loop(char **envp)
 	while (true)
 	{
 		// g_signal_received = 0;
-		line = readline("Wildshell> ");
+		line = readline("$ ");
+		if (!line)
+			free_minishell(mini), exit(0);
 		// g_signal_received = 1;
 		parsing_shell(mini, line);
-		show_m_shell(mini);
+		// show_m_shell(mini);
 		executing_minishell(mini);
 		add_history(line);
 		free(line);
@@ -44,28 +46,31 @@ void	loop(char **envp)
 	}
 }
 
-void	handle_sigint(int num)
-{
-	(void)num;
-	if (g_signal_received == 2)
-	{
-		write(1, "\n", 1);
-	}
-	else
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
+// void	handle_sigint(int num)
+// {
+// 	(void)num;
+// 	if (g_signal_received == 2)
+// 	{
+// 		write(1, "\n", 1);
+// 		write(2, "DDDD\n", 5);
+
+// 	}
+// 	else
+// 	{
+// 		printf("tetst");
+// 		write(1, "\n", 1);
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
 	// struct sigaction sa;
-	// rl_outstream = stderr;
+	rl_outstream = stderr;
 	// sa.sa_handler = handle_sigint;
 	// sa.sa_flags = 0;
 	// sigemptyset(&sa.sa_mask);

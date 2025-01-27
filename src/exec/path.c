@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 04:28:28 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 06:21:30 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static char	*check_absolute_path(char **cmd, t_mini *mini)
 	{
 		if (access(cmd[0], F_OK) < 0)
 		{
-			ft_printf_fd(2, "Command not found: %s\n", cmd[0]);
+			ft_printf_fd(2, "%s: command not found\n", cmd[0]);
 			free_minishell(mini);
 			exit(127);
 		}
 		else if (access(cmd[0], X_OK) < 0)
 		{
-			ft_printf_fd(2, "Permission denied: %s\n", cmd[0]);
+			ft_printf_fd(2, "%s: Permission denied\n", cmd[0]);
 			free_minishell(mini);
 			exit(126);
 		}
@@ -72,9 +72,20 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 	path = get_path(cmd, envp);
 	if (!path)
 	{
-		ft_printf_fd(2, "Command not found: %s\n", mini->lst_cmd->cmd[0]);
-		free_minishell(mini);
-		exit(127);
+		struct stat st;
+
+		if (stat(mini->lst_cmd->cmd[0], &st) == 0 && S_ISDIR(st.st_mode))
+		{
+			ft_printf_fd(2, "%s: Is a directory\n", mini->lst_cmd->cmd[0]);
+			free_minishell(mini);
+			exit(126);
+		}
+		else
+		{
+			ft_printf_fd(2, "%s: command not found\n", mini->lst_cmd->cmd[0]);
+			free_minishell(mini);
+			exit(127);
+		}
 	}
 	return (path);
 }

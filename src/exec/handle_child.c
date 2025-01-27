@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 04:32:33 by albillie         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/01/27 07:20:04 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -43,11 +44,11 @@ void	sig_child(int sig)
 void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 {
 	char	*path;
-	struct sigaction sa;
-	sa.sa_handler = sig_child;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
+	// struct sigaction sa;
+	// sa.sa_handler = sig_child;
+	// sigemptyset(&sa.sa_mask);
+	// sa.sa_flags = 0;
+	// sigaction(SIGINT, &sa, NULL);
 
 	if (data->nb_cmd == 1)
 		handle_redir_no_pipe(data, pipex, tmp);
@@ -66,6 +67,7 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 	{
 		which_builtins(data, tmp);
 		free_minishell(data);
+		exit(EXIT_SUCCESS);
 		exit(EXIT_SUCCESS);
 	}
 	path = validate_cmd_path(tmp->cmd, data->lst_env, data);

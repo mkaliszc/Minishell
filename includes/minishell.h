@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 07:15:11 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/27 05:54:14 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <signal.h>
 # include <stdbool.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 

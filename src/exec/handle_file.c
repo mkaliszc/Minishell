@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 23:21:57 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/27 07:20:48 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*handle_here_doc(char *limiter)
 {
 	int		tmp_fd;
 	char	*line;
-	g_signal_received = 2;
+	// g_signal_received = 2;
 
 	tmp_fd = open(".tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (tmp_fd < 0)

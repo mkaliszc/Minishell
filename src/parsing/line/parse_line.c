@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:24:19 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/21 04:33:38 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/27 07:11:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	empty_line(char *ln_cmd)
 	int	i;
 
 	i = 0;
+	if (!ln_cmd)
+		return (1);
 	while (ln_cmd[i])
 	{
 		if (ln_cmd[i] != ' ')

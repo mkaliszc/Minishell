@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   table_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 05:02:03 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/26 23:01:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,28 @@ char	*get_args(char *cmd, int *i)
 	return (ft_substr(cmd, start, end - start));
 }
 
+char	**is_first_arg_empty(char **pptr)
+{
+	int i;
+	char **rdm;
+
+	if (pptr[0][0] != '\0')
+		return (pptr);
+	i = 0;
+	while (pptr[i])
+		++i;
+	rdm = malloc(sizeof(char *) * i);
+	i = 1;
+	while (pptr[i])
+	{
+		rdm[i - 1] = ft_strdup(pptr[i]);
+		++i;
+	}
+	rdm[i - 1] = NULL;
+	free_split(pptr);
+	return (rdm);
+}
+
 char	**table_cmd(char *cmd, t_mini *m_shell)
 {
 	char	**pptr;
@@ -99,5 +121,6 @@ char	**table_cmd(char *cmd, t_mini *m_shell)
 		++i;
 	}
 	pptr[j] = NULL;
+	pptr = is_first_arg_empty(pptr);
 	return (pptr);
 }

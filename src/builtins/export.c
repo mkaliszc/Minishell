@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 22:15:26 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/01/26 23:40:25 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,8 @@ int	cmd_array_size(char **array)
 	return (i);
 }
 
-static void	export_env_var(t_mini *mini, char *export)
+static void	push_env_var(char *key, t_env *find, t_mini *mini, char *export)
 {
-	t_env	*find;
-	char	*key;
-	int i = 0;
-
-	while (export[i] != '=')
-	{
-		if (!ft_isalnum(export[i]))
-		{
-			ft_printf_fd(2, " not a valid identifier\n");
-			mini->exit_code = 1;
-			break;
-		}
-		i++;
-	}
-	key = key_env(export);
-	find = find_one_lst_env(mini->lst_env, key);
 	if (!find)
 	{
 		free(key);
@@ -54,6 +38,28 @@ static void	export_env_var(t_mini *mini, char *export)
 }
 
 
+static void	export_env_var(t_mini *mini, char *export)
+{
+	t_env	*find;
+	char	*key;
+	int i = 0;
+
+	while (export[i] != '=')
+	{
+		if (!ft_isalnum(export[i]))
+		{
+			ft_printf_fd(2, "export: `%s`: not a valid identifier\n", export);
+			mini->exit_code = 1;
+			return ;
+		}
+		i++;
+	}
+	key = key_env(export);
+	find = find_one_lst_env(mini->lst_env, key);
+	push_env_var(key, find, mini, export);
+}
+
+
 static void	exporting(t_mini *mini, char *export)
 {
 	int		i;
@@ -65,7 +71,7 @@ static void	exporting(t_mini *mini, char *export)
 		{
 			if (!ft_isalpha(export[i]))
 			{
-				ft_printf_fd(2, " not a valid identifier\n");
+				ft_printf_fd(2, "export: `%s`: not a valid identifier\n", export);
 				mini->exit_code = 1;
 				return ;
 			}
@@ -75,7 +81,7 @@ static void	exporting(t_mini *mini, char *export)
 	}
 	if (!isalpha(export[0]))
 	{
-		ft_printf_fd(2, " not a valid identifier\n");
+		ft_printf_fd(2, "export: `%s`: not a valid identifier\n", export);
 		mini->exit_code = 1;
 		return ;
 	}

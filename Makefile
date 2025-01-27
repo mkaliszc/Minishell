@@ -10,8 +10,7 @@ LIB		=	libft
 LIBFT	=	$(LIB)/libft.a
 
 SRC		=	src/builtins/cd.c 						\
-			src/builtins/pwd.c 						\
-			src/exec/main.c						\
+			src/exec/main.c 						\
 			src/exec/exec_utils.c						\
 			src/exec/handle_child.c						\
 			src/exec/handle_file.c						\
@@ -21,6 +20,7 @@ SRC		=	src/builtins/cd.c 						\
 			src/exec/path.c						\
 			src/builtins/env.c						\
 			src/builtins/echo.c						\
+			src/builtins/pwd.c						\
 			src/builtins/exit.c						\
 			src/builtins/export.c					\
 			src/builtins/unset.c					\

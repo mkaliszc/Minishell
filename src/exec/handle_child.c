@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/01/27 07:20:04 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:02:48 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 	{
 		which_builtins(data, tmp);
 		free_minishell(data);
-		exit(EXIT_SUCCESS);
 		exit(EXIT_SUCCESS);
 	}
 	path = validate_cmd_path(tmp->cmd, data->lst_env, data);

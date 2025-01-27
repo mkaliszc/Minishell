@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 06:21:30 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:04:50 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*check_absolute_path(char **cmd, t_mini *mini)
+static void	check_absolute_path(char **cmd, t_mini *mini)
 {
 	if (ft_strchr(cmd[0], '/'))
 	{
@@ -28,12 +28,10 @@ static char	*check_absolute_path(char **cmd, t_mini *mini)
 			free_minishell(mini);
 			exit(126);
 		}
-		return (cmd[0]);
 	}
-	return (NULL);
 }
 
-static char	*get_path(char **cmd, t_env *envp)
+static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	t_env	*cur;
 	char	**all_paths;
@@ -46,6 +44,7 @@ static char	*get_path(char **cmd, t_env *envp)
 	if (cur == NULL)
 	{
 		ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]);
+		free_minishell(mini);
 		exit(127);
 	}
 	all_paths = ft_split(cur->value, ':');
@@ -69,7 +68,7 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 	if (!cmd[0])
 		return (NULL);
 	check_absolute_path(cmd, mini);
-	path = get_path(cmd, envp);
+	path = get_path(cmd, envp, mini);
 	if (!path)
 	{
 		struct stat st;

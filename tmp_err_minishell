@@ -1,0 +1,6 @@
+Wildshell> cd ../../
+Wildshell> cd -
+cd: -: No such file or directory
+Wildshell> cd -
+cd: -: No such file or directory
+Wildshell> 

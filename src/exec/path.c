@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 01:55:28 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/27 04:28:28 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	check_absolute_path(char **cmd, t_mini *mini)
+static char	*check_absolute_path(char **cmd, t_mini *mini)
 {
 	if (ft_strchr(cmd[0], '/'))
 	{
@@ -28,7 +28,9 @@ static void	check_absolute_path(char **cmd, t_mini *mini)
 			free_minishell(mini);
 			exit(126);
 		}
+		return (cmd[0]);
 	}
+	return (NULL);
 }
 
 static char	*get_path(char **cmd, t_env *envp)

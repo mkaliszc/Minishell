@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:03:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 21:33:44 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/27 04:32:33 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 	{
 		which_builtins(data, tmp);
 		free_minishell(data);
-		exit(data->exit_code);
+		exit(EXIT_SUCCESS);
 	}
 	path = validate_cmd_path(tmp->cmd, data->lst_env, data);
 	if (execve(path, tmp->cmd, lst_to_char(data->lst_env)) == -1)

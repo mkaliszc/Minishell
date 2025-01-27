@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 06:02:22 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/25 22:37:54 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 04:41:18 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ void	free_env_struct(t_env *lst_env)
 
 void	free_order_file_struct(t_order_file *order_file)
 {
+	t_order_file	*temp;
+
 	if (!order_file)
 		return ;
 	while (order_file)
 	{
+		temp = order_file->next;
 		if (order_file->file)
 			free(order_file->file);
-		order_file = order_file->next;
+		free(order_file);
+		order_file = temp;
 	}
 	free(order_file);
 }

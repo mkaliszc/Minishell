@@ -46,6 +46,7 @@ SRC		=	src/builtins/cd.c 						\
 			src/parsing/var_env/exit_code.c			\
 			src/parsing/var_env/rep_q_n_v.c			\
 			src/parsing/parsing.c			\
+			src/parsing/rm_quote/rm_a_quote.c	\
 
 
 OBJ 		= $(SRC:.c=.o)

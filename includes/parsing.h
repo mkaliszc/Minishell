@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/26 05:44:35 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:58:50 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ bool			is_builtins(char *cmd);
 void			length_exit_code(int code, int *i, int *len);
 void			rep_exit_code(int code, char *new, t_pain *pain);
 void			parsing_shell(t_mini *m_shell, char *ln_cmd);
+char			*rep_n_quote(char *s);
 
 #endif

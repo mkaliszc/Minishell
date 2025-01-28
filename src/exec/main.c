@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 03:00:20 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 04:35:24 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	loop(char **envp)
 		line = readline("$ ");
 		if (!line)
 		{
-			if (mini->exit_code == 127)
-			{
-				exit_code = 0;
-			}
-			else
+			// if (mini->exit_code == 127)
+			// {
+			// 	exit_code = 0;
+			// }
+			// else
 				exit_code = mini->exit_code;
 			free_minishell(mini), exit(exit_code);
 		}

@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 04:21:27 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 02:57:36 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/28 04:06:14 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	redir_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)
 {
 	int	start;
 	int	end;
-
+	(void)m_shell;
 	++*i;
 	while (cmd[*i] == ' ' && cmd[*i])
 		++*i;
@@ -53,8 +53,7 @@ void	redir_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)
 	}
 	end = *i;
 	order_file_add_lst(ord_f, \
-	create_order_file(replace_o_var(ft_substr(cmd, start, end - start), \
-	m_shell), HDC));
+	create_order_file(rep_n_quote(ft_substr(cmd, start, end - start)), HDC));
 }
 
 void	redir_in_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)

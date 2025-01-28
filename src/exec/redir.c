@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 06:59:52 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:33:52 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_redir_no_pipe(t_mini *data, t_data *info, t_lst_cmd *tmp)
 {
 	handle_file(data, info, tmp);
 	if (info->in_fd == -1 || info->out_fd == -1 || data->exit_code == 126)
-		return (perror("error while opening a file"));
+		return ;
 	if (info->in_fd != 0 && dup2(info->in_fd, STDIN_FILENO) < 0)
 		return (perror("error while redirecting the entry"));
 	if (info->in_fd != 0)

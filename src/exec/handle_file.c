@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 07:20:48 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:35:25 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,20 @@ void	handle_open(t_data *info, t_order_file *cur, int exit_code)
 
 void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp)
 {
+	bool			error;
 	t_order_file	*cur;
 
 	cur = tmp->order_file;
+	error = false;
 	while (cur)
 	{
 		handle_open(info, cur, data->exit_code);
-		if (info->in_fd == -1 || info->out_fd == -1)
+		if ((info->in_fd == -1 || info->out_fd == -1) && error != true)
+		{
+			perror(cur->file);
+			error = true;
 			data->exit_code = 126;
+		}
 		cur = cur->next;
 	}
 }

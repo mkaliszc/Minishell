@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 20:04:50 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:47:57 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	check_absolute_path(char **cmd, t_mini *mini)
+/* static void	check_absolute_path(char **cmd, t_mini *mini)
 {
 	if (ft_strchr(cmd[0], '/'))
 	{
@@ -29,7 +29,7 @@ static void	check_absolute_path(char **cmd, t_mini *mini)
 			exit(126);
 		}
 	}
-}
+} */
 
 static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 {
@@ -61,14 +61,33 @@ static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 	return (ft_free_char_tab(all_paths), NULL);
 }
 
+char	*test_path(char **cmd, t_env *envp, t_mini *mini)
+{
+	char	*path;
+	
+	if (access(cmd[0], F_OK) == 0)
+		path = cmd[0];
+	else
+		path = get_path(cmd, envp, mini);
+	if (path == NULL)
+	{
+		exit(127); // ? perror
+	}
+	else if (access(path, X_OK) == 0)
+		return (path);
+	else
+		exit(126); // ? perror
+	// return (NULL);
+}
+
 char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	char	*path;
 
 	if (!cmd[0])
 		return (NULL);
-	check_absolute_path(cmd, mini);
-	path = get_path(cmd, envp, mini);
+	// check_absolute_path(cmd, mini);
+	path = test_path(cmd, envp, mini);
 	if (!path)
 	{
 		struct stat st;

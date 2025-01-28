@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 11:59:09 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:36:04 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	loop(char **envp)
 		}
 		// g_signal_received = 1;
 		parsing_shell(mini, line);
-		// show_m_shell(mini);	
+		// show_m_shell(mini);
 		executing_minishell(mini);
 		add_history(line);
 		free(line);
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	// struct sigaction sa;
-	// rl_outstream = stderr;
+	// rl_outstream = stderr; 
 	// sa.sa_handler = handle_sigint;
 	// sa.sa_flags = 0;
 	// sigemptyset(&sa.sa_mask);

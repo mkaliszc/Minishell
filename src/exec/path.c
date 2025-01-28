@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 02:58:14 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 05:39:07 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,24 +90,21 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 		return (NULL);
 	// check_absolute_path(cmd, mini);
 	path = test_path(cmd, envp, mini);
-	if (!path)
-	{
-		struct stat st;
+	struct stat st;
 
-		if (stat(cmd[0], &st) == 0 && S_ISDIR(st.st_mode))
-		{
-			write(2, cmd[0], ft_strlen(cmd[0]));
-			write(2, " : is a directory\n", 19);
-			free_minishell(mini);
-			exit(126);
-		}
-		else
-		{
-			write(2, cmd[0], ft_strlen(cmd[0]));
-			write(2, " : command not found\n", 21);
-			free_minishell(mini);
-			exit(127);
-		}
+	if (stat(cmd[0], &st) == 0 && S_ISDIR(st.st_mode))
+	{
+		write(2, cmd[0], ft_strlen(cmd[0]));
+		write(2, " : is a directory\n", 19);
+		free_minishell(mini);
+		exit(126);
+	}
+	else
+	{
+		write(2, cmd[0], ft_strlen(cmd[0]));
+		write(2, " : command not found\n", 21);
+		free_minishell(mini);
+		exit(127);
 	}
 	return (path);
 }

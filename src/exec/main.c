@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 04:35:24 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/28 05:39:32 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	// struct sigaction sa;
-	// rl_outstream = stderr;
+	rl_outstream = stderr;
 	// sa.sa_handler = handle_sigint;
 	// sa.sa_flags = 0;
 	// sigemptyset(&sa.sa_mask);

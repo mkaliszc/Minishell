@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/26 17:26:54 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:40:34 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini);
 void	perror_exit(t_mini *mini, char *error, int status);
 void	handle_open(t_data *info, t_order_file *cur, int exit_code);
 void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp);
+int		process_here_doc(t_mini *mini);
 void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info);
 
 // ? Free Functions

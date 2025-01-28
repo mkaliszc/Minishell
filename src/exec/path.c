@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 12:04:54 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:09:50 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ char	*test_path(char **cmd, t_env *envp, t_mini *mini)
 	else if (access(path, X_OK) == 0)
 		return (path);
 	else
-		exit(126); // ? perror
+	{
+		perror(path);
+		exit(126);
+	}
 }
 
 char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
@@ -95,10 +98,19 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 
 	if (stat(cmd[0], &st) == 0 && S_ISDIR(st.st_mode))
 	{
-		write(2, cmd[0], ft_strlen(cmd[0]));
-		write(2, " : is a directory\n", 19);
-		free_minishell(mini);
-		exit(126);
+		if (ft_strcmp(cmd[0], ".") == 0)
+		{
+			write(2, ".: filename argument reauired\n", 31);
+			free_minishell(mini);
+			exit(2);
+		}
+		else
+		{		
+			write(2, cmd[0], ft_strlen(cmd[0]));
+			write(2, " : is a directory\n", 19);
+			free_minishell(mini);
+			exit(126);
+		}
 	}
 	// else
 	// {

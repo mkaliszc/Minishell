@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 06:52:34 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/28 21:41:28 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,23 @@ void	executing_minishell(t_mini *mini)
 		return ;
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);
+	if (process_here_doc(mini))
+		return(ft_putstr_fd("heredoc failure\n", 2));
 	tmp = mini->lst_cmd;
 	if (tmp->is_builtins == true && mini->nb_cmd == 1 && ft_strcmp("echo", tmp->cmd[0]) != 0)
 	{
 		handle_only_builtins(mini, mini->lst_cmd, mini->data);
 		return ;
 	}
-	else if (mini->nb_cmd == 1 && tmp->cmd[0] == NULL) // * fix temporaire (waiting for jbergos fix) replace 1 with 0
-		return (handle_file(mini, mini->data, tmp));
+	else if (mini->nb_cmd == 1 && tmp->cmd[0] == NULL)
+	{
+		handle_file(mini, mini->data, tmp);
+		if (mini->data->in_fd != 0)
+			close(mini->data->in_fd);
+		if (mini->data->out_fd != 1)
+			close(mini->data->out_fd);
+		return ;
+	}
 	while (tmp)
 	{
 		handle_pipe(mini, mini->data, cur_cmd_nbr, tmp);

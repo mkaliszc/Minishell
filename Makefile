@@ -14,6 +14,7 @@ SRC		=	src/builtins/cd.c 						\
 			src/exec/exec_utils.c						\
 			src/exec/handle_child.c						\
 			src/exec/handle_file.c						\
+			src/exec/here_doc.c							\
 			src/exec/exec_main.c						\
 			src/exec/redir.c						\
 			src/exec/error.c						\

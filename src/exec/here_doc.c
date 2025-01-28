@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_file.c                                      :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 21:43:12 by mkaliszc         ###   ########.fr       */
+/*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
+/*   Updated: 2025/01/28 21:43:29 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* char	*get_name(void)
+char	*get_name(void)
 {
 	static int i = 0;
 	char	*name;
@@ -61,49 +61,31 @@ char	*handle_here_doc(char *limiter)
 		free(line);
 	}
 	return (NULL);
-} */
-
-void	handle_open(t_data *info, t_order_file *cur, int exit_code)
-{
-	if (cur->type == APP && exit_code == 0)
-	{
-		if (info->out_fd > 1)
-			close(info->out_fd);
-		info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	}
-	else if (cur->type == OUT && exit_code == 0)
-	{
-		if (info->out_fd > 1)
-			close(info->out_fd);
-		info->out_fd = open(cur->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	}
-	else if (cur->type == IN || cur->type == HDC)
-	{
-		if (info->in_fd > 0)
-			close(info->in_fd);
-		info->in_fd = open(cur->file, O_RDONLY);
-	}
 }
 
-void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp)
+int	process_here_doc(t_mini *mini)
 {
-	bool			error;
+	t_lst_cmd		*tmp;
 	t_order_file	*cur;
+	char			*name;
 
-	cur = tmp->order_file;
-	error = false;
-	while (cur)
+	tmp = mini->lst_cmd;
+	while (tmp)
 	{
-		handle_open(info, cur, data->exit_code);
-		if ((info->in_fd == -1 || info->out_fd == -1) && error != true)
+		cur = tmp->order_file;
+		while (cur)
 		{
-			perror(cur->file);
-			error = true;
-			if (errno == 21)
-				data->exit_code = 1;
-			else
-				data->exit_code = 126;
+			if (cur->type == HDC)
+			{
+				name = handle_here_doc(cur->file);
+				if (!name)
+					return(1);
+				free(cur->file);
+				cur->file = name;
+			}
+			cur = cur->next;
 		}
-		cur = cur->next;
+		tmp = tmp->next;
 	}
+	return (0);
 }

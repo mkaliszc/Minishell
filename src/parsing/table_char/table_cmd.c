@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/28 04:11:59 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/28 06:51:36 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ char	**is_first_arg_empty(char **pptr)
 	
 	if (!pptr[0])
 		return (pptr);
+	if (pptr[0][0] == '\0' && !pptr[1])
+	{
+		free(pptr);
+		return (NULL);
+	}
 	if (pptr[0][0] != '\0')
 		return (pptr);
 	if (!pptr[1])

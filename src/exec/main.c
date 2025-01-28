@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 06:09:57 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 06:51:45 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	loop(char **envp)
 		}
 		// g_signal_received = 1;
 		parsing_shell(mini, line);
-		// show_m_shell(mini);-?
+		// show_m_shell(mini);
 		executing_minishell(mini);
 		add_history(line);
 		free(line);

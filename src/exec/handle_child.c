@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/01/28 05:37:39 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 06:39:57 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 	{
 		free(path);
 		ft_free_char_tab(lst_tochar);
-		// free_minishell(data);
+		free_minishell(data);
 		exit(1);
 		// perror_exit(data, "execve failed", 1);
 	}

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 05:49:55 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 06:25:46 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 		write(2, cmd[0], ft_strlen(cmd[0]));
 		write(2, " : is a directory\n", 19);
 		free_minishell(mini);
-		if (path)
-			free(path);
 		exit(126);
 	}
 	// else

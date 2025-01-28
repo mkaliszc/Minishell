@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/28 04:36:34 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 07:38:53 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 // TODO fix le exit de 0 car le atol rend 0
 
-// bool	is_numeric(char *str)
-// {
-// 	int	i;
+bool	is_numeric(char *str)
+{
+	int	i;
 
-// 	i = 0;
-// 	if (str[i] == '-' || str[i] == '+')
-// 	{
-// 		i++;
-// 	}
-// 	while (str[i])
-// 	{
-// 		/* code */
-// 	}
-
-// }
-
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		i++;
+	}
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
 
 void	handle_exit(char **cmd, t_mini *mini)
 {
@@ -39,14 +42,14 @@ void	handle_exit(char **cmd, t_mini *mini)
 	if (cmd_array_size(cmd) > 2)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
-		exit_code = 1;
+		mini->exit_code = 1;
 		return ;
 	}
 	else if (cmd[1])
 	{
 		while (cmd[1][i])
 		{
-			if (!ft_isdigit(cmd[1][i]))
+			if (!is_numeric(cmd[1]))
 			{
 				ft_printf_fd(2, "exit: %s: numeric argument required\n", cmd[1]);
 				exit_code = 2;

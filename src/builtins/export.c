@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 23:40:25 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:03:46 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	export_env_var(t_mini *mini, char *export)
 
 	while (export[i] != '=')
 	{
-		if (!ft_isalnum(export[i]))
+		if (!ft_isalnum(export[i]) && export[i] != '_' && export[i] != '+')
 		{
 			ft_printf_fd(2, "export: `%s`: not a valid identifier\n", export);
 			mini->exit_code = 1;
@@ -79,7 +79,7 @@ static void	exporting(t_mini *mini, char *export)
 		}
 		return ;
 	}
-	if (!isalpha(export[0]))
+	if (!isalpha(export[0]) && export[0] != '_')
 	{
 		ft_printf_fd(2, "export: `%s`: not a valid identifier\n", export);
 		mini->exit_code = 1;

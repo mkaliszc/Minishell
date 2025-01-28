@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/28 02:27:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 04:36:34 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	handle_exit(char **cmd, t_mini *mini)
 		exit_code += 256;
 	exit_code %= 256;
 	free_minishell(mini);
-	mini->exit_code = exit_code;
+	// mini->exit_code = exit_code;
 	exit(exit_code);
 }

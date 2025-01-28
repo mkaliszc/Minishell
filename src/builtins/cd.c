@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/28 02:40:05 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 05:54:10 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ void	handle_cd(char **cmd, t_mini *mini)
 		perror(cmd[1]);
 		mini->exit_code = 1;
 	}
-	printf("%s\n", cmd[1]);
 	update_env_pwds(mini->lst_env);
 }

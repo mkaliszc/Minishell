@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 05:39:07 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/28 05:49:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ char	*test_path(char **cmd, t_env *envp, t_mini *mini)
 		path = get_path(cmd, envp, mini);
 	if (path == NULL)
 	{
-		exit(127); // ? perror
+		ft_printf_fd(2, "%s: command not found\n", cmd[0]);
+		free_minishell(mini);
+		exit(127);
 	}
 	else if (access(path, X_OK) == 0)
 		return (path);
 	else
 		exit(126); // ? perror
-	// return (NULL);
 }
 
 char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
@@ -97,14 +98,18 @@ char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 		write(2, cmd[0], ft_strlen(cmd[0]));
 		write(2, " : is a directory\n", 19);
 		free_minishell(mini);
+		if (path)
+			free(path);
 		exit(126);
 	}
-	else
-	{
-		write(2, cmd[0], ft_strlen(cmd[0]));
-		write(2, " : command not found\n", 21);
-		free_minishell(mini);
-		exit(127);
-	}
+	// else
+	// {
+	// 	write(2, cmd[0], ft_strlen(cmd[0]));
+	// 	write(2, " : command not found\n", 21);
+	// 	free_minishell(mini);
+	// 	if (path)
+	// 		free(path);
+	// 	exit(127);
+	// }
 	return (path);
 }

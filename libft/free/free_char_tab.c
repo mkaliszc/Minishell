@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 03:56:43 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/20 03:56:45 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 05:43:32 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_free_char_tab(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab || !*tab)
+		return ;
 	while (tab[i])
 	{
 		free(tab[i]);

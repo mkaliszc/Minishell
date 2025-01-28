@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/27 21:39:25 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:27:13 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 void	handle_exit(char **cmd, t_mini *mini)
 {
 	int	exit_code = 0;
+	int i = 0;
 
 	if (cmd_array_size(cmd) > 2)
 	{
@@ -43,17 +44,25 @@ void	handle_exit(char **cmd, t_mini *mini)
 	}
 	else if (cmd[1])
 	{
-		if (!ft_atol(cmd[1]))
+		while (cmd[1][i])
 		{
-			ft_printf_fd(2, "exit: %s: numeric argument required\n", cmd[1]);
-			exit_code = 2;
-			return ;
+			if (!ft_isdigit(cmd[1][i]))
+			{
+				ft_printf_fd(2, "exit: %s: numeric argument required\n", cmd[1]);
+				exit_code = 2;
+				free_minishell(mini);
+				exit(exit_code);
+			}
+			i++;
 		}
 		exit_code = ft_atol(cmd[1]);
 	}
+	else
+		exit_code = mini->exit_code;
 	if (exit_code < 0)
 		exit_code += 256;
 	exit_code %= 256;
 	free_minishell(mini);
+	mini->exit_code = exit_code;
 	exit(exit_code);
 }

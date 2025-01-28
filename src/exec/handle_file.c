@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 02:35:25 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:57:35 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ char	*handle_here_doc(char *limiter)
 		return (NULL);
 	while (true)
 	{
-		ft_putstr_fd("> ", 1);
-		line = get_next_line(0);
+		line = readline("> ");
 		if (!line)
 		{
 			close(tmp_fd);
@@ -32,14 +31,13 @@ char	*handle_here_doc(char *limiter)
 		}
 		if (line == NULL)
 			break ;
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-			&& line[ft_strlen(limiter)] == '\n')
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
 			close(tmp_fd);
 			free(line);
 			return (".tmp");
 		}
-		ft_putstr_fd(line, tmp_fd);
+		ft_putendl_fd(line, tmp_fd);
 		free(line);
 	}
 	return (NULL);

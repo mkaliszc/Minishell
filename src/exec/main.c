@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 02:48:51 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:00:20 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,25 @@ void	loop(char **envp)
 {
 	t_mini	*mini;
 	char	*line;
+	int		exit_code;
 
+
+	exit_code = 0;
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
 		// g_signal_received = 0;
 		line = readline("$ ");
 		if (!line)
-			free_minishell(mini), exit(0);
+		{
+			if (mini->exit_code == 127)
+			{
+				exit_code = 0;
+			}
+			else
+				exit_code = mini->exit_code;
+			free_minishell(mini), exit(exit_code);
+		}
 		// g_signal_received = 1;
 		parsing_shell(mini, line);
 		// show_m_shell(mini);
@@ -77,5 +88,6 @@ int	main(int argc, char **argv, char **envp)
 	// sigaction(SIGINT, &sa, NULL);
 	// signal(SIGQUIT, SIG_IGN);
 	loop(envp);
+	rl_clear_history();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:53:14 by albillie          #+#    #+#             */
-/*   Updated: 2024/12/06 05:11:30 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:05:21 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strchr(const char *s, int c)
 	char	cc;
 
 	cc = (char) c;
+	if (!s)
+		return (NULL);
 	if (!cc)
 	{
 		return ((char *) s + ft_strlen(s));
@@ -31,13 +33,3 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-/*
-int	main()
-{
-	char *string = "kaveo";
-	char c = '\0';
-	char *result = ft_strchr(string, c);
-
-	printf("%s\n", result);
-}
-*/

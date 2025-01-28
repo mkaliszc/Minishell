@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_m_shell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:23:21 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/25 23:24:15 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:14:21 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ void	reset_m_shell(t_mini *m_shell)
 	free_data_struct(m_shell->data);
 	m_shell->data = NULL;
 	m_shell->lst_cmd = NULL;
+	// m_shell->exit_code = 0;
 }

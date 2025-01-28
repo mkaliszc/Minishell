@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 20:01:10 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:51:54 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,15 @@ t_data	*init_struct(t_mini *data)
 void	wait_for_child(t_mini *mini)
 {
 	int i;
+	int	status;
 
 	i = -1;
+	status = 0;
 	while (++i < mini->nb_cmd)
 	{
-		waitpid(mini->data->pid[i], &mini->exit_code, 0);
-		if (WIFEXITED(mini->exit_code))
-			mini->exit_code = WEXITSTATUS(mini->exit_code);
+		waitpid(mini->data->pid[i], &status, 0);
+		if (WIFEXITED(status))
+			mini->exit_code = WEXITSTATUS(status);
 	}
 }
 

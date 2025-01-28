@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/27 21:35:55 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:40:05 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	handle_cd(char **cmd, t_mini *mini)
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		mini->exit_code = 1;
 	}
-	else if (!cmd[1])
+	else if (!cmd[1] || ft_strncmp(cmd[1], "~", 1) == 0)
 	{
 		handle_home_event(mini);
 	}
@@ -69,5 +69,6 @@ void	handle_cd(char **cmd, t_mini *mini)
 		perror(cmd[1]);
 		mini->exit_code = 1;
 	}
+	printf("%s\n", cmd[1]);
 	update_env_pwds(mini->lst_env);
 }

@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 21:43:29 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:16:55 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*get_name(void)
 {
-	static int i = 0;
-	char	*name;
-	char	*number;
+	static int	i = 0;
+	char		*name;
+	char		*number;
 
 	number = ft_itoa(i);
 	if (!number)
@@ -47,7 +47,7 @@ char	*handle_here_doc(char *limiter)
 		if (!line)
 		{
 			close(tmp_fd);
-			break;
+			break ;
 		}
 		if (line == NULL)
 			break ;
@@ -79,7 +79,7 @@ int	process_here_doc(t_mini *mini)
 			{
 				name = handle_here_doc(cur->file);
 				if (!name)
-					return(1);
+					return (1);
 				free(cur->file);
 				cur->file = name;
 			}

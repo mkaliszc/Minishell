@@ -6,28 +6,20 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 21:41:28 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:00:59 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	which_builtins(t_mini *data, t_lst_cmd *tmp)
+void	handle_only_file(t_mini *mini, t_lst_cmd *tmp)
 {
-	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
-		handle_env(data->lst_env);
-	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
-		handle_export(data->lst_cmd->cmd, &data);
-	else if (ft_strcmp("unset", tmp->cmd[0]) == 0)
-		handle_unset(tmp->cmd, &data->lst_env);
-	else if (ft_strcmp("cd", tmp->cmd[0]) == 0)
-		handle_cd(tmp->cmd, data);
-	else if (ft_strcmp("pwd", tmp->cmd[0]) == 0)
-		handle_pwd();
-	else if (ft_strcmp("echo", tmp->cmd[0]) == 0 )
-		handle_echo(tmp->cmd);
-	else if (ft_strcmp("exit", tmp->cmd[0]) == 0)
-		handle_exit(tmp->cmd, data);
+	handle_file(mini, mini->data, tmp);
+	if (mini->data->in_fd != 0)
+		close(mini->data->in_fd);
+	if (mini->data->out_fd != 1)
+		close(mini->data->out_fd);
+	return ;
 }
 
 void	handle_only_builtins(t_mini *data, t_lst_cmd *tmp, t_data *pipex)
@@ -37,7 +29,7 @@ void	handle_only_builtins(t_mini *data, t_lst_cmd *tmp, t_data *pipex)
 		return ;
 	if (data->data->out_fd != 1)
 		dup2(data->data->out_fd, STDOUT_FILENO);
-	if (ft_strcmp("env", tmp->cmd[0]) == 0 )
+	if (ft_strcmp("env", tmp->cmd[0]) == 0)
 		handle_env(data->lst_env);
 	else if (ft_strcmp("export", tmp->cmd[0]) == 0)
 		handle_export(data->lst_cmd->cmd, &data);
@@ -73,7 +65,7 @@ t_data	*init_struct(t_mini *data)
 
 void	wait_for_child(t_mini *mini)
 {
-	int i;
+	int	i;
 	int	status;
 
 	i = -1;
@@ -88,7 +80,7 @@ void	wait_for_child(t_mini *mini)
 
 void	executing_minishell(t_mini *mini)
 {
-	int		cur_cmd_nbr;
+	int			cur_cmd_nbr;
 	t_lst_cmd	*tmp;
 
 	if (mini->exit_code == 2 || mini->lst_cmd == NULL || mini->lst_cmd->cmd == NULL)
@@ -96,7 +88,7 @@ void	executing_minishell(t_mini *mini)
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);
 	if (process_here_doc(mini))
-		return(ft_putstr_fd("heredoc failure\n", 2));
+		return (ft_putstr_fd("heredoc failure\n", 2));
 	tmp = mini->lst_cmd;
 	if (tmp->is_builtins == true && mini->nb_cmd == 1 && ft_strcmp("echo", tmp->cmd[0]) != 0)
 	{
@@ -104,14 +96,7 @@ void	executing_minishell(t_mini *mini)
 		return ;
 	}
 	else if (mini->nb_cmd == 1 && tmp->cmd[0] == NULL)
-	{
-		handle_file(mini, mini->data, tmp);
-		if (mini->data->in_fd != 0)
-			close(mini->data->in_fd);
-		if (mini->data->out_fd != 1)
-			close(mini->data->out_fd);
-		return ;
-	}
+		return (handle_only_file(mini, tmp));
 	while (tmp)
 	{
 		handle_pipe(mini, mini->data, cur_cmd_nbr, tmp);

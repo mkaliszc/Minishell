@@ -6,21 +6,12 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 18:27:30 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:13:28 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <signal.h>
-
-/*
-	TODO : overall
-	* check leaks and fds open
-	* signal
-
-	? msg discord si doute
-
-*/
 
 // volatile sig_atomic_t	g_signal_received = 0;
 
@@ -29,7 +20,6 @@ void	loop(char **envp)
 	t_mini	*mini;
 	char	*line;
 	int		exit_code;
-
 
 	exit_code = 0;
 	mini = create_m_shell_env(envp);
@@ -45,7 +35,7 @@ void	loop(char **envp)
 			// }
 			// else
 			exit_code = mini->exit_code;
-			free_minishell(mini), exit(exit_code);
+			(free_minishell(mini), exit(exit_code));
 		}
 		// g_signal_received = 1;
 		parsing_shell(mini, line);

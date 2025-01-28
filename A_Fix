@@ -1,0 +1,7 @@
+<< EOF into cat test
+<< EOF into GNL (replace with readline)
+Multiple Redir into cat test
+./ + / + . to handle
+signaux ctrl D + ctrl + C
+gerer les here_doc un par un avant les forks + coupler ca avec les signaux
+Changer le .tmp pour plusieurs pipes donc multitutes de /tmp/heredoc

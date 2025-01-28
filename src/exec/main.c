@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 19:59:11 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:47:14 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,25 @@ void	loop(char **envp)
 {
 	t_mini	*mini;
 	char	*line;
+	int		exit_code;
 
+
+	exit_code = 0;
 	mini = create_m_shell_env(envp);
 	while (true)
 	{
 		// g_signal_received = 0;
 		line = readline("$ ");
 		if (!line)
-			free_minishell(mini), exit(0);
+		{
+			if (mini->exit_code == 127)
+			{
+				exit_code = 0;
+			}
+			else
+				exit_code = mini->exit_code;
+			free_minishell(mini), exit(exit_code);
+		}
 		// g_signal_received = 1;
 		parsing_shell(mini, line);
 		// show_m_shell(mini);
@@ -70,12 +81,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	// struct sigaction sa;
-	rl_outstream = stderr;
+	// rl_outstream = stderr;
 	// sa.sa_handler = handle_sigint;
 	// sa.sa_flags = 0;
 	// sigemptyset(&sa.sa_mask);
 	// sigaction(SIGINT, &sa, NULL);
 	// signal(SIGQUIT, SIG_IGN);
 	loop(envp);
+	rl_clear_history();
 	return (0);
 }

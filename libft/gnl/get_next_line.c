@@ -3,106 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 01:53:11 by albillie          #+#    #+#             */
-/*   Updated: 2024/12/06 05:11:31 by albillie         ###   ########.fr       */
+/*   Created: 2024/10/24 02:29:36 by mkaliszc          #+#    #+#             */
+/*   Updated: 2024/11/05 02:23:51 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*fill_line_buffer(int fd, char *left_c)
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
+char	*ft_strjoin_gnl(char *s1, char *s2)
+{
+	char	*dest;
+	size_t	i;
+	size_t	j;
+
+	if (!s1)
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
+	if (!s1 || !s2)
+		return (NULL);
+	dest = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!dest)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (s1[++i])
+		dest[i] = s1[i];
+	while (s2[j])
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	free(s1);
+	return (dest);
+}
+
+char	*read_line(char *buf, int fd)
 {
 	char	*buffer;
-	char	*temp;
-	ssize_t	b_read;
+	int		index;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
 		return (NULL);
-	if (!left_c)
-		left_c = ft_strdup("");
-	if (!left_c)
-		return (free(buffer), NULL);
-	b_read = 1;
-	while (b_read > 0 && !ft_strchr(left_c, '\n'))
+	index = 1;
+	while (!ft_strchr(buf, '\n') && index > 0)
 	{
-		b_read = read(fd, buffer, BUFFER_SIZE);
-		if (b_read == -1)
-			return (free(buffer), free(left_c), NULL);
-		buffer[b_read] = '\0';
-		temp = left_c;
-		left_c = ft_strjoin(left_c, buffer);
-		free(temp);
-		if (!left_c)
-			return (free(buffer), NULL);
+		index = read(fd, buffer, BUFFER_SIZE);
+		if (index == -1)
+		{
+			free(buf);
+			free(buffer);
+			return (NULL);
+		}
+		buffer[index] = '\0';
+		buf = ft_strjoin_gnl(buf, buffer);
 	}
-	return (free(buffer), left_c);
+	free (buffer);
+	return (buf);
 }
 
-char	*extract_line(char *left_c)
+char	*update_line(char	*line, char *buf)
 {
-	char	*line;
-	int		i;
+	char			*new_buf;
+	unsigned int	len_line;
 
-	i = 0;
-	if (!left_c[0])
-		return (NULL);
-	while (left_c[i] && left_c[i] != '\n')
-		i++;
-	if (left_c[i] == '\n')
-		i++;
-	line = ft_substr(left_c, 0, i);
-	return (line);
-}
-
-char	*update_left_c(char *left_c)
-{
-	char	*new_left;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (left_c[i] && left_c[i] != '\n')
-		i++;
-	if (!left_c[i])
-		return (NULL);
-	i++;
-	new_left = (char *)malloc(sizeof(char) * (ft_strlen(left_c) - i + 1));
-	if (!new_left)
-		return (NULL);
-	j = 0;
-	while (left_c[i])
-		new_left[j++] = left_c[i++];
-	new_left[j] = '\0';
-	return (new_left);
+	len_line = ft_strlen(line);
+	new_buf = ft_substr(buf, len_line, ft_strlen(buf) - len_line);
+	free(buf);
+	return (new_buf);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*left_c;
+	static char	*buffer[1024];
 	char		*line;
-	char		*temp;
+	size_t		len;
 
+	len = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer[fd] = read_line(buffer[fd], fd);
+	if (!buffer[fd])
 	{
-		free(left_c);
-		left_c = NULL;
+		free(buffer[fd]);
 		return (NULL);
 	}
-	left_c = fill_line_buffer(fd, left_c);
-	if (!left_c)
-		return (NULL);
-	line = extract_line(left_c);
-	if (!line)
-	{
-		free(left_c);
-		left_c = NULL;
-		return (NULL);
-	}
-	temp = left_c;
-	left_c = update_left_c(left_c);
-	free(temp);
+	while (buffer[fd][len] != '\0' && buffer[fd][len] != '\n')
+		len++;
+	line = ft_substr(buffer[fd], 0, len + 1);
+	buffer[fd] = update_line(line, buffer[fd]);
 	return (line);
 }

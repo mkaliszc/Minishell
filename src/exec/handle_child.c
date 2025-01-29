@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:10:39 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 09:06:15 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:52:48 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 	{
 		free(path);
 		ft_free_char_tab(lst_tochar);
-		free_minishell(data);
-		exit(0);
+		(free_minishell(data), exit(0));
 	}
 }

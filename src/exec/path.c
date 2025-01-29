@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 08:53:03 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:52:30 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 	if (cur == NULL)
 	{
 		ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]);
-		free_minishell(mini);
-		exit(127);
+		(free_minishell(mini), exit(127));
 	}
 	all_paths = ft_split(cur->value, ':');
 	while (all_paths[i])

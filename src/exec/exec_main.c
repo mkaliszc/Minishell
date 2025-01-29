@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 09:05:08 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:15:29 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_data	*init_struct(t_mini *data)
 	res = malloc(sizeof(t_data));
 	if (res == NULL)
 		return (NULL);
+	res->nb_of_hdc = 0;
 	res->in_fd = 0;
 	res->out_fd = 1;
 	res->pid = malloc(sizeof(pid_t) * data->nb_cmd);
@@ -97,12 +98,12 @@ void	executing_minishell(t_mini *mini)
 		return ;
 	}
 	else if (mini->nb_cmd == 1 && (tmp->cmd == NULL || tmp->cmd[0] == NULL))
-		return (handle_only_file(mini, tmp));
+		return (handle_only_file(mini, tmp), unlinks_here_doc(mini->data));
 	while (tmp)
 	{
 		handle_pipe(mini, mini->data, cur_cmd_nbr, tmp);
 		cur_cmd_nbr++;
 		tmp = tmp->next;
 	}
-	wait_for_child(mini);
+	(wait_for_child(mini), unlinks_here_doc(mini->data));
 }

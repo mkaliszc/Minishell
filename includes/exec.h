@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 21:40:34 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:10:08 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**lst_to_char(t_env *lst_env);
 int		get_lst_env_size(t_env *lst_env);
 void	handle_pipe(t_mini *data, t_data *info, int cur_cmd, t_lst_cmd *tmp);
 void	handle_child(t_mini *data, int cmd_nbr, t_data	*info, t_lst_cmd *tmp);
-char	*handle_here_doc(char *limiter);
+char	*handle_here_doc(char *limiter, t_mini *mini);
 void	handle_redir_no_pipe(t_mini *data, t_data *info, t_lst_cmd *tmp);
 void	handle_redir(t_mini *data, int cmd_nbr, t_data *info, t_lst_cmd *tmp);
 void	loop(char **envp);
@@ -32,6 +32,7 @@ void	perror_exit(t_mini *mini, char *error, int status);
 void	handle_open(t_data *info, t_order_file *cur, int exit_code);
 void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp);
 int		process_here_doc(t_mini *mini);
+void	unlinks_here_doc(t_data *data);
 void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info);
 
 // ? Free Functions

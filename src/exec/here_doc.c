@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 23:16:55 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 01:37:41 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ char	*get_name(void)
 	free(number);
 	i++;
 	return (name);
+}
+
+int	write_to_here_doc(char *line, char *limiter, int tmp_fd)
+{
+	if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+	{
+		close(tmp_fd);
+		free(line);
+		return (1);
+	}
+	ft_putendl_fd(line, tmp_fd);
+	free(line);
+	return (0);
 }
 
 char	*handle_here_doc(char *limiter)
@@ -49,16 +62,8 @@ char	*handle_here_doc(char *limiter)
 			close(tmp_fd);
 			break ;
 		}
-		if (line == NULL)
-			break ;
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-		{
-			close(tmp_fd);
-			free(line);
+		if (write_to_here_doc(line, limiter, tmp_fd) == 1)
 			return (name);
-		}
-		ft_putendl_fd(line, tmp_fd);
-		free(line);
 	}
 	return (NULL);
 }

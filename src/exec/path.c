@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 23:15:42 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 02:43:01 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 char	*test_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	char	*path;
+	struct stat	buf;
 
-	if (access(cmd[0], F_OK) == 0)
-		path = cmd[0];
+	if (ft_strchr(cmd[0], '/') || ft_strchr(cmd[0], '.'))
+	{
+		if (stat(cmd[0], &buf) == -1)
+			(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), free_minishell(mini), exit(127));
+		else
+			return(cmd[0]);
+	}
 	else
 		path = get_path(cmd, envp, mini);
 	if (path == NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_char_tab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 03:56:43 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/28 05:43:32 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 02:10:39 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	ft_free_char_tab(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab || !*tab)
-		return ;
 	while (tab[i])
 	{
 		free(tab[i]);

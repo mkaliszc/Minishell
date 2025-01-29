@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 02:33:52 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 01:42:53 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info, t_lst_cmd *tmp)
 {
 	handle_file(data, info, tmp);
 	if (data->exit_code == 126)
-		return (perror("error while opening a file"));
+		return ;
 	if (cmd_nbr == 0)
 		handle_first_child(data, cmd_nbr, info);
 	else if (cmd_nbr == data->nb_cmd - 1)

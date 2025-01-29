@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:10:39 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 01:15:13 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 02:27:40 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	process_redir(t_mini *data, int cmd_nbr, t_data *pipex, t_lst_cmd *tmp)
 		handle_redir(data, cmd_nbr, pipex, tmp);
 	if (data->exit_code != 0)
 	{
+		if (cmd_nbr > 0)
+			close(pipex->pipe_fd[2 * (cmd_nbr - 1)]);
+		close(pipex->pipe_fd[cmd_nbr * 2]);
+		close(pipex->pipe_fd[cmd_nbr * 2 + 1]);
 		free_minishell(data);
 		exit(1);
 	}

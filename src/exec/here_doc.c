@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 01:37:41 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:18:55 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*handle_here_doc(char *limiter)
 	char	*name;
 	int		tmp_fd;
 	char	*line;
-	// g_signal_received = 2;
+	g_signal_received = 2;
 
 	name = get_name();
 	tmp_fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -56,7 +56,14 @@ char	*handle_here_doc(char *limiter)
 	}
 	while (true)
 	{
-		line = readline("> ");
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
+		if (g_signal_received == 0)
+		{
+			close(tmp_fd);
+			free(name);
+			break;
+		}
 		if (!line)
 		{
 			close(tmp_fd);

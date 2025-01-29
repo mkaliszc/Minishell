@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:10:39 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 02:48:12 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:17:17 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 {
 	char	*path;
 	char	**lst_tochar;
-	// struct sigaction sa;
-	// sa.sa_handler = sig_child;
-	// sigemptyset(&sa.sa_mask);
-	// sa.sa_flags = 0;
-	// sigaction(SIGINT, &sa, NULL);
+	struct sigaction sa;
+	sa.sa_handler = sig_child;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
 
 	process_redir(data, cmd_nbr, pipex, tmp);
 	if (tmp->is_builtins == true)

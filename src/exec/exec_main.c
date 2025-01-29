@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 21:41:28 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 01:05:11 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	executing_minishell(t_mini *mini)
 	int		cur_cmd_nbr;
 	t_lst_cmd	*tmp;
 
-	if (mini->exit_code == 2 || mini->lst_cmd == NULL || mini->lst_cmd->cmd == NULL)
+	if (mini->exit_code == 2 || mini->lst_cmd == NULL)
 		return ;
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);
@@ -103,7 +103,7 @@ void	executing_minishell(t_mini *mini)
 		handle_only_builtins(mini, mini->lst_cmd, mini->data);
 		return ;
 	}
-	else if (mini->nb_cmd == 1 && tmp->cmd[0] == NULL)
+	else if (mini->nb_cmd == 1 && tmp->cmd == NULL)
 	{
 		handle_file(mini, mini->data, tmp);
 		if (mini->data->in_fd != 0)

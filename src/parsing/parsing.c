@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:14:14 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/26 03:13:50 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:59:05 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 {
+	// ln_cmd = pre_parsing(ln_cmd);
 	if (empty_line(ln_cmd))
 		m_shell->exit_code = 0;
 	else if (is_border_pipe(ln_cmd))

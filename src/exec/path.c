@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 02:43:01 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 03:10:19 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,33 @@ static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 	return (ft_free_char_tab(all_paths), NULL);
 }
 
+static bool	check_perms(char *cmd)
+{
+	if (access(cmd, F_OK) == 0)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (true);
+	}
+	return (false);
+}
+
+
 char	*test_path(char **cmd, t_env *envp, t_mini *mini)
 {
-	char	*path;
+	char	*path = NULL;
 	struct stat	buf;
 
-	if (ft_strchr(cmd[0], '/') || ft_strchr(cmd[0], '.'))
+	if (ft_strchr(cmd[0], '/'))
 	{
 		if (stat(cmd[0], &buf) == -1)
 			(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), free_minishell(mini), exit(127));
 		else
-			return(cmd[0]);
+		{
+			if (check_perms(cmd[0]))
+				return(cmd[0]);
+			else
+				(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), free_minishell(mini), exit(127));
+		}
 	}
 	else
 		path = get_path(cmd, envp, mini);

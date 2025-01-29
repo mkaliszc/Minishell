@@ -6,16 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:23 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 02:50:30 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO fix le exit de 0 car le atol rend 0
-
-
-// TODO exit "-100"
 
 bool	is_numeric(char *str)
 {

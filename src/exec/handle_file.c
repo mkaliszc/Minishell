@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 22:27:00 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 22:31:30 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 02:46:55 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp)
 		{
 			perror(cur->file);
 			error = true;
-			if (errno == 21)
-				data->exit_code = 1;
-			else
-				data->exit_code = 126;
+			data->exit_code = 126;
 		}
 		cur = cur->next;
 	}

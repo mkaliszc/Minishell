@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 02:27:33 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:09:40 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	executing_minishell(t_mini *mini)
 	int			cur_cmd_nbr;
 	t_lst_cmd	*tmp;
 
-	show_m_shell(mini);
+	// show_m_shell(mini);
 	if (mini->exit_code == 2 || mini->lst_cmd == NULL)
 		return ;
 	cur_cmd_nbr = 0;

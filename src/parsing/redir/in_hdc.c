@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 04:21:27 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/29 08:59:06 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:12:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	redir_in(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)
 	m_shell), IN));
 }
 
-void	redir_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)
+void	redir_hdc(t_order_file **ord_f, char *cmd, int *i)
 {
 	int	start;
 	int	end;
@@ -60,7 +60,7 @@ void	redir_in_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)
 {
 	++*i;
 	if (cmd[*i] == '<')
-		redir_hdc(ord_f, cmd, i, m_shell);
+		redir_hdc(ord_f, cmd, i);
 	else
 		redir_in(ord_f, cmd, i, m_shell);
 }

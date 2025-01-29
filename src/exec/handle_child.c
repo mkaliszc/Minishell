@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:10:39 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/28 23:12:11 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 01:08:10 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	handle_child(t_mini *data, int cmd_nbr, t_data	*pipex, t_lst_cmd *tmp)
 		free_minishell(data);
 		exit(EXIT_SUCCESS);
 	}
+	if (!tmp->cmd)
+		(free_minishell(data), exit(0));
 	path = validate_cmd_path(tmp->cmd, data->lst_env, data);
 	lst_tochar = lst_to_char(data->lst_env);
 	if (execve(path, tmp->cmd, lst_tochar) == -1)

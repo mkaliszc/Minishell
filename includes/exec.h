@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:59:55 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 16:10:08 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:34:14 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	handle_file(t_mini *data, t_data *info, t_lst_cmd *tmp);
 int		process_here_doc(t_mini *mini);
 void	unlinks_here_doc(t_data *data);
 void	handle_redir_out(t_mini *data, int cmd_nbr, t_data *info);
+void	check_close(t_data *data);
 
 // ? Free Functions
 

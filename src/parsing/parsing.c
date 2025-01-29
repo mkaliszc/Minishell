@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:14:14 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/29 09:00:33 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:15:48 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,4 @@ void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 		m_shell->exit_code = 2;
 	else
 		add_lst_cmd(m_shell, ln_cmd);
-}
-
-void	j_loop(t_mini *m_shell)
-{
-	char	*line;
-
-	while (true)
-	{
-		line = readline("Wildshell>");
-		if (ft_strncmp("exit", line, 5) == 0)
-		{
-			free(line);
-			break ;
-		}
-		parsing_shell(m_shell, line);
-		free(line);
-	}
 }

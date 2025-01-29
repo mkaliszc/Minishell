@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:54:16 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 16:55:12 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:33:49 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	handle_redir_no_pipe(t_mini *data, t_data *info, t_lst_cmd *tmp)
 	handle_file(data, info, tmp);
 	if (info->in_fd == -1 || info->out_fd == -1 || data->exit_code == 126)
 	{
-		if (info->out_fd != 1)
-			close(info->out_fd);
-		if (info->in_fd != 0)
-			close(info->in_fd);
+		check_close(info);
 		return ;
 	}
 	if (info->in_fd != 0 && dup2(info->in_fd, STDIN_FILENO) < 0)
@@ -76,7 +73,7 @@ void	handle_redir(t_mini *data, int cmd_nbr, t_data *info, t_lst_cmd *tmp)
 {
 	handle_file(data, info, tmp);
 	if (data->exit_code == 126)
-		return ;
+		return (check_close(info));
 	if (cmd_nbr == 0)
 		handle_first_child(data, cmd_nbr, info);
 	else if (cmd_nbr == data->nb_cmd - 1)

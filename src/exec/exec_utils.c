@@ -6,11 +6,19 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:43:21 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/23 20:33:31 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:34:50 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	check_close(t_data *data)
+{
+	if (data->out_fd != 1 && data->out_fd != -1)
+		close(data->out_fd);
+	if (data->in_fd != 0 && data->in_fd != -1)
+		close(data->in_fd);
+}
 
 int	get_lst_env_size(t_env *lst_env)
 {

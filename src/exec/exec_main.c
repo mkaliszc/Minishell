@@ -6,7 +6,7 @@
 /*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 16:15:29 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:32:39 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	handle_only_file(t_mini *mini, t_lst_cmd *tmp)
 {
 	handle_file(mini, mini->data, tmp);
-	if (mini->data->in_fd != 0)
-		close(mini->data->in_fd);
-	if (mini->data->out_fd != 1)
-		close(mini->data->out_fd);
+	check_close(mini->data);
 	return ;
 }
 

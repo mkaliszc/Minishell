@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 20:41:04 by mkaliszc         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:05:18 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*handle_here_doc(char *limiter, t_mini *mini)
 			break ;
 		}
 		if (write_to_here_doc(line, limiter, tmp_fd) == 1)
-			return (name);
+			return (get_next_line(-1), name);
 	}
 	return (NULL);
 }

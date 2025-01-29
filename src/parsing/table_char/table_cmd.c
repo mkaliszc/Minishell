@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/29 22:07:10 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 22:50:36 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,29 @@ char	**is_first_arg_empty(char **pptr)
 {
 	int		i;
 	char	**rdm;
+	int		count;
 
-	if (!pptr[0])
-		return (pptr);
-	if (pptr[0][0] == '\0' && !pptr[1])
-		return (free_split(pptr), NULL);
-	if (pptr[0][0] != '\0')
-		return (pptr);
-	if (!pptr[1])
-		return (pptr);
 	i = 0;
-	while (pptr[i])
-		++i;
-	rdm = malloc(sizeof(char *) * i);
-	i = 1;
+	count = 0;
 	while (pptr[i])
 	{
-		rdm[i - 1] = ft_strdup(pptr[i]);
+		if (pptr[i][0] != '\0')
+			count ++;
 		++i;
 	}
-	rdm[i - 1] = NULL;
-	free_split(pptr);
-	return (rdm);
+	if (count == 0)
+		return (free_split(pptr), NULL);
+	rdm = malloc(sizeof(char *) * (count + 1));
+	i = 0;
+	count = 0;
+	while (pptr[i])
+	{
+		if (pptr[i][0] != '\0')
+			rdm[count++] = ft_strdup(pptr[i]);
+		++i;
+	}
+	rdm[count] = NULL;
+	return (free_split(pptr), rdm);
 }
 
 char	**table_cmd(char *cmd, t_mini *m_shell)

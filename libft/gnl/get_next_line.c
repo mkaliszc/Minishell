@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 02:29:36 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 04:36:52 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 04:45:52 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,26 @@ char	*update_line(char	*line, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[1024];
+	static char	*buffer;
 	char		*line;
 	size_t		len;
 
 	len = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer[fd] = read_line(buffer[fd], fd);
-	if (!buffer[fd])
 	{
-		free(buffer[fd]);
+		if (buffer)
+			free(buffer);
 		return (NULL);
 	}
-	while (buffer[fd][len] != '\0' && buffer[fd][len] != '\n')
+	buffer = read_line(buffer, fd);
+	if (!buffer)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	while (buffer[len] != '\0' && buffer[len] != '\n')
 		len++;
-	line = ft_substr(buffer[fd], 0, len + 1);
-	buffer[fd] = update_line(line, buffer[fd]);
+	line = ft_substr(buffer, 0, len + 1);
+	buffer = update_line(line, buffer);
 	return (line);
 }

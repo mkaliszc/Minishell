@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 04:09:40 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:29:01 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	executing_minishell(t_mini *mini)
 	cur_cmd_nbr = 0;
 	mini->data = init_struct(mini);
 	if (process_here_doc(mini) == 1)
-		return (ft_putstr_fd("heredoc failure\n", 2));
+		return (ft_putstr_fd("\n", 1));
 	tmp = mini->lst_cmd;
 	if (tmp->is_builtins == true && mini->nb_cmd == 1 && ft_strcmp("echo", tmp->cmd[0]) != 0)
 	{

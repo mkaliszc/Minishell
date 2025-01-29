@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 04:18:55 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 04:37:20 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,17 @@ char	*handle_here_doc(char *limiter)
 			free(name);
 			break;
 		}
-		if (!line)
+		if (!line || line[0] == '\0')
 		{
+			get_next_line(-1);
+			free(line);
 			close(tmp_fd);
+			free(name);
 			break ;
 		}
 		if (write_to_here_doc(line, limiter, tmp_fd) == 1)
 			return (name);
+		free(line);
 	}
 	return (NULL);
 }

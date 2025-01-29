@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:36:47 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 04:20:16 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:05:42 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <signal.h>
 
 volatile sig_atomic_t	g_signal_received = 0;
-
 
 void	handle_sigint(int sig)
 {
@@ -26,10 +25,10 @@ void	handle_sigint(int sig)
 	}
 	else
 	{
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -47,7 +46,8 @@ void	loop(char **envp)
 		if (!line)
 		{
 			exit_code = mini->exit_code;
-			free_minishell(mini), exit(exit_code);
+			free_minishell(mini);
+			exit(exit_code);
 		}
 		parsing_shell(mini, line);
 		executing_minishell(mini);
@@ -59,10 +59,11 @@ void	loop(char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
+	struct sigaction	sa;
+
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, handle_sigint);
-	struct sigaction sa;
 	rl_outstream = stderr;
 	sa.sa_handler = handle_sigint;
 	sa.sa_flags = 0;

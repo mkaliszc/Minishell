@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 03:10:19 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 08:53:03 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,30 @@ static bool	check_perms(char *cmd)
 	return (false);
 }
 
+char	*handle_when_slash(char **cmd, t_mini *mini)
+{
+	struct stat	buf;
+
+	if (stat(cmd[0], &buf) == -1)
+		(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]),
+			free_minishell(mini), exit(127));
+	else
+	{
+		if (check_perms(cmd[0]))
+			return (cmd[0]);
+		else
+			(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]),
+				free_minishell(mini), exit(127));
+	}
+}
 
 char	*test_path(char **cmd, t_env *envp, t_mini *mini)
 {
-	char	*path = NULL;
-	struct stat	buf;
+	char		*path;
 
 	if (ft_strchr(cmd[0], '/'))
 	{
-		if (stat(cmd[0], &buf) == -1)
-			(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), free_minishell(mini), exit(127));
-		else
-		{
-			if (check_perms(cmd[0]))
-				return(cmd[0]);
-			else
-				(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]), free_minishell(mini), exit(127));
-		}
+		path = handle_when_slash(cmd, mini);
 	}
 	else
 		path = get_path(cmd, envp, mini);

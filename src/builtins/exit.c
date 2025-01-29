@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:35:06 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/29 02:50:30 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 08:43:19 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ bool	is_numeric(char *str)
 	return (true);
 }
 
+int	calculate_exit_code(int exit_code)
+{
+	if (exit_code < 0)
+		exit_code += 256;
+	exit_code %= 256;
+	return (exit_code);
+}
+
 void	handle_exit(char **cmd, t_mini *mini)
 {
-	int	exit_code = 0;
+	int	exit_code;
 
 	if (cmd[1])
 	{
@@ -55,9 +63,7 @@ void	handle_exit(char **cmd, t_mini *mini)
 		mini->exit_code = 1;
 		return ;
 	}
-	if (exit_code < 0)
-		exit_code += 256;
-	exit_code %= 256;
+	exit_code = calculate_exit_code(exit_code);
 	free_minishell(mini);
 	printf("exit\n");
 	exit(exit_code);

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:23:29 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/28 11:03:46 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 08:45:41 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void	push_env_var(char *key, t_env *find, t_mini *mini, char *export)
 	}
 }
 
-
 static void	export_env_var(t_mini *mini, char *export)
 {
 	t_env	*find;
 	char	*key;
-	int i = 0;
+	int		i;
 
+	i = 0;
 	while (export[i] != '=')
 	{
 		if (!ft_isalnum(export[i]) && export[i] != '_' && export[i] != '+')
@@ -59,7 +59,6 @@ static void	export_env_var(t_mini *mini, char *export)
 	push_env_var(key, find, mini, export);
 }
 
-
 static void	exporting(t_mini *mini, char *export)
 {
 	int		i;
@@ -71,7 +70,8 @@ static void	exporting(t_mini *mini, char *export)
 		{
 			if (!ft_isalpha(export[i]))
 			{
-				ft_printf_fd(2, "export: `%s`: not a valid identifier\n", export);
+				ft_printf_fd(2, "export: `%s`: not a valid identifier\n",
+					export);
 				mini->exit_code = 1;
 				return ;
 			}
@@ -88,7 +88,6 @@ static void	exporting(t_mini *mini, char *export)
 	export_env_var(mini, export);
 }
 
-
 void	handle_export(char **cmd, t_mini **mini)
 {
 	int	i;
@@ -104,5 +103,4 @@ void	handle_export(char **cmd, t_mini **mini)
 			i++;
 		}
 	}
-
 }

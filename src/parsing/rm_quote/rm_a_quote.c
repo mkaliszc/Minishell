@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_a_quote.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 03:43:35 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/28 04:01:42 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:55:26 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	length_n_quote(char *s)
 {
 	int	i;
-	int len;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -39,14 +39,12 @@ int	length_n_quote(char *s)
 	return (i + len);
 }
 
-char *rep_n_quote(char *s)
+char	*rep_n_quote(char *s)
 {
 	char	*new;
 	t_pain	pain;
 
 	new = malloc(sizeof(char) * (length_n_quote(s) + 1));
-	if (!new)
-		return (NULL);
 	pain.i = 0;
 	pain.j = 0;
 	while (s[pain.i])
@@ -55,7 +53,7 @@ char *rep_n_quote(char *s)
 		{
 			++pain.i;
 			if (s[pain.i - 1] == '"')
-				while(s[pain.i] && s[pain.i] != '"')
+				while (s[pain.i] && s[pain.i] != '"')
 					new[pain.j++] = s[pain.i++];
 			else
 				while (s[pain.i] && s[pain.i] != '\'')

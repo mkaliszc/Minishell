@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:51:01 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 04:29:01 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:05:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	executing_minishell(t_mini *mini)
 	int			cur_cmd_nbr;
 	t_lst_cmd	*tmp;
 
-	// show_m_shell(mini);
 	if (mini->exit_code == 2 || mini->lst_cmd == NULL)
 		return ;
 	cur_cmd_nbr = 0;
@@ -91,7 +90,8 @@ void	executing_minishell(t_mini *mini)
 	if (process_here_doc(mini) == 1)
 		return (ft_putstr_fd("\n", 1));
 	tmp = mini->lst_cmd;
-	if (tmp->is_builtins == true && mini->nb_cmd == 1 && ft_strcmp("echo", tmp->cmd[0]) != 0)
+	if (tmp->is_builtins == true && mini->nb_cmd == 1
+		&& ft_strcmp("echo", tmp->cmd[0]) != 0)
 	{
 		handle_only_builtins(mini, mini->lst_cmd, mini->data);
 		return ;

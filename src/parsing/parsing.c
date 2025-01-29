@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:14:14 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/29 00:59:05 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:00:33 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 {
-	// ln_cmd = pre_parsing(ln_cmd);
 	if (empty_line(ln_cmd))
 		m_shell->exit_code = 0;
 	else if (is_border_pipe(ln_cmd))
@@ -27,8 +26,6 @@ void	parsing_shell(t_mini *m_shell, char *ln_cmd)
 		m_shell->exit_code = 2;
 	else
 		add_lst_cmd(m_shell, ln_cmd);
-	// show_m_shell(m_shell); ? ONLY FOR DEBUG
-	// reset_m_shell(m_shell); ? ONLY FOR DEBUG
 }
 
 void	j_loop(t_mini *m_shell)

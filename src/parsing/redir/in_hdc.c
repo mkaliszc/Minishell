@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_hdc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 04:21:27 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/28 04:06:14 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:59:06 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	redir_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell)
 {
 	int	start;
 	int	end;
-	(void)m_shell;
+
 	++*i;
 	while (cmd[*i] == ' ' && cmd[*i])
 		++*i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:19:56 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/29 04:46:50 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:02:35 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ char	*handle_here_doc(char *limiter)
 	char	*name;
 	int		tmp_fd;
 	char	*line;
-	g_signal_received = 2;
 
+	g_signal_received = 2;
 	name = get_name();
 	tmp_fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (tmp_fd < 0)
@@ -62,7 +62,7 @@ char	*handle_here_doc(char *limiter)
 		{
 			close(tmp_fd);
 			free(name);
-			break;
+			break ;
 		}
 		if (!line || line[0] == '\0')
 		{
@@ -74,7 +74,6 @@ char	*handle_here_doc(char *limiter)
 		}
 		if (write_to_here_doc(line, limiter, tmp_fd) == 1)
 			return (name);
-		// free(line);
 	}
 	return (NULL);
 }

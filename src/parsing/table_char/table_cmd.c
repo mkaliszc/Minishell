@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   table_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 03:09:09 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/26 23:01:43 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:07:10 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,16 @@ char	*get_args(char *cmd, int *i)
 
 char	**is_first_arg_empty(char **pptr)
 {
-	int i;
-	char **rdm;
+	int		i;
+	char	**rdm;
 
+	if (!pptr[0])
+		return (pptr);
+	if (pptr[0][0] == '\0' && !pptr[1])
+		return (free_split(pptr), NULL);
 	if (pptr[0][0] != '\0')
+		return (pptr);
+	if (!pptr[1])
 		return (pptr);
 	i = 0;
 	while (pptr[i])

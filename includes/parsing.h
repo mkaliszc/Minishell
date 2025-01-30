@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:11:39 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/26 05:44:35 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 08:40:36 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ void			show_split(char **c_split);
 void			free_split(char **c_split);
 t_lst_cmd		*create_lst_cmd(char **cmd_split, t_mini *m_shell);
 char			**table_cmd(char *cmd, t_mini *m_shell);
-void			order_file_add_lst(t_order_file **order_file, t_order_file *file);
+void			order_file_add_lst(t_order_file **order_file,
+					t_order_file *file);
 t_order_file	*create_order_file(char *file, t_rd_file type);
 t_order_file	*create_lst_order_file(char *one_cmd, t_mini *m_shell);
-void			redir_in_hdc(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell);
-void			redir_out_app(t_order_file **ord_f, char *cmd, int *i, t_mini *m_shell);
+void			redir_in_hdc(t_order_file **ord_f, char *cmd, int *i,
+					t_mini *m_shell);
+void			redir_out_app(t_order_file **ord_f, char *cmd, int *i,
+					t_mini *m_shell);
 void			show_order_file(t_order_file *ord_f);
 int				nb_cmd(t_lst_cmd *cmd);
 void			free_order_file(t_order_file *ord_f);
@@ -74,5 +77,6 @@ bool			is_builtins(char *cmd);
 void			length_exit_code(int code, int *i, int *len);
 void			rep_exit_code(int code, char *new, t_pain *pain);
 void			parsing_shell(t_mini *m_shell, char *ln_cmd);
+char			*rep_n_quote(char *s);
 
 #endif

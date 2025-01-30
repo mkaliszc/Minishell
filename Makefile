@@ -10,17 +10,18 @@ LIB		=	libft
 LIBFT	=	$(LIB)/libft.a
 
 SRC		=	src/builtins/cd.c 						\
-			src/builtins/pwd.c 						\
-			src/exec/main.c						\
+			src/exec/main.c 						\
 			src/exec/exec_utils.c						\
 			src/exec/handle_child.c						\
 			src/exec/handle_file.c						\
+			src/exec/here_doc.c							\
 			src/exec/exec_main.c						\
 			src/exec/redir.c						\
 			src/exec/error.c						\
 			src/exec/path.c						\
 			src/builtins/env.c						\
 			src/builtins/echo.c						\
+			src/builtins/pwd.c						\
 			src/builtins/exit.c						\
 			src/builtins/export.c					\
 			src/builtins/unset.c					\
@@ -46,6 +47,7 @@ SRC		=	src/builtins/cd.c 						\
 			src/parsing/var_env/exit_code.c			\
 			src/parsing/var_env/rep_q_n_v.c			\
 			src/parsing/parsing.c			\
+			src/parsing/rm_quote/rm_a_quote.c	\
 
 
 OBJ 		= $(SRC:.c=.o)

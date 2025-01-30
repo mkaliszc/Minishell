@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:53:30 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/20 03:58:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:13:29 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,5 @@ void	ft_free_int_tab(int **tab, int size);
 # endif
 
 char	*get_next_line(int fd);
-void	fill_str(char *res, char *s1, char *s2);
-char	*fill_line_buffer(int fd, char *left_c);
-char	*extract_line(char *left_c);
-char	*update_left_c(char *left_c);
 
 #endif

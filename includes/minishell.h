@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 00:29:40 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/27 05:54:14 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:04:54 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_data
 	int					out_fd;
 	pid_t				*pid;
 	int					*pipe_fd;
+	int					nb_of_hdc;
 }						t_data;
 
 typedef struct s_pain

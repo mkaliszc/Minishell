@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 05:20:17 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/26 02:44:42 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:40:11 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	handle_home_event(t_mini *mini)
 	{
 		ft_putstr_fd("cd: HOME not set\n", 2);
 		mini->exit_code = 1;
+		return ;
 	}
 	home = find_one_lst_env(mini->lst_env, "HOME");
 	if (chdir(home->value) == -1)
@@ -51,14 +52,34 @@ void	handle_home_event(t_mini *mini)
 	}
 }
 
+static void	handle_minus(t_mini *mini)
+{
+	t_env	*old_pwd;
+
+	if (!find_one_lst_env(mini->lst_env, "OLDPWD"))
+	{
+		ft_putstr_fd("cd: OLDPWD not set\n", 2);
+		mini->exit_code = 1;
+		return ;
+	}
+	old_pwd = find_one_lst_env(mini->lst_env, "OLDPWD");
+	printf("%s\n", old_pwd->value);
+	chdir(old_pwd->value);
+}
+
 void	handle_cd(char **cmd, t_mini *mini)
 {
 	if (cmd_array_size(cmd) > 2)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		mini->exit_code = 1;
+		return ;
 	}
-	else if (!cmd[1])
+	if (cmd[1] && ft_strcmp(cmd[1], "-") == 0)
+	{
+		handle_minus(mini);
+	}
+	else if (!cmd[1] || ft_strcmp(cmd[1], "~") == 0)
 	{
 		handle_home_event(mini);
 	}

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:33:04 by albillie          #+#    #+#             */
-/*   Updated: 2025/01/03 08:21:15 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/28 04:13:48 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,13 @@ int	ft_printchar_fd(int c, int fd)
 
 int	ft_print_str_fd(char *str, int fd)
 {
-	size_t	i;
-
-	i = 0;
 	if (!str)
 	{
 		write(fd, "(null)", 6);
 		return (6);
 	}
-	while (str[i])
-	{
-		ft_printchar_fd(str[i], fd);
-		i++;
-	}
-	return (i);
+	write(fd, str, ft_strlen(str));
+	return (ft_strlen(str));
 }
 
 int	ft_print_nbr_fd(int nbr, int fd)

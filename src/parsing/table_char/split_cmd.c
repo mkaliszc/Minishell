@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 04:29:57 by jbergos           #+#    #+#             */
-/*   Updated: 2025/01/24 00:33:28 by jbergos          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:56:47 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,16 @@ void	show_split(char **c_split)
 	int	i;
 
 	i = 0;
-	if (!c_split[0])
+	if (!c_split)
+	{
 		printf("no cmd \n");
+		return ;
+	}
+	if (!c_split[0])
+	{
+		printf("no cmd \n");
+		return ;
+	}
 	while (c_split[i])
 	{
 		if (i == 0)

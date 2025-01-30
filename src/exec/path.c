@@ -3,37 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaliszc <mkaliszc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:20:06 by mkaliszc          #+#    #+#             */
-/*   Updated: 2025/01/27 06:21:30 by albillie         ###   ########.fr       */
+/*   Updated: 2025/01/30 01:22:14 by mkaliszc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*check_absolute_path(char **cmd, t_mini *mini)
-{
-	if (ft_strchr(cmd[0], '/'))
-	{
-		if (access(cmd[0], F_OK) < 0)
-		{
-			ft_printf_fd(2, "%s: command not found\n", cmd[0]);
-			free_minishell(mini);
-			exit(127);
-		}
-		else if (access(cmd[0], X_OK) < 0)
-		{
-			ft_printf_fd(2, "%s: Permission denied\n", cmd[0]);
-			free_minishell(mini);
-			exit(126);
-		}
-		return (cmd[0]);
-	}
-	return (NULL);
-}
-
-static char	*get_path(char **cmd, t_env *envp)
+static char	*get_path(char **cmd, t_env *envp, t_mini *mini)
 {
 	t_env	*cur;
 	char	**all_paths;
@@ -46,7 +25,7 @@ static char	*get_path(char **cmd, t_env *envp)
 	if (cur == NULL)
 	{
 		ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]);
-		exit(127);
+		(free_minishell(mini), exit(127));
 	}
 	all_paths = ft_split(cur->value, ':');
 	while (all_paths[i])
@@ -62,29 +41,81 @@ static char	*get_path(char **cmd, t_env *envp)
 	return (ft_free_char_tab(all_paths), NULL);
 }
 
+static bool	check_perms(char *cmd)
+{
+	if (access(cmd, F_OK) == 0)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (true);
+	}
+	return (false);
+}
+
+char	*handle_when_slash(char **cmd, t_mini *mini)
+{
+	struct stat	buf;
+
+	if (stat(cmd[0], &buf) == -1)
+		(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]),
+			free_minishell(mini), exit(127));
+	else
+	{
+		if (check_perms(cmd[0]))
+			return (cmd[0]);
+		else
+			(ft_printf_fd(2, "%s: No such file or directory\n", cmd[0]),
+				free_minishell(mini), exit(127));
+	}
+}
+
+char	*test_path(char **cmd, t_env *envp, t_mini *mini)
+{
+	char		*path;
+
+	if (ft_strchr(cmd[0], '/'))
+	{
+		path = handle_when_slash(cmd, mini);
+	}
+	else
+		path = get_path(cmd, envp, mini);
+	if (path == NULL)
+	{
+		ft_printf_fd(2, "%s: command not found\n", cmd[0]);
+		free_minishell(mini);
+		exit(127);
+	}
+	else if (access(path, X_OK) == 0)
+		return (path);
+	else
+	{
+		perror(path);
+		exit(126);
+	}
+}
+
 char	*validate_cmd_path(char **cmd, t_env *envp, t_mini *mini)
 {
-	char	*path;
+	char		*path;
+	struct stat	st;
 
 	if (!cmd[0])
 		return (NULL);
-	check_absolute_path(cmd, mini);
-	path = get_path(cmd, envp);
-	if (!path)
+	path = test_path(cmd, envp, mini);
+	if (stat(cmd[0], &st) == 0 && S_ISDIR(st.st_mode))
 	{
-		struct stat st;
-
-		if (stat(mini->lst_cmd->cmd[0], &st) == 0 && S_ISDIR(st.st_mode))
+		if (ft_strcmp(cmd[0], ".") == 0)
 		{
-			ft_printf_fd(2, "%s: Is a directory\n", mini->lst_cmd->cmd[0]);
+			write(2, ".: filename argument required\n", 31);
+			free(path);
 			free_minishell(mini);
-			exit(126);
+			exit(2);
 		}
 		else
 		{
-			ft_printf_fd(2, "%s: command not found\n", mini->lst_cmd->cmd[0]);
+			write(2, cmd[0], ft_strlen(cmd[0]));
+			write(2, " : is a directory\n", 19);
 			free_minishell(mini);
-			exit(127);
+			exit(126);
 		}
 	}
 	return (path);
